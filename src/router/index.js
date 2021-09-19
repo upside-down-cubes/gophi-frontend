@@ -7,6 +7,12 @@ import Translator_order from "../components/translator/Translator_Order";
 
 Vue.use(VueRouter);
 
+// Protocol to avoid redirection duplication
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
+
 const routes = [
   {
     name: "Login",
