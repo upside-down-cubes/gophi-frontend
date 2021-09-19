@@ -32,6 +32,7 @@
         elevation="0"
         max-height="48"
         contain
+        :to="{name: 'hello'}"
       >
         test
       </v-btn>
