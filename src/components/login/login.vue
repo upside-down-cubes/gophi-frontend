@@ -100,12 +100,10 @@
             </v-col>
           </v-row>
           <router-link
-            :to="{name: 'hello'}"
-            style="text-decoration: none; color: inherit;">
-            <v-card-text
-                align="center"
-                style="color: #1bb7a4"
-            >
+            :to="{ name: 'hello' }"
+            style="text-decoration: none; color: inherit"
+          >
+            <v-card-text align="center" style="color: #1bb7a4">
               Create an Account
             </v-card-text>
           </router-link>

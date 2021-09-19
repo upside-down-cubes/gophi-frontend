@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Login from "../components/login/login.vue";
 import Hello from "../components/HelloWorld.vue";
 import Translator_order from "../components/translator/Translator_Order";
+import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
     name: "translator_order",
     path: "/torder",
     component: Translator_order,
+  },
+  {
+    name: "Workspace",
+    path: "/workspace",
+    component: TranslatorWorkspace,
   },
 ];
 
