@@ -106,7 +106,7 @@
                 align="center"
                 style="color: #1bb7a4"
             >
-              Sign up here
+              Create an Account
             </v-card-text>
           </router-link>
         </v-card>
