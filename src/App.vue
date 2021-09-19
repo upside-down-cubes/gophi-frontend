@@ -32,7 +32,7 @@
         elevation="0"
         max-height="48"
         contain
-        :to="{name: 'hello'}"
+        :to="{ name: 'hello' }"
       >
         test
       </v-btn>
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
   data: () => ({
