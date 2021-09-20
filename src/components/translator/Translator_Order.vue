@@ -135,7 +135,7 @@
                 <span style="color: white"> Reject </span>
               </v-btn>
               <v-btn icon elevation="0">
-                <v-icon>mdi-message</v-icon>
+                <v-icon>mdi-chat</v-icon>
               </v-btn>
             </td>
           </tr>
