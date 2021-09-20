@@ -5,6 +5,7 @@ import Login from "../components/login/login.vue";
 import Hello from "../components/HelloWorld.vue";
 import Translator_order from "../components/translator/Translator_Order";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
+import SignUp from "@/components/signup/SignUp";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,12 @@ const routes = [
     name: "Workspace",
     path: "/workspace",
     component: TranslatorWorkspace,
+  },
+  {
+    name: "Signup",
+    path: "/signup",
+    component: SignUp,
+    props: true,
   },
 ];
 

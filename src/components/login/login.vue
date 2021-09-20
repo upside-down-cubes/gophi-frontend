@@ -81,13 +81,25 @@
             </v-col>
           </v-row>
           <v-row class="justify-space-around">
-            <v-radio-group v-model="row" row>
-              <v-btn class="mx-10" outlined color="#13B8A4" rounded>
+            <v-radio-group row>
+              <v-btn
+                class="mx-10"
+                outlined
+                color="#13B8A4"
+                rounded
+                @click="toggleValues(true)"
+              >
                 <v-radio value="customer" color="#13B8A4">
                   <span slot="label" class="default-color">Customer</span>
                 </v-radio>
               </v-btn>
-              <v-btn class="mx-10" outlined color="#13B8A4" rounded>
+              <v-btn
+                class="mx-10"
+                outlined
+                color="#13B8A4"
+                rounded
+                @click="toggleValues(false)"
+              >
                 <v-radio value="translator" color="#13B8A4">
                   <span slot="label" class="default-color">Translator</span>
                 </v-radio>
@@ -100,7 +112,7 @@
             </v-col>
           </v-row>
           <router-link
-            :to="{ name: 'hello' }"
+            :to="{ name: 'Signup', params: { translator, customer } }"
             style="text-decoration: none; color: inherit"
           >
             <v-card-text align="center" style="color: #1bb7a4">
@@ -123,6 +135,13 @@ export default {
     email: "",
     password: "",
   }),
+
+  methods: {
+    toggleValues(is_customer) {
+      this.customer = is_customer;
+      this.translator = !is_customer;
+    },
+  },
 };
 </script>
 
