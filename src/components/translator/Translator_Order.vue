@@ -131,8 +131,11 @@
                   </v-card>
                 </template>
               </v-dialog>
-              <v-btn color="#ACACAC" elevation="0" x-small>
+              <v-btn class="ma-1" color="#ACACAC" elevation="0" x-small>
                 <span style="color: white"> Reject </span>
+              </v-btn>
+              <v-btn icon elevation="0">
+                <v-icon>mdi-message</v-icon>
               </v-btn>
             </td>
           </tr>
