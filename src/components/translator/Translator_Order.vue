@@ -2,6 +2,7 @@
   <v-container>
     <v-row class="mt-5">
       <v-col>
+        <!--    Button toggle    -->
         <v-btn-toggle
           v-model="text"
           class="mt-10 rounded-lg"
@@ -17,99 +18,127 @@
         </v-btn-toggle>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-simple-table class="styled-table">
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  <span style="font-size: 18px">Date/Time</span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px">By</span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px"> Language </span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px"> Level of language </span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px"> Category </span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px">Length</span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px">Amount </span>
-                </th>
-                <th class="text-left">
-                  <span style="font-size: 18px">Notes</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in order" :key="item.name">
-                <td>{{ item.date }}</td>
-                <td>{{ item.by }}</td>
-                <td>
-                  <v-chip
-                    class="ma-1"
-                    color="#CECECE"
-                    v-for="(lan_item, j) in item.language"
-                    :key="j"
+    <!--   Order table (styled table class is in css/translator/order.css)     -->
+    <v-simple-table class="styled-table">
+      <template v-slot:default>
+        <!--  Header -->
+        <thead>
+          <tr>
+            <th class="text-left">
+              <span style="font-size: 18px">Date/Time</span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px">By</span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px"> Language </span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px"> Level of language </span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px"> Category </span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px">Length</span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px">Amount </span>
+            </th>
+            <th class="text-left">
+              <span style="font-size: 18px">Notes</span>
+            </th>
+            <th />
+          </tr>
+        </thead>
+        <!--      Table row      -->
+        <tbody>
+          <tr v-for="item in order" :key="item.name">
+            <td>{{ item.date }}</td>
+            <td>{{ item.by }}</td>
+            <td>
+              <v-chip
+                class="ma-1"
+                color="#CECECE"
+                v-for="(lan_item, j) in item.language"
+                :key="j"
+              >
+                {{ lan_item.content }}
+              </v-chip>
+            </td>
+            <td>{{ item.level }}</td>
+            <td>
+              <v-chip color="#CECECE">{{ item.category }}</v-chip>
+            </td>
+            <td>{{ item.length }}</td>
+            <td>{{ item.amount }}</td>
+            <td>
+              <!--    Note toggle  -->
+              <v-menu
+                top
+                min-width="300px"
+                max-height="500px"
+                open-on-hover
+                offset-y
+                right
+                offset-x
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon> mdi-dots-horizontal </v-icon>
+                  </v-btn>
+                </template>
+                <v-card class="mx-auto" max-width="300" outlined>
+                  <v-card-title class="ma-1">
+                    <p class="font-weight-light">
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout. The point of using Lorem Ipsum is that it
+                      has a more-or-less normal distribution of letters, as
+                      opposed to using 'Content here, content here', making it
+                      look like readable English. Many desktop publishing
+                      packages and web page editors now use Lorem Ipsum as their
+                      default model text, and a search for 'lorem ipsum' will
+                      uncover many web sites still in their infancy. Various
+                      versions have evolved over the years, sometimes by
+                      accident, sometimes on purpose (injected humour and the
+                      like).
+                    </p>
+                  </v-card-title>
+                </v-card>
+              </v-menu>
+            </td>
+            <td>
+              <v-dialog transition="dialog-top-transition" max-width="600">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="success"
+                    elevation="0"
+                    x-small
+                    v-bind="attrs"
+                    v-on="on"
+                    >Accept</v-btn
                   >
-                    {{ lan_item.content }}
-                  </v-chip>
-                </td>
-                <td>{{ item.level }}</td>
-                <td>
-                  <v-chip color="#CECECE">{{ item.category }}</v-chip>
-                </td>
-                <td>{{ item.length }}</td>
-                <td>{{ item.amount }}</td>
-                <td>
-                  <v-menu
-                    top
-                    min-width="300px"
-                    max-height="600px"
-                    open-on-hover
-                    offset-y
-                    right
-                    offset-x
-                  >
-                    <template v-slot:activator="{ on }">
-                      <v-btn icon v-on="on">
-                        <v-icon> mdi-dots-horizontal </v-icon>
-                      </v-btn>
-                    </template>
-                    <v-card class="mx-auto" max-width="300" outlined>
-                      <v-card-title class="ma-1">
-                        <p class="font-weight-light">
-                          It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout. The point of using Lorem Ipsum
-                          is that it has a more-or-less normal distribution of
-                          letters, as opposed to using 'Content here, content
-                          here', making it look like readable English. Many
-                          desktop publishing packages and web page editors now
-                          use Lorem Ipsum as their default model text, and a
-                          search for 'lorem ipsum' will uncover many web sites
-                          still in their infancy. Various versions have evolved
-                          over the years, sometimes by accident, sometimes on
-                          purpose (injected humour and the like).
-                        </p>
-                      </v-card-title>
-                    </v-card>
-                  </v-menu>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-col>
-    </v-row>
+                </template>
+                <template v-slot:default="dialog">
+                  <v-card>
+                    <v-card-text>
+                      <div class="text-h2 pa-12">Hello world!</div>
+                    </v-card-text>
+                    <v-card-actions class="justify-end">
+                      <v-btn text @click="dialog.value = false">Close</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </template>
+              </v-dialog>
+              <v-btn color="#ACACAC" elevation="0" x-small>
+                <span style="color: white"> Reject </span>
+              </v-btn>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </v-container>
 </template>
 
