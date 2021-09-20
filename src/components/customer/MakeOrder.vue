@@ -184,10 +184,10 @@
                 </v-col>
               </v-row>
               <v-card-actions class="justify-end">
+                <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
                 <v-btn color="#13B8A4" elevation="0" dark @click="e6 = 3">
                   Confirm
                 </v-btn>
-                <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
               </v-card-actions>
             </v-card>
           </v-stepper-content>
@@ -198,13 +198,32 @@
           </v-stepper-step>
 
           <v-stepper-content step="3">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn color="primary"> Continue </v-btn>
-            <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
+            <v-card color="#F1F1F1" flat>
+              <v-card-title class="pb-0">
+                <p style="font-size: 16px">Select your payment method</p>
+              </v-card-title>
+              <v-card-actions class="pt-0">
+                <v-radio-group row hide-details class="mt-0 pt-0 mb-4">
+                  <v-btn class="mx-10 my-1" outlined color="#13B8A4" rounded>
+                    <v-radio value="credit" color="#13B8A4">
+                      <span slot="label" class="default-color"
+                        >Credit/Debt</span
+                      >
+                    </v-radio>
+                  </v-btn>
+                  <v-btn class="mx-10 my-1" outlined color="#13B8A4" rounded>
+                    <v-radio value="mobileBank" color="#13B8A4">
+                      <span slot="label" class="default-color"
+                        >Mobile Backing</span
+                      >
+                    </v-radio>
+                  </v-btn>
+                </v-radio-group>
+              </v-card-actions>
+              <v-card-actions class="justify-end">
+                <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-stepper-content>
         </v-stepper>
       </v-col>
@@ -238,6 +257,8 @@ export default {
     return {
       dialog: false,
       note: "",
+      credit: false,
+      mobileBanking: false,
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
       audioLangInput: "English",
@@ -249,7 +270,7 @@ export default {
       subtitlingLang: ["Japan", "Thai", "English", "Spanish"],
       audioLang: ["Japan", "Thai", "English", "Spanish"],
       category: ["Business", "Sport", "Cosmetic", "Science"],
-      e6: 2,
+      e6: 3,
     };
   },
 };
