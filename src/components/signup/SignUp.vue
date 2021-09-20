@@ -22,7 +22,7 @@
           >
             <span class="mt-5">Welcome to gophi</span>
           </v-card-title>
-          <v-row align="center" justify="center" class="mx-3">
+          <v-row align="center" justify="center" class="mx-7">
             <v-col align="center" class="completed-signup">
               <span>Personal Information</span>
             </v-col>
@@ -42,13 +42,74 @@
 
           <!--Different steps for signing up-->
           <v-window v-model="step">
-            <v-window-item :value="1"> </v-window-item>
+            <v-window-item :value="1">
+              <PersonalInformation></PersonalInformation>
+            </v-window-item>
+
+            <v-window-item :value="2">
+              <v-card-text>
+                <v-text-field label="Password" type="password"></v-text-field>
+                <v-text-field
+                  label="Confirm Password"
+                  type="password"
+                ></v-text-field>
+                <span class="text-caption grey--text text--darken-1">
+                  Please enter a password for your account
+                </span>
+              </v-card-text>
+            </v-window-item>
+
+            <v-window-item :value="3">
+              <div class="pa-4 text-center">
+                <v-img
+                  class="mb-4"
+                  contain
+                  height="128"
+                  src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+                ></v-img>
+                <h3 class="text-h6 font-weight-light mb-2">
+                  Welcome to Vuetify
+                </h3>
+                <span class="text-caption grey--text"
+                  >Thanks for signing up!</span
+                >
+              </div>
+            </v-window-item>
           </v-window>
-          <v-row class="mx-6" no-gutters>
-            <v-col>
-              <v-divider class="mt-3" />
-            </v-col>
-          </v-row>
+
+          <v-spacer></v-spacer>
+          <v-row> </v-row>
+          <v-card-actions class="back-button">
+            <v-btn color="#13B8A4" dark rounded small @click="goBack" class="px-6">
+              Back
+            </v-btn>
+          </v-card-actions>
+          <v-card-actions class="next-button"
+            ><v-btn
+              v-if="step < 3 && this.is_translator"
+              align="right"
+              color="#13B8A4"
+              rounded
+              small
+              dark
+              @click="step++"
+              class="px-6"
+            >
+              Next
+            </v-btn>
+            <v-btn
+              v-else
+              color="#13B8A4"
+              rounded
+              small
+              dark
+              align="right"
+              @click="submitSignup"
+              class="px-4"
+            >
+              Submit
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -56,9 +117,12 @@
 </template>
 
 <script>
+import PersonalInformation from "./PersonalInformation";
+
 export default {
   name: "Signup",
-  props: ["translator", "customer"],
+  components: { PersonalInformation },
+  props: ["translator"],
 
   data: () => ({
     is_translator: false,
@@ -74,9 +138,7 @@ export default {
   },
 
   mounted() {
-    console.log("Translator: " + this.translator);
-    console.log("Customer: " + this.customer);
-    if (this.translator === undefined && this.customer === undefined) {
+    if (this.translator === undefined) {
       this.$router.push("/login");
     }
     this.is_translator = this.translator;
@@ -86,6 +148,21 @@ export default {
     preventNav(event) {
       event.preventDefault();
       event.returnValue = "";
+    },
+
+    goBack() {
+      if (this.step > 1) {
+        this.step--;
+      } else {
+        this.$router.push("/login");
+      }
+    },
+    submitSignup() {
+      if (this.is_translator) {
+        this.$router.push("/torder");
+      } else {
+        this.$router.push("/hello");
+      }
     },
   },
 };

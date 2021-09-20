@@ -11,8 +11,8 @@
 }
 
 .completed-signup {
-    margin: 10px;
-    padding-bottom:40px;
+    margin: 5px;
+    padding-bottom:1px;
     position:relative;
     color: #5B5B5B;
 }
@@ -30,8 +30,8 @@
 }
 
 .incomplete-signup {
-    margin: 10px;
-    padding-bottom:40px;
+    margin: 5px;
+    padding-bottom:1px;
     position:relative;
     color: #5B5B5B;
 }
@@ -46,4 +46,17 @@
     background:#CECECE;
     height:5px;
     border-radius:10px;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    align-content: center;
+}
+
+.next-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
