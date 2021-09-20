@@ -21,10 +21,18 @@
                       color="#13B8A4"
                       class="mt-3 mr-2"
                       outlined
+                      @click="onButtonClick"
                     >
                       <span style="color: black">Choose file</span>
                     </v-btn>
-                    <span class="mt-3">No file chosen</span>
+                    <input
+                      ref="uploader"
+                      class="d-none"
+                      type="file"
+                      accept="video/*"
+                      @change="onFileChanged"
+                    />
+                    <span class="mt-3">{{ fileName }}</span>
                   </v-card-actions>
                   <v-card-subtitle>
                     <span>Only video files are allowed to be uploaded.</span>
@@ -266,12 +274,38 @@ export default {
       levelOfLangInput: "Basic",
       categoryInput: "Business",
       proofread: false,
+      isSelecting: false,
+      selectedFile: null,
       levelOfLang: ["Basic", "Friendly", "Academic"],
       subtitlingLang: ["Japan", "Thai", "English", "Spanish"],
       audioLang: ["Japan", "Thai", "English", "Spanish"],
       category: ["Business", "Sport", "Cosmetic", "Science"],
-      e6: 3,
+      e6: 1,
     };
+  },
+  computed: {
+    fileName() {
+      return this.selectedFile ? this.selectedFile.name : "No file chosen";
+    },
+  },
+  methods: {
+    onButtonClick() {
+      this.isSelecting = true;
+      window.addEventListener(
+        "focus",
+        () => {
+          this.isSelecting = false;
+        },
+        { once: true }
+      );
+
+      this.$refs.uploader.click();
+    },
+    onFileChanged(e) {
+      this.selectedFile = e.target.files[0];
+
+      // do something
+    },
   },
 };
 </script>
