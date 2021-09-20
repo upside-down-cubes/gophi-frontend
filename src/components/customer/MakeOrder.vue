@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
-    <v-row class="mt-5 mx-10" no-gutters>
-      <v-col class="col-8">
+    <v-row class="mt-5" no-gutters>
+      <v-col class="col-8 ml-10">
         <!--  Order input field -->
-        <v-stepper v-model="e6" vertical flat max-width="850">
+        <v-stepper v-model="e6" vertical flat max-width="1200">
           <!-- Upload file (step 1) -->
           <v-stepper-step :complete="e6 > 1" step="1" color="#13B8A4">
             <span>File upload</span>
@@ -146,12 +146,41 @@
                   ></v-switch>
                 </v-col>
                 <v-col>
-                  <v-card-actions class="justify-end">
-                    <v-btn elevation="0" text>
-                      <v-icon color="#13B8A4" class="mr-1">mdi-chat</v-icon>
-                      <span style="color: dimgray">Notes to translators</span>
-                    </v-btn>
-                  </v-card-actions>
+                  <v-dialog v-model="dialog" width="500">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-card-actions class="justify-end">
+                        <v-btn elevation="0" text v-bind="attrs" v-on="on">
+                          <v-icon color="#13B8A4" class="mr-1">mdi-chat</v-icon>
+                          <span style="color: dimgray"
+                            >Notes to translators</span
+                          >
+                        </v-btn>
+                      </v-card-actions>
+                    </template>
+
+                    <v-card>
+                      <v-card-title style="background-color: #13b8a4">
+                        <span style="color: white">Note to translators</span>
+                      </v-card-title>
+
+                      <v-card-actions class="mt-5">
+                        <v-textarea
+                          v-model="note"
+                          solo
+                          label="Please fill in this area"
+                          outlined
+                          color="#13b8a4"
+                        >
+                        </v-textarea>
+                      </v-card-actions>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="#13b8a4" text @click="dialog = false">
+                          Confirm
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
                 </v-col>
               </v-row>
               <v-card-actions class="justify-end">
@@ -207,6 +236,8 @@ export default {
   name: "MakeOrder",
   data() {
     return {
+      dialog: false,
+      note: "",
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
       audioLangInput: "English",
