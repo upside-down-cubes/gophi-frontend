@@ -48,7 +48,7 @@
           </v-stepper-content>
 
           <v-stepper-step :complete="e6 > 2" step="2" color="#13B8A4">
-            Configure analytics for this app
+            Order information
           </v-stepper-step>
 
           <v-stepper-content step="2">
@@ -58,7 +58,7 @@
               height="200px"
             ></v-card>
             <v-btn color="primary" @click="e6 = 3"> Continue </v-btn>
-            <v-btn text> Cancel </v-btn>
+            <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e6 > 3" step="3" color="#13B8A4">
@@ -71,8 +71,8 @@
               class="mb-12"
               height="200px"
             ></v-card>
-            <v-btn color="primary" @click="e6 = 4"> Continue </v-btn>
-            <v-btn text> Cancel </v-btn>
+            <v-btn color="primary"> Continue </v-btn>
+            <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
           </v-stepper-content>
         </v-stepper>
       </v-col>
@@ -90,7 +90,9 @@
           </v-card-title>
           <v-divider class="mx-10"></v-divider>
         </v-card>
-        <v-btn class="mt-3" color="#13B8A4" elevation="0" dark> Confirm order </v-btn>
+        <v-btn class="mt-3" color="#13B8A4" elevation="0" dark>
+          Confirm order
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
