@@ -1,8 +1,10 @@
 <template>
-  <v-container>
-    <v-row class="mt-5">
-      <v-col class="ml-10">
-        <v-stepper v-model="e6" vertical flat max-width="700">
+  <v-container fluid>
+    <v-row class="mt-5 mx-10" no-gutters>
+      <v-col class="col-8">
+        <!--  Order input field -->
+        <v-stepper v-model="e6" vertical flat max-width="850">
+          <!-- Upload file (step 1) -->
           <v-stepper-step :complete="e6 > 1" step="1" color="#13B8A4">
             <span>File upload</span>
             <v-divider></v-divider>
@@ -41,28 +43,129 @@
                 </v-list-item-content>
 
                 <v-list-item-action>
-                  <v-card height="130" width="180" color="grey" flat> </v-card>
+                  <v-window>
+                    <v-window-item v-html="video"></v-window-item>
+                  </v-window>
                 </v-list-item-action>
               </v-list-item>
             </v-card>
           </v-stepper-content>
 
+          <!--  Order information (step 2) -->
           <v-stepper-step :complete="e6 > 2" step="2" color="#13B8A4">
             Order information
           </v-stepper-step>
 
           <v-stepper-content step="2">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn color="primary" @click="e6 = 3"> Continue </v-btn>
-            <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
+            <v-card color="#F1F1F1" class="mb-12" flat>
+              <v-card-title>
+                <v-row no-gutters>
+                  <v-col>
+                    <p style="font-size: 12px; color: #5b5b5b" class="mb-0">
+                      go-gophi.mp4
+                    </p>
+                  </v-col>
+                  <v-col>
+                    <p
+                      style="font-size: 12px; color: #5b5b5b"
+                      class="mb-0 text-end"
+                    >
+                      ~3 mins
+                    </p>
+                  </v-col>
+                </v-row>
+              </v-card-title>
+              <v-row class="mx-2">
+                <v-col>
+                  <span>Audio language</span>
+                  <v-autocomplete
+                    color="#13B8A4"
+                    style="background-color: white"
+                    clearable
+                    outlined
+                    hide-details
+                    single-line
+                    v-model="audioLangInput"
+                    :items="audioLang"
+                    dense
+                  ></v-autocomplete>
+                </v-col>
+                <v-col>
+                  <span>Subtitling language</span>
+                  <v-autocomplete
+                    outlined
+                    color="#13B8A4"
+                    style="background-color: white"
+                    clearable
+                    v-model="subtitlingLangInput"
+                    hide-details
+                    single-line
+                    :items="subtitlingLang"
+                    dense
+                  ></v-autocomplete>
+                </v-col>
+              </v-row>
+              <v-row class="mx-2">
+                <v-col>
+                  <span>Level of language</span>
+                  <v-autocomplete
+                    outlined
+                    color="#13B8A4"
+                    style="background-color: white"
+                    clearable
+                    v-model="levelOfLangInput"
+                    hide-details
+                    single-line
+                    :items="levelOfLang"
+                    dense
+                  ></v-autocomplete>
+                </v-col>
+                <v-col>
+                  <span>Content category</span>
+                  <v-autocomplete
+                    outlined
+                    color="#13B8A4"
+                    style="background-color: white"
+                    clearable
+                    v-model="categoryInput"
+                    hide-details
+                    single-line
+                    :items="category"
+                    dense
+                  ></v-autocomplete>
+                </v-col>
+              </v-row>
+              <v-row class="mx-2">
+                <v-col>
+                  <v-switch
+                    class="mt-2"
+                    v-model="proofread"
+                    color="#13B8A4"
+                    label="Proofread by reviewer"
+                    hide-details
+                  ></v-switch>
+                </v-col>
+                <v-col>
+                  <v-card-actions class="justify-end">
+                    <v-btn elevation="0" text>
+                      <v-icon color="#13B8A4" class="mr-1">mdi-chat</v-icon>
+                      <span style="color: dimgray">Notes to translators</span>
+                    </v-btn>
+                  </v-card-actions>
+                </v-col>
+              </v-row>
+              <v-card-actions class="justify-end">
+                <v-btn color="#13B8A4" elevation="0" dark @click="e6 = 3">
+                  Confirm
+                </v-btn>
+                <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-stepper-content>
 
+          <!--  Payment (step 3) -->
           <v-stepper-step :complete="e6 > 3" step="3" color="#13B8A4">
-            Select an ad format and name ad unit
+            Payment
           </v-stepper-step>
 
           <v-stepper-content step="3">
@@ -80,6 +183,7 @@
         <v-card
           flat
           color="#F1F1F1"
+          class="justify-center"
           min-height="300"
           min-width="200"
           max-width="400"
@@ -103,7 +207,18 @@ export default {
   name: "MakeOrder",
   data() {
     return {
-      e6: 1,
+      video:
+        '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+      audioLangInput: "English",
+      subtitlingLangInput: "English",
+      levelOfLangInput: "Basic",
+      categoryInput: "Business",
+      proofread: false,
+      levelOfLang: ["Basic", "Friendly", "Academic"],
+      subtitlingLang: ["Japan", "Thai", "English", "Spanish"],
+      audioLang: ["Japan", "Thai", "English", "Spanish"],
+      category: ["Business", "Sport", "Cosmetic", "Science"],
+      e6: 2,
     };
   },
 };
