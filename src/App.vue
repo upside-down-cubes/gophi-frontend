@@ -10,8 +10,7 @@
         max-height="48"
         width="90"
         contain
-        fixed
-        left
+        :to="{ name: 'Login' }"
       >
         <v-img
           :src="require('./assets/gophilogodark.png')"
@@ -20,21 +19,38 @@
           max-height="40"
         />
       </v-btn>
+      <v-btn
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
+        :to="{ name: 'translator_order' }"
+      >
+        Orders
+      </v-btn>
+      <v-btn
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
+        :to="{ name: 'Workspace' }"
+      >
+        My Workspace
+      </v-btn>
 
       <v-spacer />
 
       <v-btn
-        fab
-        tile
         text
-        x-large
+        plain
+        class="ml-5"
         color="#d4f8f4"
-        elevation="0"
         max-height="48"
-        contain
         :to="{ name: 'hello' }"
       >
-        test
+        Profile
       </v-btn>
     </v-app-bar>
 
