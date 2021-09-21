@@ -9,3 +9,60 @@
 .default-color-light{
     color: #d4f8f4
 }
+
+.completed-signup {
+    margin: 5px;
+    padding-bottom:1px;
+    position:relative;
+    color: #5B5B5B;
+}
+
+.completed-signup:after {
+    content:'';
+    position:absolute;
+    display: block;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#13B8A4;
+    height:5px;
+    border-radius:10px;
+}
+
+.incomplete-signup {
+    margin: 5px;
+    padding-bottom:1px;
+    position:relative;
+    color: #5B5B5B;
+}
+
+.incomplete-signup:after {
+    content:'';
+    position:absolute;
+    display: block;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#CECECE;
+    height:5px;
+    border-radius:10px;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    align-content: center;
+}
+
+.next-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.take-test {
+    padding: inherit;
+    align-content: center;
+    bottom: 2px;
+}

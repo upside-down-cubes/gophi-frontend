@@ -6,6 +6,7 @@ import Hello from "../components/HelloWorld.vue";
 import Translator_order from "../components/translator/Translator_Order";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 import Translator_OrderHistory from "../components/translator/Translator_OrderHistory";
+import SignUp from "@/components/signup/SignUp";
 
 Vue.use(VueRouter);
 
@@ -40,7 +41,13 @@ const routes = [
     name: "translator_orderHistory",
     path: "/torder-history",
     component: Translator_OrderHistory,
-  }
+  },
+  {
+    name: "Signup",
+    path: "/signup",
+    component: SignUp,
+    props: true,
+  },
 ];
 
 const router = new VueRouter({ mode: "history", routes: routes });
