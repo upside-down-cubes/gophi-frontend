@@ -15,7 +15,7 @@
         </div>
       </v-col>
       <v-col md="6">
-        <v-card height="540" class="mr-16 rounded-xl" flat color="#F1F1F1">
+        <v-card height="580" class="mr-9 rounded-xl" flat color="#F1F1F1">
           <v-card-title
             class="justify-center default-color"
             style="font-size: xx-large; font-weight: bolder"
@@ -29,13 +29,13 @@
             <v-col
               align="center"
               v-if="this.is_translator"
-              :class="this.step > 1 ? 'completed-signup' : 'incomplete-signup'"
+              :class="this.step > 2 ? 'completed-signup' : 'incomplete-signup'"
               ><span>Expertise</span></v-col
             >
             <v-col
               align="center"
               v-if="this.is_translator"
-              :class="this.step > 2 ? 'completed-signup' : 'incomplete-signup'"
+              :class="this.step > 3 ? 'completed-signup' : 'incomplete-signup'"
               ><span>Test</span></v-col
             >
           </v-row>
@@ -47,19 +47,14 @@
             </v-window-item>
 
             <v-window-item :value="2">
-              <v-card-text>
-                <v-text-field label="Password" type="password"></v-text-field>
-                <v-text-field
-                  label="Confirm Password"
-                  type="password"
-                ></v-text-field>
-                <span class="text-caption grey--text text--darken-1">
-                  Please enter a password for your account
-                </span>
-              </v-card-text>
+              <PersonalTwo></PersonalTwo>
             </v-window-item>
 
             <v-window-item :value="3">
+              <Expertise></Expertise>
+            </v-window-item>
+
+            <v-window-item :value="4">
               <div class="pa-4 text-center">
                 <v-img
                   class="mb-4"
@@ -80,13 +75,20 @@
           <v-spacer></v-spacer>
           <v-row> </v-row>
           <v-card-actions class="back-button">
-            <v-btn color="#13B8A4" dark rounded small @click="goBack" class="px-6">
+            <v-btn
+              color="#13B8A4"
+              dark
+              rounded
+              small
+              @click="goBack"
+              class="px-6"
+            >
               Back
             </v-btn>
           </v-card-actions>
           <v-card-actions class="next-button"
             ><v-btn
-              v-if="step < 3 && this.is_translator"
+              v-if="(step < 4 && this.is_translator) || step < 2"
               align="right"
               color="#13B8A4"
               rounded
@@ -118,10 +120,12 @@
 
 <script>
 import PersonalInformation from "./PersonalInformation";
+import PersonalTwo from "./PersonalTwo";
+import Expertise from "./Expertise";
 
 export default {
   name: "Signup",
-  components: { PersonalInformation },
+  components: { PersonalInformation, PersonalTwo, Expertise },
   props: ["translator"],
 
   data: () => ({

@@ -5,14 +5,38 @@
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
         >
-          Full name</v-card-text
+          Card number</v-card-text
+        >
+      </v-col>
+      <v-col class="mr-5">
+        <v-text-field
+          v-model="cardNumber"
+          color="#13B8A4"
+          label="•••• •••• •••• ••••"
+          persistent-hint
+          required
+          clearable
+          outlined
+          dense
+          single-line
+          solo
+        ></v-text-field>
+      </v-col>
+    </v-row>
+
+    <v-row class="mx-6">
+      <v-col md="4">
+        <v-card-text
+          style="font-size: large; font-weight: normal; color: #535353"
+        >
+          Cardholder name</v-card-text
         >
       </v-col>
       <v-col class="mr-5">
         <v-text-field
           v-model="fullName"
+          color="#13B8A4"
           label="John Doe"
-          color="#13B8A4"
           persistent-hint
           required
           clearable
@@ -29,14 +53,66 @@
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
         >
-          Email</v-card-text
+          Expiry date</v-card-text
+        >
+      </v-col>
+      <v-col class="mr-5">
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          :return-value.sync="date"
+          transition="scale-transition"
+          max-width="290px"
+          min-width="auto"
+          position-y="20px"
+          ><template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date"
+              color="#13B8A4"
+              label="••••••••"
+              prepend-inner-icon="mdi-calendar"
+              required
+              clearable
+              outlined
+              dense
+              single-line
+              solo
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date"
+            type="month"
+            no-title
+            scrollable
+            color="#13B8A4"
+            light
+          >
+            <v-spacer></v-spacer>
+            <v-btn text color="#13B8A4" @click="menu = false"> Cancel </v-btn>
+            <v-btn text color="#13B8A4" @click="$refs.menu.save(date)">
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
+    </v-row>
+    <v-row class="mx-6">
+      <v-col md="4">
+        <v-card-text
+          style="font-size: large; font-weight: normal; color: #535353"
+        >
+          CVC</v-card-text
         >
       </v-col>
       <v-col class="mr-5">
         <v-text-field
+          v-model="cvc"
           color="#13B8A4"
-          v-model="email"
-          label="customer@example.com"
+          label="•••"
           persistent-hint
           required
           clearable
@@ -44,52 +120,6 @@
           dense
           single-line
           solo
-        ></v-text-field>
-      </v-col>
-    </v-row>
-
-    <v-row class="mx-6">
-      <v-col md="4">
-        <v-card-text
-          style="font-size: large; font-weight: normal; color: #535353"
-        >
-          Password</v-card-text
-        >
-      </v-col>
-      <v-col class="mr-5">
-        <v-text-field
-          color="#13B8A4"
-          label="••••••••"
-          required
-          clearable
-          outlined
-          dense
-          single-line
-          solo
-          type="password"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-
-    <v-row class="mx-6">
-      <v-col md="4">
-        <v-card-text
-          style="font-size: large; font-weight: normal; color: #535353"
-        >
-          Confirm password</v-card-text
-        >
-      </v-col>
-      <v-col class="mr-5">
-        <v-text-field
-          color="#13B8A4"
-          label="••••••••"
-          required
-          clearable
-          outlined
-          dense
-          single-line
-          solo
-          type="password"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -98,11 +128,15 @@
 
 <script>
 export default {
-  name: "PersonalInformation",
+  name: "PersonalTwo",
 
   data: () => ({
     email: "",
     fullName: "",
+    cardNumber: "",
+    date: new Date().toISOString().substr(0, 7),
+    menu: false,
+    cvc: "",
   }),
 };
 </script>
