@@ -66,3 +66,7 @@
     align-content: center;
     bottom: 2px;
 }
+
+input:-webkit-autofill {
+    -webkit-background-clip: text;
+}
