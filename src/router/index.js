@@ -7,6 +7,7 @@ import Translator_order from "../components/translator/Translator_Order";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 import Translator_OrderHistory from "../components/translator/Translator_OrderHistory";
 import SignUp from "@/components/signup/SignUp";
+import MakeOrder from "../components/customer/MakeOrder";
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,11 @@ const routes = [
     path: "/signup",
     component: SignUp,
     props: true,
+  },
+  {
+    name: "MakeOrder",
+    path: "/makeorder",
+    component: MakeOrder,
   },
 ];
 
