@@ -79,6 +79,7 @@
               single-line
               solo
               readonly
+              filled
               v-bind="attrs"
               v-on="on"
             ></v-text-field>

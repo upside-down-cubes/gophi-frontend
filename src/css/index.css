@@ -60,3 +60,9 @@
     bottom: 20px;
     right: 20px;
 }
+
+.take-test {
+    padding: inherit;
+    align-content: center;
+    bottom: 2px;
+}

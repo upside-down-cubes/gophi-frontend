@@ -90,20 +90,26 @@
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
         >
-          Password</v-card-text
+          Certification</v-card-text
         >
       </v-col>
       <v-col class="mr-5">
-        <v-text-field
-          label="••••••••"
+        <v-file-input
+          label="Upload your certifications"
+          placeholder="Upload your certifications"
           required
           clearable
           outlined
           dense
           single-line
+          multiple
+          filled
           solo
-          type="password"
-        ></v-text-field>
+          append-icon="mdi-tray-arrow-up"
+          prepend-icon=""
+          color="#13B8A4"
+          truncate-length="30"
+        ></v-file-input>
       </v-col>
     </v-row>
   </v-container>

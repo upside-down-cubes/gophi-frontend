@@ -54,21 +54,20 @@
               <Expertise></Expertise>
             </v-window-item>
 
-            <v-window-item :value="4">
-              <div class="pa-4 text-center">
-                <v-img
-                  class="mb-4"
-                  contain
-                  height="128"
-                  src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-                ></v-img>
-                <h3 class="text-h6 font-weight-light mb-2">
-                  Welcome to Vuetify
-                </h3>
-                <span class="text-caption grey--text"
-                  >Thanks for signing up!</span
+            <v-window-item :value="4" class="take-test">
+              <v-container>
+                <v-spacer></v-spacer>
+                <v-row
+                  class="justify-space-around mt-16"
+                  align="center"
+                  justify="center"
                 >
-              </div>
+                  <v-btn color="#13B8A4" dark x-large class="py-7 mt-16">
+                    Take test now
+                  </v-btn>
+                </v-row>
+                <v-spacer></v-spacer>
+              </v-container>
             </v-window-item>
           </v-window>
 
