@@ -9,10 +9,10 @@
           color="green"
           mandatory
         >
-          <v-btn class="mr-1 rounded-lg" @click="test('left')">
+          <v-btn class="mr-1 rounded-lg" @click="changeOrderData('left')">
             <span class="disable-color">Your Orders</span>
           </v-btn>
-          <v-btn class="rounded-lg" @click="test('center')">
+          <v-btn class="rounded-lg" @click="changeOrderData('center')">
             <span class="disable-color">Quick Orders</span>
           </v-btn>
         </v-btn-toggle>
@@ -208,9 +208,36 @@
               <v-btn class="ma-1" color="#ACACAC" elevation="0" x-small>
                 <span style="color: white"> Reject </span>
               </v-btn>
-              <v-btn icon elevation="0">
-                <v-icon>mdi-chat</v-icon>
-              </v-btn>
+              <v-dialog v-model="dialog" width="500">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn icon elevation="0" v-bind="attrs" v-on="on">
+                    <v-icon>mdi-chat</v-icon>
+                  </v-btn>
+                </template>
+
+                <v-card>
+                  <v-card-title style="background-color: #13b8a4">
+                    <span style="color: white">Note to Customer</span>
+                  </v-card-title>
+
+                  <v-card-actions class="mt-5">
+                    <v-textarea
+                      v-model="noteToCustomer"
+                      solo
+                      label="Please fill in this area"
+                      outlined
+                      color="#13b8a4"
+                    >
+                    </v-textarea>
+                  </v-card-actions>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="#13b8a4" text @click="dialog = false">
+                      Confirm
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </td>
           </tr>
         </tbody>
@@ -225,11 +252,13 @@ export default {
   data: () => ({
     text: "left",
     time: null,
+    noteToCustomer: "",
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       .toISOString()
       .substr(0, 10),
     menu: false,
     menu2: false,
+    dialog: false,
     toggle_multiple: [0, 1, 2],
     order: [
       {
@@ -256,7 +285,7 @@ export default {
       this.time = null;
       dialog.value = false;
     },
-    test(input) {
+    changeOrderData(input) {
       if (input === "left") {
         this.order = [
           {
