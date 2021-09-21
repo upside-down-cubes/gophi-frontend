@@ -10,10 +10,10 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">
+                <th class="text-left" width="20%">
                   <span style="font-size: 18px">Order ID </span>
                 </th>
-                <th class="text-left">
+                <th class="text-left" width="30%">
                   <span style="font-size: 18px">Title </span>
                 </th>
                 <th class="text-left">
@@ -26,6 +26,7 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.title }}</td>
                 <v-btn
+                  v-if="item.approve"
                   rounded
                   small
                   elevation="0"
@@ -35,6 +36,7 @@
                   Customer review
                 </v-btn>
                 <v-btn
+                  v-if="item.approve"
                   rounded
                   small
                   elevation="0"
@@ -44,6 +46,7 @@
                   Approve
                 </v-btn>
                 <v-btn
+                  v-if="item.approve"
                   rounded
                   small
                   elevation="0"
@@ -52,7 +55,25 @@
                 >
                   Request revision
                 </v-btn>
-                <a href="workspace" class="ml-16">View submission</a>
+                <v-btn
+                  v-if="!item.approve"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#CECECE"
+                  class="white--text mt-3"
+                >
+                 Order sent
+                </v-btn>
+                <a
+                  href="workspace"
+                  v-if="item.approve"
+                  class="mr-4 float-right mt-3"
+                  >View submission</a
+                >
+                <a href="workspace" v-else class="mr-3 float-right mt-3"
+                  >View more details</a
+                >
               </tr>
             </tbody>
           </template>
@@ -66,13 +87,16 @@
 export default {
   name: "Translator_OrderHistory",
   data: () => ({
-    text: "left",
-    toggle_multiple: [0, 1, 2],
     order: [
       {
         id: "#000001",
         title: "Go gophi!",
         approve: true,
+        //some Random data
+      },
+      {
+        id: "#000002",
+        title: "Go udc!",
         //some Random data
       },
     ],

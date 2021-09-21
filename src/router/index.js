@@ -5,7 +5,7 @@ import Login from "../components/login/login.vue";
 import Hello from "../components/HelloWorld.vue";
 import Translator_order from "../components/translator/Translator_Order";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
-import Translator_OrderHistory from "../components/translator/Translator_OrderHistory";
+import ManageOrders from "../components/customer/ManageOrders";
 import SignUp from "@/components/signup/SignUp";
 import MakeOrder from "../components/customer/MakeOrder";
 
@@ -39,9 +39,9 @@ const routes = [
     component: TranslatorWorkspace,
   },
   {
-    name: "translator_orderHistory",
-    path: "/torder-history",
-    component: Translator_OrderHistory,
+    name: "ManageOrders",
+    path: "/manageorders",
+    component: ManageOrders,
   },
   {
     name: "Signup",
