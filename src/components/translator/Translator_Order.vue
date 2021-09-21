@@ -232,7 +232,21 @@
                   </v-card-actions>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="#13b8a4" text @click="dialog = false">
+                    <v-btn
+                      text
+                      @click="
+                        dialog = false;
+                        noteToCustomer = '';
+                      "
+                    >
+                      Back
+                    </v-btn>
+                    <v-btn
+                      color="#13b8a4"
+                      dark
+                      elevation="0"
+                      @click="dialog = false"
+                    >
                       Confirm
                     </v-btn>
                   </v-card-actions>
