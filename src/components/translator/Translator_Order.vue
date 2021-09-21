@@ -109,6 +109,7 @@
               </v-menu>
             </td>
             <td>
+              <!-- Accept button with dialog -->
               <v-dialog transition="dialog-top-transition" max-width="600">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -120,17 +121,90 @@
                     >Accept</v-btn
                   >
                 </template>
+                <!--  Pop up dialog to select estimate time to finish -->
                 <template v-slot:default="dialog">
                   <v-card>
-                    <v-card-text>
-                      <div class="text-h2 pa-12">Hello world!</div>
-                    </v-card-text>
+                    <v-card-title style="background-color: #13b8a4">
+                      <span style="color: white">Estimate time to finish</span>
+                    </v-card-title>
+                    <v-row class="mx-5 mt-4">
+                      <v-col>
+                        <v-menu
+                          v-model="menu"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="date"
+                              label="Estimate Date"
+                              outlined
+                              color="#13b8a4"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="date"
+                            color="#13b8a4"
+                            @input="menu = false"
+                          ></v-date-picker>
+                        </v-menu>
+                      </v-col>
+                      <v-col>
+                        <v-menu
+                          ref="menu"
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          :return-value.sync="time"
+                          transition="scale-transition"
+                          offset-y
+                          max-width="290px"
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="time"
+                              color="#13b8a4"
+                              label="Estimate time"
+                              prepend-icon="mdi-clock-time-four-outline"
+                              readonly
+                              outlined
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-time-picker
+                            v-if="menu2"
+                            v-model="time"
+                            color="#13b8a4"
+                            format="24hr"
+                            full-width
+                            @click:minute="$refs.menu[0].save(time)"
+                          ></v-time-picker>
+                        </v-menu>
+                      </v-col>
+                    </v-row>
                     <v-card-actions class="justify-end">
-                      <v-btn text @click="dialog.value = false">Close</v-btn>
+                      <v-btn text @click="clearDate(dialog)">Close</v-btn>
+                      <v-btn
+                        color="#13b8a4"
+                        elevation="0"
+                        dark
+                        @click="dialog.value = false"
+                        >Confirm</v-btn
+                      >
                     </v-card-actions>
                   </v-card>
                 </template>
               </v-dialog>
+              <!--    Reject button  -->
               <v-btn class="ma-1" color="#ACACAC" elevation="0" x-small>
                 <span style="color: white"> Reject </span>
               </v-btn>
@@ -150,6 +224,12 @@ export default {
   name: "Translator_Order",
   data: () => ({
     text: "left",
+    time: null,
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
+    menu: false,
+    menu2: false,
     toggle_multiple: [0, 1, 2],
     order: [
       {
@@ -171,6 +251,11 @@ export default {
     ],
   }),
   methods: {
+    clearDate(dialog) {
+      this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+      this.time = null;
+      dialog.value = false;
+    },
     test(input) {
       if (input === "left") {
         this.order = [
