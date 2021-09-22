@@ -19,14 +19,14 @@ VueRouter.prototype.push = function push(location) {
 
 const routes = [
   {
+    name: "Home",
+    path: "/",
+    component: Hello,
+  },
+  {
     name: "Login",
     path: "/login",
     component: Login,
-  },
-  {
-    name: "hello",
-    path: "/hello",
-    component: Hello,
   },
   {
     name: "translator_order",

@@ -10,7 +10,7 @@
         max-height="48"
         width="90"
         contain
-        :to="{ name: 'Login' }"
+        :to="{ name: 'Home' }"
       >
         <v-img
           :src="require('./assets/gophilogodark.png')"
@@ -35,6 +35,16 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
+        :to="{ name: 'MakeOrder' }"
+      >
+        Make Order
+      </v-btn>
+      <v-btn
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
         :to="{ name: 'Workspace' }"
       >
         My Workspace
@@ -48,7 +58,7 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
-        :to="{ name: 'hello' }"
+        :to="{ name: 'Login' }"
       >
         Profile
       </v-btn>

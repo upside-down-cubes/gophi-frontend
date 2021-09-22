@@ -108,7 +108,7 @@
           </v-row>
           <v-row>
             <v-col class="mx-10 mb=5" justify="space-around">
-              <v-btn block color="#13B8A4" dark>Log In</v-btn>
+              <v-btn block color="#13B8A4" dark @click="logIn">Log In</v-btn>
             </v-col>
           </v-row>
           <router-link
@@ -139,6 +139,10 @@ export default {
   methods: {
     toggleValues(is_translator) {
       this.translator = is_translator;
+    },
+
+    async logIn() {
+      await this.$router.push("/");
     },
   },
 };

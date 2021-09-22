@@ -4,10 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    isLoggedIn: false,
+    isTranslator: false,
+    orderData: [],
+  },
   actions: {
-    setUserLogin({ commit }, logInStatus, customerStatus) {
+    setUserLogin({ commit }, logInStatus, translatorStatus) {
       commit("setLogIn", logInStatus);
-      commit("setUserStatus", customerStatus);
+      commit("setUserStatus", translatorStatus);
     },
     addNewOrder({ commit }, newOrder) {
       commit("addOrder", newOrder);
@@ -18,16 +23,11 @@ export default new Vuex.Store({
       this.state.isLoggedIn = loading_status;
     },
     setUserStatus(state, userStatus) {
-      this.state.isCustomer = userStatus;
+      this.state.isTranslator = userStatus;
     },
     addOrder(state, order) {
       this.state.orderData.push(order);
     },
-  },
-  state: {
-    isLoggedIn: false,
-    isCustomer: false,
-    orderData: [],
   },
   modules: {},
 });
