@@ -123,29 +123,28 @@ import PersonalTwo from "./PersonalTwo";
 import Expertise from "./Expertise";
 
 export default {
-  name: "Signup",
+  name: "Signup_Translator",
   components: { PersonalInformation, PersonalTwo, Expertise },
-  props: ["translator"],
 
   data: () => ({
-    is_translator: false,
+    is_translator: true,
     step: 1,
   }),
 
-  beforeMount() {
-    window.addEventListener("beforeunload", this.preventNav);
-  },
+  // beforeMount() {
+  //   window.addEventListener("beforeunload", this.preventNav);
+  // },
+  //
+  // beforeDestroy() {
+  //   window.removeEventListener("beforeunload", this.preventNav);
+  // },
 
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.preventNav);
-  },
-
-  mounted() {
-    if (this.translator === undefined) {
-      this.$router.push("/login");
-    }
-    this.is_translator = this.translator;
-  },
+  // mounted() {
+  //   if (this.translator === undefined) {
+  //     this.$router.push("/login");
+  //   }
+  //   this.is_translator = this.translator;
+  // },
 
   methods: {
     preventNav(event) {
@@ -164,7 +163,7 @@ export default {
       if (this.is_translator) {
         this.$router.push("/torder");
       } else {
-        this.$router.push("/hello");
+        this.$router.push("/");
       }
     },
   },

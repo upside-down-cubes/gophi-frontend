@@ -111,14 +111,9 @@
               <v-btn block color="#13B8A4" dark @click="logIn">Log In</v-btn>
             </v-col>
           </v-row>
-          <router-link
-            :to="{ name: 'Signup', params: { translator } }"
-            style="text-decoration: none; color: inherit"
-          >
-            <v-card-text align="center" style="color: #1bb7a4">
-              Create an Account
-            </v-card-text>
-          </router-link>
+          <v-card-text align="center" style="color: #1bb7a4" @click="createAcc">
+            Create an Account
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -143,6 +138,16 @@ export default {
 
     async logIn() {
       await this.$router.push("/");
+    },
+
+    async createAcc() {
+      if (this.translator) {
+        //console.log("trans");
+        await this.$router.push({ name: "SignUp_Translator" });
+      } else {
+        //console.log("cust");
+        await this.$router.push({ name: "SignUp_Customer" });
+      }
     },
   },
 };
