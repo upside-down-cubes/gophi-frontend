@@ -80,7 +80,7 @@
                 <v-row no-gutters>
                   <v-col>
                     <p style="font-size: 12px; color: #5b5b5b" class="mb-0">
-                      go-gophi.mp4
+                      {{ fileName }}
                     </p>
                   </v-col>
                   <v-col>
@@ -177,7 +177,7 @@
                     </template>
 
                     <v-card>
-                      <v-card-title style="background-color: #13b8a4">
+                      <v-card-title class="gophi-theme-color-bg">
                         <span style="color: white">Note to translators</span>
                       </v-card-title>
 
@@ -227,22 +227,52 @@
               </v-card-title>
               <v-card-actions class="pt-0">
                 <v-radio-group row hide-details class="mt-0 pt-0 mb-4">
-                  <v-btn class="mx-10 my-1" outlined color="#13B8A4" rounded>
+                  <v-btn
+                    @click="creditDialog = !creditDialog"
+                    class="mx-10 my-1"
+                    outlined
+                    color="#13B8A4"
+                    rounded
+                  >
                     <v-radio value="credit" color="#13B8A4">
                       <span slot="label" class="default-color"
-                        >Credit/Debt</span
+                        >Credit/Debit</span
                       >
                     </v-radio>
                   </v-btn>
-                  <v-btn class="mx-10 my-1" outlined color="#13B8A4" rounded>
+                  <v-btn
+                    @click="creditDialog = false"
+                    class="mx-10 my-1"
+                    outlined
+                    color="#13B8A4"
+                    rounded
+                  >
                     <v-radio value="mobileBank" color="#13B8A4">
                       <span slot="label" class="default-color"
-                        >Mobile Backing</span
+                        >Mobile Banking</span
                       >
                     </v-radio>
                   </v-btn>
                 </v-radio-group>
               </v-card-actions>
+              <v-card class="mx-8" v-if="creditDialog" flat color="#f7f7f5">
+                <v-card-title class="gophi-theme-color-bg">
+                  <span class="text-h5 white--text"
+                    >Credit/Debit card information</span
+                  >
+                </v-card-title>
+                <CreditInformation />
+                <v-card-actions class="justify-end mr-3">
+                  <v-btn
+                    elevation="0"
+                    class="mb-2"
+                    color="#13b8a4"
+                    @click="creditDialog = false"
+                    dark
+                    >Confirm</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
               <v-card-actions class="justify-end">
                 <v-btn text @click="e6 = e6 - 1"> Back </v-btn>
               </v-card-actions>
@@ -274,13 +304,18 @@
 </template>
 
 <script>
+import CreditInformation from "./CreditInformation";
+
 export default {
   name: "MakeOrder",
+  components: { CreditInformation },
   data() {
     return {
       dialog: false,
       note: "",
       credit: false,
+      cardNumber: "",
+      creditDialog: false,
       mobileBanking: false,
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
@@ -295,7 +330,7 @@ export default {
       subtitlingLang: ["Japan", "Thai", "English", "Spanish"],
       audioLang: ["Japan", "Thai", "English", "Spanish"],
       category: ["Business", "Sport", "Cosmetic", "Science"],
-      e6: 1,
+      e6: 3,
     };
   },
   computed: {
