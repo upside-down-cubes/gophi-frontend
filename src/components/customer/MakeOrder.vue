@@ -228,7 +228,11 @@
               <v-card-actions class="pt-0">
                 <v-radio-group row hide-details class="mt-0 pt-0 mb-4">
                   <v-btn
-                    @click="creditDialog = !creditDialog"
+                    @click="
+                      creditDialog = !creditDialog;
+                      qrcodeDialog = false;
+                      mobileBankingDialog = false;
+                    "
                     class="mx-10 my-1"
                     outlined
                     color="#13B8A4"
@@ -241,7 +245,11 @@
                     </v-radio>
                   </v-btn>
                   <v-btn
-                    @click="creditDialog = false"
+                    @click="
+                      creditDialog = false;
+                      qrcodeDialog = false;
+                      mobileBankingDialog = !mobileBanking;
+                    "
                     class="mx-10 my-1"
                     outlined
                     color="#13B8A4"
@@ -253,8 +261,26 @@
                       >
                     </v-radio>
                   </v-btn>
+                  <v-btn
+                    @click="
+                      creditDialog = false;
+                      qrcodeDialog = !qrcode;
+                      mobileBankingDialog = false;
+                    "
+                    class="mx-10 my-1"
+                    outlined
+                    color="#13B8A4"
+                    rounded
+                  >
+                    <v-radio value="qrcode" color="#13B8A4">
+                      <span slot="label" class="default-color"
+                        >QR code/Promtpay</span
+                      >
+                    </v-radio>
+                  </v-btn>
                 </v-radio-group>
               </v-card-actions>
+              <!--   Credit card dialog -->
               <v-card class="mx-8" v-if="creditDialog" flat color="#f7f7f5">
                 <v-card-title class="gophi-theme-color-bg">
                   <span class="text-h5 white--text"
@@ -268,6 +294,54 @@
                     class="mb-2"
                     color="#13b8a4"
                     @click="creditDialog = false"
+                    dark
+                    >Confirm</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+              <!--   Mobile Banking -->
+              <v-card
+                class="mx-8"
+                v-if="mobileBankingDialog"
+                flat
+                color="#f7f7f5"
+              >
+                <v-card-title class="gophi-theme-color-bg">
+                  <span class="text-h5 white--text"
+                    >Mobile bank information</span
+                  >
+                </v-card-title>
+                <CreditInformation />
+                <v-card-actions class="justify-end mr-3">
+                  <v-btn
+                    elevation="0"
+                    class="mb-2"
+                    color="#13b8a4"
+                    @click="mobileBankingDialog = false"
+                    dark
+                    >Confirm</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+              <!--   QR code -->
+              <v-card class="mx-8" v-if="qrcodeDialog" flat color="#f7f7f5">
+                <v-card-title class="gophi-theme-color-bg">
+                  <span class="text-h5 white--text">QR code / Promtpay</span>
+                </v-card-title>
+                <v-card-actions class="justify-center mt-3">
+                  <v-img
+                    max-height="300"
+                    max-width="300"
+                    :src="require('../../assets/gophi-qrcode.png')"
+                    alt="QR code payment"
+                  />
+                </v-card-actions>
+                <v-card-actions class="justify-end mr-3">
+                  <v-btn
+                    elevation="0"
+                    class="mb-2"
+                    color="#13b8a4"
+                    @click="qrcodeDialog = false"
                     dark
                     >Confirm</v-btn
                   >
@@ -314,8 +388,11 @@ export default {
       dialog: false,
       note: "",
       credit: false,
+      qrcode: false,
       cardNumber: "",
       creditDialog: false,
+      mobileBankingDialog: false,
+      qrcodeDialog: false,
       mobileBanking: false,
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
