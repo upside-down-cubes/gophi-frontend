@@ -63,9 +63,9 @@
           :close-on-content-click="false"
           :return-value.sync="date"
           transition="scale-transition"
+          position-y="20px"
           max-width="290px"
           min-width="auto"
-          position-y="20px"
           ><template v-slot:activator="{ on, attrs }">
             <v-text-field
               v-model="date"
