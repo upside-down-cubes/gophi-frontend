@@ -102,9 +102,11 @@
                     clearable
                     outlined
                     hide-details
+                    label="Select language"
                     single-line
                     v-model="audioLangInput"
                     :items="audioLang"
+                    small-chips
                     dense
                   ></v-autocomplete>
                 </v-col>
@@ -115,12 +117,17 @@
                     color="#13B8A4"
                     style="background-color: white"
                     clearable
+                    hide-selected
+                    label="Select language"
                     v-model="subtitlingLangInput"
                     hide-details
                     single-line
                     :items="subtitlingLang"
+                    multiple
+                    small-chips
                     dense
-                  ></v-autocomplete>
+                  >
+                  </v-autocomplete>
                 </v-col>
               </v-row>
               <v-row class="mx-2">
@@ -132,6 +139,7 @@
                     style="background-color: white"
                     clearable
                     v-model="levelOfLangInput"
+                    label="Select level of language"
                     hide-details
                     single-line
                     :items="levelOfLang"
@@ -147,6 +155,7 @@
                     clearable
                     v-model="categoryInput"
                     hide-details
+                    label="Select category"
                     single-line
                     :items="category"
                     dense
@@ -420,18 +429,18 @@ export default {
       mobileBanking: false,
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-      audioLangInput: "English",
-      subtitlingLangInput: "English",
-      levelOfLangInput: "Basic",
-      categoryInput: "Business",
+      audioLangInput: "",
+      subtitlingLangInput: [],
+      levelOfLangInput: "",
+      categoryInput: "",
       proofread: false,
       isSelecting: false,
       selectedFile: null,
       levelOfLang: ["Basic", "Friendly", "Academic"],
-      subtitlingLang: ["Japan", "Thai", "English", "Spanish"],
-      audioLang: ["Japan", "Thai", "English", "Spanish"],
+      subtitlingLang: ["EN", "TH", "JP", "KR"],
+      audioLang: ["EN", "TH", "JP", "KR"],
       category: ["Business", "Sport", "Cosmetic", "Science"],
-      e6: 3,
+      e6: 2,
     };
   },
   computed: {
