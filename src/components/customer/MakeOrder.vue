@@ -54,7 +54,8 @@
                   color="#13B8A4"
                   elevation="0"
                   @click="e6 = 2"
-                  dark
+                  :disabled="this.selectedFile == null"
+                  :dark="this.selectedFile !== null"
                   class="mb-3"
                 >
                   Upload
