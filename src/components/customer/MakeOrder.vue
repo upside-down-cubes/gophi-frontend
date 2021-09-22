@@ -248,7 +248,7 @@
                     @click="
                       creditDialog = false;
                       qrcodeDialog = false;
-                      mobileBankingDialog = !mobileBanking;
+                      mobileBankingDialog = !mobileBankingDialog;
                     "
                     class="mx-10 my-1"
                     outlined
@@ -264,7 +264,7 @@
                   <v-btn
                     @click="
                       creditDialog = false;
-                      qrcodeDialog = !qrcode;
+                      qrcodeDialog = !qrcodeDialog;
                       mobileBankingDialog = false;
                     "
                     class="mx-10 my-1"
@@ -283,9 +283,16 @@
               <!--   Credit card dialog -->
               <v-card class="mx-8" v-if="creditDialog" flat color="#f7f7f5">
                 <v-card-title class="gophi-theme-color-bg">
-                  <span class="text-h5 white--text"
-                    >Credit/Debit card information</span
-                  >
+                  <v-row>
+                    <v-col class="col-1">
+                      <v-icon color="white">mdi-credit-card</v-icon>
+                    </v-col>
+                    <v-col>
+                      <span class="text-h5 white--text"
+                        >Credit/Debit card information</span
+                      >
+                    </v-col>
+                  </v-row>
                 </v-card-title>
                 <CreditInformation />
                 <v-card-actions class="justify-end mr-3">
@@ -307,11 +314,18 @@
                 color="#f7f7f5"
               >
                 <v-card-title class="gophi-theme-color-bg">
-                  <span class="text-h5 white--text"
-                    >Mobile bank information</span
-                  >
+                  <v-row>
+                    <v-col class="col-1">
+                      <v-icon color="white">mdi-cellphone</v-icon>
+                    </v-col>
+                    <v-col>
+                      <span class="text-h5 white--text"
+                        >Mobile bank information</span
+                      >
+                    </v-col>
+                  </v-row>
                 </v-card-title>
-                <CreditInformation />
+                <MobileBankingInformation />
                 <v-card-actions class="justify-end mr-3">
                   <v-btn
                     elevation="0"
@@ -326,7 +340,16 @@
               <!--   QR code -->
               <v-card class="mx-8" v-if="qrcodeDialog" flat color="#f7f7f5">
                 <v-card-title class="gophi-theme-color-bg">
-                  <span class="text-h5 white--text">QR code / Promtpay</span>
+                  <v-row>
+                    <v-col class="col-1">
+                      <v-icon color="white">mdi-qrcode-scan </v-icon>
+                    </v-col>
+                    <v-col>
+                      <span class="text-h5 white--text"
+                        >QR code / Promtpay</span
+                      >
+                    </v-col>
+                  </v-row>
                 </v-card-title>
                 <v-card-actions class="justify-center mt-3">
                   <v-img
@@ -379,10 +402,11 @@
 
 <script>
 import CreditInformation from "./CreditInformation";
+import MobileBankingInformation from "./MobileBankingInformation";
 
 export default {
   name: "MakeOrder",
-  components: { CreditInformation },
+  components: { CreditInformation, MobileBankingInformation },
   data() {
     return {
       dialog: false,
