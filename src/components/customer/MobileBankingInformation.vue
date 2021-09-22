@@ -15,6 +15,7 @@
           clearable
           outlined
           hide-details
+          label="Select bank"
           single-line
           v-model="bankSelected"
           :items="bankChoices"
