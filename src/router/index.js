@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from "../components/login/login.vue";
-import Hello from "../components/HelloWorld.vue";
+import Home from "../components/Home.vue";
 import Translator_order from "../components/translator/Translator_Order";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 import ManageOrders from "../components/customer/ManageOrders";
@@ -21,7 +21,7 @@ const routes = [
   {
     name: "Home",
     path: "/",
-    component: Hello,
+    component: Home,
   },
   {
     name: "Login",
