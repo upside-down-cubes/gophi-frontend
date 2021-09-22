@@ -5,14 +5,18 @@
         <!--  Order input field -->
         <v-stepper v-model="e6" vertical flat max-width="1200">
           <!-- Upload file (step 1) -->
-          <v-stepper-step :complete="e6 > 1" step="1" color="#13B8A4">
+          <v-stepper-step
+            @click.native="e6 = 1"
+            :complete="e6 > 1"
+            step="1"
+            color="#13B8A4"
+          >
             <span>File upload</span>
-            <v-divider></v-divider>
           </v-stepper-step>
 
           <v-stepper-content step="1">
             <v-card color="#F1F1F1" flat class="mb-12">
-              <v-list-item three-line>
+              <v-list-item two-line>
                 <v-list-item-content>
                   <v-card-actions>
                     <v-btn
@@ -37,17 +41,6 @@
                   <v-card-subtitle>
                     <span>Only video files are allowed to be uploaded.</span>
                   </v-card-subtitle>
-                  <v-card-actions>
-                    <v-btn
-                      color="#13B8A4"
-                      elevation="0"
-                      @click="e6 = 2"
-                      dark
-                      class="mb-3"
-                    >
-                      Upload
-                    </v-btn>
-                  </v-card-actions>
                 </v-list-item-content>
 
                 <v-list-item-action>
@@ -56,11 +49,27 @@
                   </v-window>
                 </v-list-item-action>
               </v-list-item>
+              <v-card-actions class="justify-end mx-2">
+                <v-btn
+                  color="#13B8A4"
+                  elevation="0"
+                  @click="e6 = 2"
+                  dark
+                  class="mb-3"
+                >
+                  Upload
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-stepper-content>
 
           <!--  Order information (step 2) -->
-          <v-stepper-step :complete="e6 > 2" step="2" color="#13B8A4">
+          <v-stepper-step
+            :complete="e6 > 2"
+            step="2"
+            color="#13B8A4"
+            @click.native="e6 = 2"
+          >
             Order information
           </v-stepper-step>
 
@@ -201,7 +210,12 @@
           </v-stepper-content>
 
           <!--  Payment (step 3) -->
-          <v-stepper-step :complete="e6 > 3" step="3" color="#13B8A4">
+          <v-stepper-step
+            @click.native="e6 = 3"
+            :complete="e6 > 3"
+            step="3"
+            color="#13B8A4"
+          >
             Payment
           </v-stepper-step>
 
@@ -300,6 +314,9 @@ export default {
       );
 
       this.$refs.uploader.click();
+    },
+    test() {
+      console.log("can click");
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
