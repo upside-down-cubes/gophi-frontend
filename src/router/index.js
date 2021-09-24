@@ -3,12 +3,13 @@ import VueRouter from "vue-router";
 
 import Login from "../components/login/login.vue";
 import Home from "../components/Home.vue";
-import Translator_order from "../components/translator/Translator_Order";
+
+import TranslatorSignup from "../components/signup/TranslatorSignup";
+import TranslatorOrder from "../components/translator/TranslatorOrder";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
-import ManageOrders from "../components/customer/ManageOrders";
-import MakeOrder from "../components/customer/MakeOrder";
-import SignUp_Customer from "../components/signup/SignUp_Customer";
-import SignUp_Translator from "../components/signup/SignUp_Translator";
+import CustomerSignup from "../components/signup/CustomerSignup";
+import CustomerOrder from "../components/customer/CustomerOrder";
+import CustomerMakeOrder from "../components/customer/MakeOrder";
 
 Vue.use(VueRouter);
 
@@ -30,34 +31,34 @@ const routes = [
     component: Login,
   },
   {
-    name: "translator_order",
-    path: "/torder",
-    component: Translator_order,
+    name: "TranslatorOrder",
+    path: "/received_order",
+    component: TranslatorOrder,
   },
   {
-    name: "Workspace",
-    path: "/workspace",
+    name: "TranslatorWorkspace",
+    path: "/my_workspace",
     component: TranslatorWorkspace,
   },
   {
-    name: "ManageOrders",
-    path: "/manageorders",
-    component: ManageOrders,
+    name: "CustomerOrder",
+    path: "/my_orders",
+    component: CustomerOrder,
   },
   {
-    name: "Signup_Translator",
-    path: "/tsignup",
-    component: SignUp_Translator,
+    name: "TranslatorSignup",
+    path: "/translator_signup",
+    component: TranslatorSignup,
   },
   {
-    name: "Signup_Customer",
-    path: "/csignup",
-    component: SignUp_Customer,
+    name: "CustomerSignup",
+    path: "/customer_signup",
+    component: CustomerSignup,
   },
   {
-    name: "MakeOrder",
+    name: "CustomerMakeOrder",
     path: "/makeorder",
-    component: MakeOrder,
+    component: CustomerMakeOrder,
   },
 ];
 

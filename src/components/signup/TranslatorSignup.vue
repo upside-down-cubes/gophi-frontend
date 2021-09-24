@@ -9,9 +9,9 @@
           class="mt-16"
         />
         <div class="text-center mt-2">
-          <span style="font-size: x-large">
-            A subtitling platform for globalizing knowledge
-          </span>
+          <span style="font-size: x-large"
+            >A subtitling platform for globalizing knowledge</span
+          >
         </div>
       </v-col>
       <v-col md="6">
@@ -116,27 +116,28 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 import PersonalInformation from "./PersonalInformation";
 import PersonalTwo from "./PersonalTwo";
 import Expertise from "./Expertise";
 
 export default {
-  name: "Signup_Customer",
+  name: "TranslatorSignup",
   components: { PersonalInformation, PersonalTwo, Expertise },
 
   data: () => ({
-    is_translator: false,
+    is_translator: true,
     step: 1,
   }),
 
-  beforeMount() {
-    window.addEventListener("beforeunload", this.preventNav);
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.preventNav);
-  },
+  // beforeMount() {
+  //   window.addEventListener("beforeunload", this.preventNav);
+  // },
+  //
+  // beforeDestroy() {
+  //   window.removeEventListener("beforeunload", this.preventNav);
+  // },
 
   // mounted() {
   //   if (this.translator === undefined) {

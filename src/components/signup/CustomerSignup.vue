@@ -9,9 +9,9 @@
           class="mt-16"
         />
         <div class="text-center mt-2">
-          <span style="font-size: x-large"
-            >A subtitling platform for globalizing knowledge</span
-          >
+          <span style="font-size: x-large">
+            A subtitling platform for globalizing knowledge
+          </span>
         </div>
       </v-col>
       <v-col md="6">
@@ -116,36 +116,27 @@
     </v-row>
   </v-container>
 </template>
-
 <script>
 import PersonalInformation from "./PersonalInformation";
 import PersonalTwo from "./PersonalTwo";
 import Expertise from "./Expertise";
 
 export default {
-  name: "Signup_Translator",
+  name: "CustomerSignup",
   components: { PersonalInformation, PersonalTwo, Expertise },
 
   data: () => ({
-    is_translator: true,
+    is_translator: false,
     step: 1,
   }),
 
-  // beforeMount() {
-  //   window.addEventListener("beforeunload", this.preventNav);
-  // },
-  //
-  // beforeDestroy() {
-  //   window.removeEventListener("beforeunload", this.preventNav);
-  // },
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+  },
 
-  // mounted() {
-  //   if (this.translator === undefined) {
-  //     this.$router.push("/login");
-  //   }
-  //   this.is_translator = this.translator;
-  // },
-
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
   methods: {
     preventNav(event) {
       event.preventDefault();
@@ -156,15 +147,11 @@ export default {
       if (this.step > 1) {
         this.step--;
       } else {
-        this.$router.push("/login");
+        this.$router.push({ name: "Login"});
       }
     },
     submitSignup() {
-      if (this.is_translator) {
-        this.$router.push("/torder");
-      } else {
-        this.$router.push("/");
-      }
+      this.$router.push({ name: "CustomerOrder"});
     },
   },
 };

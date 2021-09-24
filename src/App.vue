@@ -25,7 +25,7 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
-        :to="{ name: 'translator_order' }"
+        :to="{ name: 'TranslatorOrder' }"
       >
         Orders
       </v-btn>
@@ -35,7 +35,7 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
-        :to="{ name: 'MakeOrder' }"
+        :to="{ name: 'CustomerMakeOrder' }"
       >
         Make Order
       </v-btn>
@@ -45,7 +45,7 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
-        :to="{ name: 'Workspace' }"
+        :to="{ name: 'TranslatorWorkspace' }"
       >
         My Workspace
       </v-btn>
