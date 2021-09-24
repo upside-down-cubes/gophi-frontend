@@ -161,7 +161,7 @@ export default {
     },
     submitSignup() {
       if (this.is_translator) {
-        this.$router.push("/torder");
+        this.$router.push({name: "TranslatorOrder"});
       } else {
         this.$router.push("/");
       }
