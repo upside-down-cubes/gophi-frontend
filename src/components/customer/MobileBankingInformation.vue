@@ -16,6 +16,7 @@
           outlined
           hide-details
           label="Select bank"
+          item-color="teal accent-4"
           single-line
           v-model="bankSelected"
           :items="bankChoices"
