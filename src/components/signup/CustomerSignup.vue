@@ -35,7 +35,7 @@
             </v-window-item>
 
             <v-window-item :value="2">
-              <PersonalInformation></PersonalInformation>
+              <PersonalTwo></PersonalTwo>
             </v-window-item>
           </v-window>
 
@@ -86,10 +86,10 @@
 </template>
 <script>
 import PersonalInformation from "./PersonalInformation";
-
+import PersonalTwo from "./PersonalTwo";
 export default {
   name: "CustomerSignup",
-  components: { PersonalInformation },
+  components: { PersonalInformation, PersonalTwo },
 
   data: () => ({
     step: 1,

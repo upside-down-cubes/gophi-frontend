@@ -74,7 +74,7 @@
             >
               <span style="font-size: x-large">Customer</span>
             </v-btn>
-            <ul class="check-list text-left" style="margin-left: 180px">
+            <ul class="check-list text-left" style="margin-left: 125px">
               <li>Order subtitles</li>
               <li>Subtitle your own video</li>
             </ul>
@@ -91,7 +91,7 @@
             >
               <span style="font-size: x-large">Translator</span>
             </v-btn>
-            <ul class="check-list text-left" style="margin-left: 100px">
+            <ul class="check-list text-left" style="padding-left: 90px">
               <li>Find & Work on freelance subtitle orders</li>
             </ul>
           </v-col>

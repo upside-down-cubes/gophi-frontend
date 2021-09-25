@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-10 justify-space-around justify-space-between">
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -51,7 +51,7 @@
         </v-menu>
       </v-col>
     </v-row>
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4" class="pt-2">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -70,11 +70,12 @@
           outlined
           dense
           solo
+          no-resize
         ></v-textarea>
       </v-col>
     </v-row>
 
-    <v-row class="mx-6">
+    <v-row class="mx-2">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"

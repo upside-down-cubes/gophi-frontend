@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-10 justify-space-around justify-space-between">
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4" class="pt-2">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -25,7 +25,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -50,7 +50,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -74,7 +74,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6 justify-space-between">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
