@@ -401,7 +401,13 @@
           </v-card-title>
           <v-divider class="mx-10"></v-divider>
         </v-card>
-        <v-btn class="mt-3" color="#13B8A4" elevation="0" dark>
+        <v-btn
+          @click="updateOrder"
+          class="mt-3"
+          color="#13B8A4"
+          elevation="0"
+          dark
+        >
           Confirm order
         </v-btn>
       </v-col>
@@ -412,6 +418,8 @@
 <script>
 import CreditInformation from "./CreditInformation";
 import MobileBankingInformation from "./MobileBankingInformation";
+import store from "../../store";
+import router from "../../router";
 
 export default {
   name: "MakeOrder",
@@ -461,8 +469,49 @@ export default {
 
       this.$refs.uploader.click();
     },
-    test() {
-      console.log("can click");
+    async updateOrder() {
+      let allMonths = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      let currentDate = new Date();
+      let orderDate =
+        currentDate.getDate() +
+        "-" +
+        allMonths[currentDate.getMonth()] +
+        "-" +
+        currentDate.getFullYear() +
+        " " +
+        currentDate.getHours() +
+        ":" +
+        currentDate.getMinutes();
+      let language = [];
+      for (let index = 0; index < this.subtitlingLangInput.length; index++) {
+        let selectedLang = this.subtitlingLangInput[index];
+        language.push({ content: this.audioLangInput + " > " + selectedLang });
+      }
+      let order = {
+        date: orderDate,
+        by: "gophi team",
+        language: language,
+        audioLang: this.audioLangInput,
+        level: this.levelOfLangInput,
+        category: this.categoryInput,
+        length: "~3 mins",
+        amount: "$122",
+      };
+      await store.dispatch("addNewOrder", order);
+      await router.push({ name: "TranslatorOrder" });
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];

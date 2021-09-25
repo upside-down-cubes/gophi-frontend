@@ -266,6 +266,8 @@
 </template>
 
 <script>
+import store from "../../store";
+
 export default {
   name: "Translator_Order",
   data: () => ({
@@ -279,25 +281,11 @@ export default {
     menu2: false,
     dialog: false,
     toggle_multiple: [0, 1, 2],
-    order: [
-      {
-        date: "25-Aug-2021 14:14",
-        by: "gophi team",
-        language: [
-          {
-            content: "EN > EN",
-          },
-          {
-            content: "EN > TH",
-          },
-        ],
-        level: "Friendly",
-        category: "Business",
-        length: "~3 mins",
-        amount: "$122",
-      },
-    ],
+    order: [],
   }),
+  beforeMount() {
+    this.changeOrderData("left");
+  },
   methods: {
     clearDate(dialog) {
       this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
@@ -306,56 +294,15 @@ export default {
     },
     changeOrderData(input) {
       if (input === "left") {
-        this.order = [
-          {
-            date: "25-Aug-2021 14:14",
-            by: "gophi team",
-            language: [
-              {
-                content: "EN > EN",
-              },
-              {
-                content: "EN > TH",
-              },
-            ],
-            level: "Friendly",
-            category: "Business",
-            length: "~3 mins",
-            amount: "$122",
-          },
-        ];
+        let allOrder = store.state.orderData;
+        for (let index = 0; index < allOrder.length; index++) {
+          if (allOrder[index].audioLang === "EN") {
+            this.order.push(allOrder[index]);
+          }
+        }
       } else if (input === "center") {
-        this.order = [
-          {
-            date: "24-Sep-2021 10:14",
-            by: "gophi team",
-            language: [
-              {
-                content: "JP > TH",
-              },
-              {
-                content: "JP > EN",
-              },
-            ],
-            level: "Academic",
-            category: "Sport",
-            length: "~10 mins",
-            amount: "$1,342",
-          },
-          {
-            date: "10-Oct-2021 15:01",
-            by: "gophi team",
-            language: [
-              {
-                content: "KR > CN",
-              },
-            ],
-            level: "Basic",
-            category: "Cosmetic",
-            length: "~2 mins",
-            amount: "$90",
-          },
-        ];
+        console.log(store.state.orderData);
+        this.order = store.state.orderData;
       }
     },
   },

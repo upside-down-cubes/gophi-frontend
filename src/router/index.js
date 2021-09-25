@@ -78,7 +78,6 @@ router.beforeEach(async (to, from, next) => {
       break;
     }
   }
-  console.log("pass");
   if (!isAvailable) {
     next({ name: "Home" });
   }
