@@ -146,7 +146,45 @@
       </v-row>
     </v-card>
     <!--Text Suggestion-->
-    <v-card width="1200" elevation="0" class="mx-auto">
+    <v-card width="1200" elevation="0" class="mx-auto mt-10">
+      <v-row class="ml-0">
+        <div v-if="this.subtitle === this.subtitleEN">
+          <v-btn
+            class="rounded-lg mr-1"
+            small
+            color="#13B8A4"
+            elevation="0"
+            dense
+          >
+            <span style="color: white">EN > EN</span>
+          </v-btn>
+          <v-btn
+            class="rounded-lg"
+            small
+            color="#B2DFDB"
+            elevation="0"
+            dense
+            @click="changeSubtitle"
+          >
+            <span style="color: white">EN > TH</span>
+          </v-btn>
+        </div>
+        <div v-else>
+          <v-btn
+            class="rounded-lg mr-1"
+            small
+            color="#B2DFDB"
+            elevation="0"
+            dense
+            @click="changeSubtitle"
+          >
+            <span style="color: white">EN > EN</span>
+          </v-btn>
+          <v-btn class="rounded-lg" small color="#13B8A4" elevation="0" dense>
+            <span style="color: white">EN > TH</span>
+          </v-btn>
+        </div>
+      </v-row>
       <v-simple-table
         fixed-header
         dark
@@ -171,14 +209,14 @@
             <v-col>
               <v-row class="justify-space-between" style="width: 190px">
                 <v-text-field
-                  value="12:30:01"
+                  v-model="sub.start"
                   type="time"
                   dense
                   hide-details
                   style="font-size: 12px; margin: unset"
                 ></v-text-field>
                 <v-text-field
-                  value="12:30:01"
+                  v-model="sub.end"
                   type="time"
                   dense
                   hide-details
@@ -238,6 +276,18 @@
         </v-slide-y-transition>
       </v-card>
     </v-card>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-btn
+        dark
+        class="ma-7"
+        color="#13B8A4"
+        elevation="0"
+        :to="{ name: 'TranslatorCurrentOrders' }"
+      >
+        Submit
+      </v-btn>
+    </v-row>
   </v-container>
 </template>
 
@@ -246,6 +296,7 @@ export default {
   name: "TranslatorProject",
 
   data: () => ({
+    text: "center",
     video:
       '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
     transcripts: [
@@ -279,9 +330,12 @@ export default {
         amount: "$122",
       },
     ],
-    subtitle: [
+    subtitle: null,
+    subtitleEN: [
       {
         id: "1",
+        start: "00:00:19",
+        end: "00:05:27",
         suggest:
           "goofy is a subtitling platform for globalizing knowledge we aim to streamline the subtitling and",
         yours:
@@ -289,6 +343,8 @@ export default {
       },
       {
         id: "2",
+        start: "00:05:27",
+        end: "00:11:08",
         suggest:
           "translation process with machine assistance to provide affordable quick and accurate subtitles",
         yours:
@@ -296,6 +352,8 @@ export default {
       },
       {
         id: "3",
+        start: "00:13:03",
+        end: "00:17:24",
         suggest:
           "kofi provides subtitling service through two models first a customer can order subtitles",
         yours:
@@ -303,6 +361,8 @@ export default {
       },
       {
         id: "4",
+        start: "00:17:24",
+        end: "00:22:16",
         suggest:
           "through gofee which matches the customer’s order with a translator on the platform the matching",
         yours:
@@ -310,17 +370,81 @@ export default {
       },
       {
         id: "5",
+        start: "00:22:16",
+        end: "00:27:17",
         suggest:
           "process considers subtitling language and content context or category a customer can make a",
         yours:
           "process considers subtitling language and content context or category. A customer can make a",
       },
     ],
+    subtitleTH: [
+      {
+        id: "1",
+        start: "00:00:19",
+        end: "00:05:27",
+        suggest:
+          "Gophi เป็นแพลตฟอร์มคำบรรยายสำหรับความรู้โลกาภิวัตน์ เรามุ่งหวังที่จะปรับปรุงกระบวนการคำบรรยาย",
+        yours:
+          "โกฟิเป็นแพลตฟอร์มสร้างคำบรรยายในวิดีโอเพื่อช่วยเผยแพร่ความรู้ให้เป็นสากล เรามุ่งหวังที่จะทำให้กระบวนการสร้างคำบรรยาย",
+      },
+      {
+        id: "2",
+        start: "00:05:27",
+        end: "00:11:08",
+        suggest:
+          "และการแปลด้วยความช่วยเหลือของเครื่องเพื่อให้คำบรรยายราคาไม่แพง รวดเร็ว และแม่นยำ",
+        yours:
+          "รวมถึงขั้นตอนการแปลมีประสิทธิภาพมากยิ่งขึ้น โดยใช้ประโยชน์จากปัญญาประดิษฐ์ เพื่อให้ได้คำบรรยายอย่างรวดเร็วและแม่นยำในราคาที่เหมาะสม",
+      },
+      {
+        id: "3",
+        start: "00:13:03",
+        end: "00:17:24",
+        suggest:
+          "Gophi ให้บริการคำบรรยายผ่านสองรูปแบบ ประการแรก ลูกค้าสามารถสั่งซื้อคำบรรยาย",
+        yours:
+          "โกฟิให้บริการสร้างคำบรรยายในวิดีโอในสองรูปแบบ ในรูปแบบแรก ลูกค้าสามารถสั่งทำคำบรรยายในวิดีโอ",
+      },
+      {
+        id: "4",
+        start: "00:17:24",
+        end: "00:22:16",
+        suggest:
+          "ผ่านโกฟิ ซึ่งจับคู่คำสั่งงานของลูกค้ากับนักแปลในระบบ การจับคู่นี้คำนึงถึงภาษาของคำบรรยายรวมถึง  ",
+        yours:
+          "ผ่านโกฟิ ซึ่งจับคู่คำสั่งงานของลูกค้ากับนักแปลในระบบ การจับคู่นี้คำนึงถึงภาษาของคำบรรยายรวมถึงบริบทหรือประเภทของเนื้อหา",
+      },
+      {
+        id: "5",
+        start: "00:22:16",
+        end: "00:27:17",
+        suggest:
+          "ขั้นตอนการจับคู่จะพิจารณาภาษาซับไตเติ้ลและบริบทเนื้อหาหรือหมวดหมู่ ลูกค้าสามารถ",
+        yours:
+          "ลูกค้าสามารถสั่งซื้อคำบรรยายในวิดีโอโดยอัปโหลดวิดีโอ เลือกภาษาของคำบรรยาย อารมณ์และน้ำเสียง และหมวดหมู่",
+      },
+    ],
     time: "00.25",
   }),
+
+  created() {
+    this.subtitle = this.subtitleEN;
+  },
+
   computed: {
     timeline() {
       return this.subtitle.slice();
+    },
+  },
+
+  methods: {
+    changeSubtitle() {
+      if (this.subtitle === this.subtitleEN) {
+        this.subtitle = this.subtitleTH;
+      } else {
+        this.subtitle = this.subtitleEN;
+      }
     },
   },
 };

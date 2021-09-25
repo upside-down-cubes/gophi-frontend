@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-    <v-row class="mx-6 mt-8">
-      <v-col md="4">
+  <v-container class="mt-10 justify-space-around justify-space-between">
+    <v-row class="mx-2 justify-space-between">
+      <v-col md="4" class="pt-2">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
         >
@@ -17,6 +17,7 @@
           required
           clearable
           outlined
+          hide-details
           dense
           single-line
           solo
@@ -24,7 +25,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -32,7 +33,7 @@
           Email</v-card-text
         >
       </v-col>
-      <v-col class="mr-5">
+      <v-col class="mr-5 pb-0 mb-0">
         <v-text-field
           color="#13B8A4"
           v-model="email"
@@ -40,6 +41,7 @@
           persistent-hint
           required
           clearable
+          hide-details
           outlined
           dense
           single-line
@@ -48,7 +50,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -56,12 +58,13 @@
           Password</v-card-text
         >
       </v-col>
-      <v-col class="mr-5">
+      <v-col class="mr-5 pb-0">
         <v-text-field
           color="#13B8A4"
           label="••••••••"
           required
           clearable
+          hide-details
           outlined
           dense
           single-line
@@ -71,7 +74,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-6">
+    <v-row class="mx-2 justify-space-between">
       <v-col md="4">
         <v-card-text
           style="font-size: large; font-weight: normal; color: #535353"
@@ -79,13 +82,14 @@
           Confirm password</v-card-text
         >
       </v-col>
-      <v-col class="mr-5">
+      <v-col class="mr-5 pb-0">
         <v-text-field
           color="#13B8A4"
           label="••••••••"
           required
           clearable
           outlined
+          hide-details
           dense
           single-line
           solo
