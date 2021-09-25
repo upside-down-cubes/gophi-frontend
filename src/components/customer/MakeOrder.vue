@@ -145,7 +145,7 @@
                     outlined
                     color="#13B8A4"
                     style="background-color: white"
-                    hide-selected
+                    item-color="teal accent-4"
                     label="Select language"
                     v-model="subtitlingLangInput"
                     hide-details
@@ -640,7 +640,7 @@ export default {
         "Sports & Recreation",
         "Technology & Product description",
       ],
-      e6: 2,
+      e6: 1,
     };
   },
   computed: {
