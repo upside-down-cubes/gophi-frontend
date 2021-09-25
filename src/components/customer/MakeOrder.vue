@@ -107,7 +107,7 @@
                     v-model="audioLangInput"
                     :items="LangChoices"
                     item-value="short"
-                    item-text="fullForm"
+                    item-text="fullName"
                     dense
                   >
                     <template v-slot:selection="data">
@@ -149,7 +149,7 @@
                     single-line
                     :items="LangChoices"
                     item-value="short"
-                    item-text="fullForm"
+                    item-text="fullName"
                     multiple
                     dense
                   >
@@ -440,19 +440,45 @@
         <v-card
           flat
           color="#F1F1F1"
-          class="justify-center"
+          class="justify-center overflow-y-auto"
           min-height="300"
           min-width="200"
-          max-width="400"
-          max-height="500"
+          max-width="300"
+          max-height="400"
         >
           <v-card-title class="justify-center">
             <h4>Order summary</h4>
           </v-card-title>
           <v-divider class="mx-10"></v-divider>
           <v-card-subtitle>
+            <p class="font-weight-bold">Languages</p>
+            <ul class="my-3" v-for="(item, i) in subtitlingLangInput" :key="i">
+              <li>
+                <v-row>
+                  <v-col cols="6">
+                    <span>{{ item }}</span>
+                  </v-col>
+                  <v-col>~30 Bath/mins</v-col>
+                </v-row>
+              </li>
+            </ul>
+            <ul class="my-3" v-if="subtitlingLangInput.length === 0">
+              <li>No subtitling language selected</li>
+            </ul>
+            <p class="font-weight-bold">Content category</p>
+            <ul class="my-3">
+              <li v-if="categoryInput !== ''">
+                <v-row>
+                  <v-col cols="6">
+                    <span>{{ categoryInput }}</span>
+                  </v-col>
+                  <v-col>~30 Bath/mins</v-col>
+                </v-row>
+              </li>
+              <li v-else>No category selected</li>
+            </ul>
             <v-row>
-              <v-col cols="6">
+              <v-col cols="7">
                 <span class="font-weight-bold">Video length</span>
               </v-col>
               <v-col>
