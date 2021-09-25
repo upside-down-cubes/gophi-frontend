@@ -98,6 +98,7 @@
                   <span>Audio language</span>
                   <v-autocomplete
                     color="#13B8A4"
+                    item-color="teal accent-4"
                     style="background-color: white"
                     clearable
                     outlined
@@ -186,6 +187,7 @@
                   <v-autocomplete
                     outlined
                     color="#13B8A4"
+                    item-color="teal accent-4"
                     style="background-color: white"
                     clearable
                     v-model="levelOfLangInput"
@@ -201,6 +203,7 @@
                   <v-autocomplete
                     outlined
                     color="#13B8A4"
+                    item-color="teal accent-4"
                     style="background-color: white"
                     clearable
                     v-model="categoryInput"

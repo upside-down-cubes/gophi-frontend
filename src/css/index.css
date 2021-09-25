@@ -70,3 +70,7 @@
 input:-webkit-autofill {
     -webkit-background-clip: text;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #1bb7a4;
+}
