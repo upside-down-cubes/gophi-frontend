@@ -485,6 +485,18 @@
                 <span>{{ this.videoDuration[0] }}:{{ this.videoDuration[1] }} minutes</span>
               </v-col>
             </v-row>
+            <v-divider class="divider-header-1 my-2"></v-divider>
+            <v-row>
+              <v-col cols="7">
+                <span class="font-weight-bold text-h6">Total:</span>
+              </v-col>
+              <v-col>
+                <span v-if="categoryInput !== ''" class="text-h6">{{ (subtitlingLangInput.length + 1) * 30 }}</span>
+                <span v-else class="text-h6">${{
+                  subtitlingLangInput.length * 30
+                }}</span>
+              </v-col>
+            </v-row>
           </v-card-subtitle>
         </v-card>
         <v-btn
