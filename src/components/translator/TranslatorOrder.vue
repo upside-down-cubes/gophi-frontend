@@ -77,20 +77,25 @@
               <v-menu
                 top
                 min-width="300px"
-                max-height="500px"
-                open-on-hover
+                max-height="300px"
                 offset-y
                 right
                 offset-x
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
+                  <v-btn
+                    rounded
+                    x-small
+                    elevation="0"
+                    v-on="on"
+                    color="#CECECE"
+                  >
                     <v-icon> mdi-dots-horizontal </v-icon>
                   </v-btn>
                 </template>
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
-                    <p class="font-weight-light">
+                    <p class="font-weight-light" style="font-size: 14px">
                       It is a long established fact that a reader will be
                       distracted by the readable content of a page when looking
                       at its layout. The point of using Lorem Ipsum is that it
