@@ -116,6 +116,8 @@
                         small
                         v-bind="data.attrs"
                         :input-value="data.selected"
+                        color="rgba(19, 184, 165, 0.7)"
+                        dark
                         close
                         @click="data.select"
                         @click:close="audioLangInput = ''"
@@ -158,6 +160,8 @@
                       <v-chip
                         v-bind="data.attrs"
                         small
+                        color="rgba(19, 184, 165, 0.7)"
+                        dark
                         :input-value="data.selected"
                         close
                         @click="data.select"
