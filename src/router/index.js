@@ -6,6 +6,7 @@ import Home from "../components/Home.vue";
 
 import TranslatorSignup from "../components/signup/TranslatorSignup";
 import TranslatorOrder from "../components/translator/TranslatorOrder";
+import TranslatorCurrentOrders from "../components/translator/TranslatorCurrentOrders";
 import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 import CustomerSignup from "../components/signup/CustomerSignup";
 import CustomerOrder from "../components/customer/CustomerOrder";
@@ -36,8 +37,13 @@ const routes = [
     component: TranslatorOrder,
   },
   {
+    name: "TranslatorCurrentOrders",
+    path: "/current_orders",
+    component: TranslatorCurrentOrders,
+  },
+  {
     name: "TranslatorWorkspace",
-    path: "/my_workspace",
+    path: "/my_workspace/",
     component: TranslatorWorkspace,
   },
   {

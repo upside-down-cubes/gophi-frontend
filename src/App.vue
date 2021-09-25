@@ -45,7 +45,7 @@
         class="ml-5"
         color="#d4f8f4"
         max-height="48"
-        :to="{ name: 'TranslatorWorkspace' }"
+        :to="{ name: 'TranslatorCurrentOrders' }"
       >
         My Workspace
       </v-btn>
