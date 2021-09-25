@@ -50,10 +50,32 @@
         </v-window>
       </v-col>
       <v-col>
-        <span>Transcript</span
-        ><v-chip x-small class="ml-2" color="#13B8A4" dark
-          >English <v-icon right> mdi-chevron-down </v-icon>
-        </v-chip>
+        <span>Transcript</span>
+        <v-menu transition="slide-y-transition" bottom offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-chip
+              x-small
+              class="ml-2"
+              color="#13B8A4"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              >English <v-icon right> mdi-chevron-down </v-icon>
+            </v-chip>
+          </template>
+          <v-list dense>
+            <v-list-item-group color="#13B8A4">
+              <v-list-item
+                v-for="item in transcripts"
+                :key="item.language"
+                @click="transcript = item.text"
+              >
+                <v-list-item-content>{{ item.language }}</v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-menu>
+
         <v-card height="250" class="overflow-y-auto mt-1" color="#F1F1F1" flat>
           <v-card-text v-text="transcript"></v-card-text>
         </v-card>
@@ -93,8 +115,17 @@ export default {
   data: () => ({
     video:
       '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-    transcript:
-      "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
+    transcripts: [
+      {
+        language: "English",
+        text: "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
+      },
+      {
+        language: "Thai",
+        text: "",
+      },
+    ],
+    transcript: "",
     order: [
       {
         id: "#000001",
