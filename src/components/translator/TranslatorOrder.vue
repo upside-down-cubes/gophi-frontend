@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <!-- Test button -->
-    <v-btn class="float-right" @click="changeOrderData(0)"> test </v-btn>
     <v-row class="mt-5">
       <v-col>
         <!--    Button toggle    -->
@@ -14,17 +13,24 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-    </v-row>
-    <!--   Order table (styled table class is in css/translator/order.css)     -->
-    <v-card-title>
       <v-text-field
+        class="search-bar"
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
         single-line
         hide-details
       ></v-text-field>
-    </v-card-title>
+      <v-select
+        class="select-bar"
+        v-resize:20
+        v-model="selectionType"
+        :items="['Customer Name', 'Language', 'Level of language']"
+        label="Filter by"
+      ></v-select>
+    </v-row>
+    <!--   Order table (styled table class is in css/translator/order.css)     -->
+
     <v-simple-table class="styled-table">
       <template v-slot:default>
         <!--  Header -->
