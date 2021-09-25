@@ -450,6 +450,16 @@
             <h4>Order summary</h4>
           </v-card-title>
           <v-divider class="mx-10"></v-divider>
+          <v-card-subtitle>
+            <v-row>
+              <v-col cols="6">
+                <span class="font-weight-bold">Video length</span>
+              </v-col>
+              <v-col>
+                <span>{{ this.videoDuration[0] }}:{{ this.videoDuration[1] }} minutes</span>
+              </v-col>
+            </v-row>
+          </v-card-subtitle>
         </v-card>
         <v-btn
           @click="updateOrder"
@@ -485,6 +495,7 @@ export default {
       mobileBankingDialog: false,
       qrcodeDialog: false,
       mobileBanking: false,
+      videoDuration: [0,0],
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
       audioLangInput: "",
@@ -494,7 +505,16 @@ export default {
       proofread: false,
       isSelecting: false,
       selectedFile: null,
-      levelOfLang: ["Basic", "Friendly", "Academic"],
+      levelOfLang: [
+        "Academic",
+        "Business Casual",
+        "Business Formal",
+        "Casual",
+        "Conversational",
+        "Formal/technical",
+        "Marketing",
+        "Other",
+      ],
       LangChoices: [
         { short: "AR", fullName: "Arabic" },
         { short: "BN", fullName: "Bengali" },
@@ -548,7 +568,25 @@ export default {
         { short: "VI", fullName: "Vietnamese" },
         { short: "CY", fullName: "Welsh" },
       ],
-      category: ["Business", "Sport", "Cosmetic", "Science"],
+      category: [
+        "General",
+        "Arts & Entertainment",
+        "Biology",
+        "Business",
+        "Chemistry",
+        "Economics & Finance",
+        "Games & Fiction",
+        "General science",
+        "History",
+        "Law",
+        "Lifestyle & Health",
+        "Medical science",
+        "News & Politics",
+        "Physics & Engineering",
+        "Society & Culture",
+        "Sports & Recreation",
+        "Technology & Product description",
+      ],
       e6: 2,
     };
   },
@@ -621,6 +659,23 @@ export default {
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
+
+      let test = [0,0]
+
+      let video = document.createElement("video");
+      video.preload = "metadata";
+      video.onloadedmetadata = function () {
+        console.log("pass");
+        window.URL.revokeObjectURL(video.src);
+        let rawLength = Math.round(video.duration);
+        test = [0, 0];
+        while (rawLength >= 60) {
+          test[0] += 1;
+          rawLength -= 60;
+        }
+        test[1] = rawLength;
+      };
+      video.src = URL.createObjectURL(this.selectedFile);
 
       // do something
     },
