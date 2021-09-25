@@ -25,9 +25,37 @@
           <td>{{ item.length }}</td>
           <td>{{ item.amount }}</td>
           <td>
-            <v-btn rounded x-small elevation="0">
-              <v-icon> mdi-dots-horizontal </v-icon>
-            </v-btn>
+            <v-menu
+              top
+              min-width="300px"
+              max-height="300px"
+              offset-y
+              right
+              offset-x
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn rounded x-small elevation="0" v-on="on" color="#CECECE">
+                  <v-icon> mdi-dots-horizontal </v-icon>
+                </v-btn>
+              </template>
+              <v-card class="mx-auto" max-width="300" outlined>
+                <v-card-title class="ma-1">
+                  <p class="font-weight-light" style="font-size: 14px">
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </v-card-title>
+              </v-card>
+            </v-menu>
           </td>
           <td>
             <v-btn icon small elevation="0">
@@ -42,47 +70,174 @@
       <v-chip v-text="time" x-small></v-chip>
     </div>
     <!--Video + Transcript-->
-    <v-row class="mt-3 mx-10">
+    <v-row class="mt-2 mx-10">
       <!--Video Player-->
       <v-col>
         <v-window>
           <v-window-item v-html="video"></v-window-item>
         </v-window>
       </v-col>
+      <!--Transcript-->
       <v-col>
-        <span>Transcript</span
-        ><v-chip x-small class="ml-2" color="#13B8A4" dark
-          >English <v-icon right> mdi-chevron-down </v-icon>
-        </v-chip>
+        <span>Transcript</span>
+        <v-menu transition="slide-y-transition" bottom offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-chip
+              x-small
+              class="ml-2"
+              color="#13B8A4"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              >English <v-icon right> mdi-chevron-down </v-icon>
+            </v-chip>
+          </template>
+          <v-list dense>
+            <v-list-item-group color="#13B8A4">
+              <v-list-item
+                v-for="item in transcripts"
+                :key="item.language"
+                @click="transcript = item.text"
+              >
+                <v-list-item-content>{{ item.language }}</v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-menu>
+
         <v-card height="250" class="overflow-y-auto mt-1" color="#F1F1F1" flat>
           <v-card-text v-text="transcript"></v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-simple-table fixed-header dark class="styled-table" height="200" dense>
-      <thead>
-        <tr>
-          <th class="text-left" style="color: #f1f1f1">#</th>
-          <th class="text-left" style="color: #f1f1f1">Text suggestion</th>
-          <th />
-          <th class="text-left" style="color: #f1f1f1">Text by You</th>
-          <th class="text-left" style="color: #f1f1f1">Char.</th>
-        </tr>
-      </thead>
-      <thead>
-        <tr v-for="sub in subtitle" :key="sub.id" style="color: #000000">
-          <td>{{ sub.id }}</td>
-          <td>{{ sub.suggest }}</td>
-          <td>
-            <v-btn rounded x-small color="#c4c4c4" elevation="0">
-              <v-icon color="#000000"> mdi-arrow-right </v-icon>
-            </v-btn>
-          </td>
-          <td>{{ sub.yours }}</td>
-          <td>{{ sub.char }}</td>
-        </tr>
-      </thead>
-    </v-simple-table>
+    <!--Dummy Subtitle Layout-->
+    <v-card
+      width="1440"
+      height="100"
+      elevation="0"
+      tile
+      dark
+      class="mt-3 overflow-hidden"
+      color="#5B5B5B"
+    >
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col v-for="s in subtitle" :key="s.id" width="400">
+          <div v-if="s.id === '2'">
+            <v-icon small color="red">mdi-triangle mdi-flip-v</v-icon>
+            <span style="font-size: 10px">00:05 / 1:40</span>
+          </div>
+          <div v-else>
+            <span style="font-size: 10px; color: #5b5b5b">00:05 / 1:40</span>
+          </div>
+          <v-row class="mt-1">
+            <v-card
+              height="70"
+              width="395"
+              outlined
+              class="rounded-lg"
+              color="#41A1FB"
+              style="border-color: white"
+            >
+              <v-card-text style="font-size: 12px">{{ s.yours }}</v-card-text>
+            </v-card>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-card>
+    <!--Text Suggestion-->
+    <v-card width="1200" elevation="0" class="mx-auto">
+      <v-simple-table
+        fixed-header
+        dark
+        class="styled-table"
+        dense
+        style="margin-bottom: unset"
+      >
+        <thead>
+          <tr>
+            <th class="text-left" style="color: #f1f1f1">#</th>
+            <th class="text-left" style="color: #f1f1f1">Text suggestion</th>
+            <th />
+            <th class="text-left" style="color: #f1f1f1">Text by You</th>
+            <th class="text-right" style="color: #f1f1f1">Char.</th>
+          </tr>
+        </thead>
+      </v-simple-table>
+      <!--Timeline-->
+      <v-card height="200" class="overflow-y-auto" elevation="0">
+        <v-slide-y-transition group>
+          <v-list-item v-for="sub in timeline" :key="sub.id" small>
+            <v-col>
+              <v-row class="justify-space-between" style="width: 190px">
+                <v-text-field
+                  value="12:30:01"
+                  type="time"
+                  dense
+                  hide-details
+                  style="font-size: 12px; margin: unset"
+                ></v-text-field>
+                <v-text-field
+                  value="12:30:01"
+                  type="time"
+                  dense
+                  hide-details
+                  style="font-size: 12px; margin: unset"
+                >
+                  <template v-slot:prepend>
+                    <v-icon x-small class="mt-1"> mdi-minus </v-icon>
+                  </template>
+                </v-text-field>
+                <v-spacer></v-spacer>
+              </v-row>
+              <v-row>
+                <v-card
+                  color="#f1f1f1"
+                  width="1440"
+                  class="pa-1"
+                  elevation="0"
+                  tile
+                >
+                  <v-row
+                    justify="space-around"
+                    align="center"
+                    style="font-size: 14px"
+                  >
+                    <v-col cols="1" v-text="sub.id"></v-col>
+                    <v-col cols="4" v-text="sub.suggest"></v-col>
+                    <v-btn
+                      rounded
+                      x-small
+                      color="#c4c4c4"
+                      elevation="0"
+                      @click="sub.yours = sub.suggest"
+                    >
+                      <v-icon color="#000000"> mdi-arrow-right </v-icon>
+                    </v-btn>
+                    <v-col cols="4"
+                      ><v-textarea
+                        v-model="sub.yours"
+                        outlined
+                        dense
+                        hide-details
+                        no-resize
+                        rows="2"
+                        style="font-size: 12px"
+                      ></v-textarea
+                    ></v-col>
+                    <v-col
+                      cols="1"
+                      class="text-right"
+                      v-text="sub.yours.length"
+                    ></v-col>
+                  </v-row>
+                </v-card>
+              </v-row>
+            </v-col>
+          </v-list-item>
+        </v-slide-y-transition>
+      </v-card>
+    </v-card>
   </v-container>
 </template>
 
@@ -93,6 +248,16 @@ export default {
   data: () => ({
     video:
       '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+    transcripts: [
+      {
+        language: "English",
+        text: "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
+      },
+      {
+        language: "Thai",
+        text: "โกฟิเป็นแพลตฟอร์มสร้างคำบรรยายในวิดีโอเพื่อช่วยเผยแพร่ความรู้สู่สากล เรามุ่งหวังที่จะทำให้กระบวนการสร้างคำบรรยาย รวมถึงขั้นตอนการแปลคล่องตัวมากยิ่งขึ้น โดยใช้ประโยชน์จากปัญญาประดิษฐ์ เพื่อให้ได้คำบรรยายอย่างรวดเร็วและแม่นยำในราคาที่เหมาะสม โกฟิให้บริการสร้างคำบรรยายในวิดีโอในสองรูปแบบ ในรูปแบบแรก ลูกค้าสามารถสั่งทำคำบรรยายในวิดีโอผ่านโกฟิ ซึ่งจับคู่คำสั่งงานของลูกค้ากับนักแปลในระบบ การจับคู่นี้คำนึงถึงภาษาของคำบรรยายรวมถึงบริบทหรือประเภทของเนื้อหา ลูกค้าสามารถสั่งซื้อคำบรรยายในวิดีโอโดยอัปโหลดวิดีโอ เลือกภาษาของคำบรรยาย อารมณ์และน้ำเสียง และหมวดหมู่ จากนั้น กดยืนยันคำสั่งซื้อและชำระค่าบริการ เมื่อนักแปลที่ถูกเลือกโดยอัตโนมัติตอบรับงาน นักแปลจะใช้เครื่องมือปัญญาประดิษฐ์ช่วยเป็นแนวทางในการแปล นักแปลส่งคำบรรยายภายในระยะเวลาที่กำหนดให้ลูกค้ากดยอมรับ ลูกค้าสามารถดาวน์โหลดคำบรรยาย และนักแปลได้รับค่าตอบแทน ในรูปแบบที่สอง ลูกค้าที่สนใจสร้างและแปลคำบรรยายในวิดีโอด้วยตนเองสามารถใช้เครื่องมือของเราที่มีปัญญา ประดิษฐ์ช่วยเหลือเช่นเดียวกับที่นักแปลใช้",
+      },
+    ],
     transcript:
       "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
     order: [
@@ -121,7 +286,6 @@ export default {
           "goofy is a subtitling platform for globalizing knowledge we aim to streamline the subtitling and",
         yours:
           "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and",
-        char: "98",
       },
       {
         id: "2",
@@ -129,7 +293,6 @@ export default {
           "translation process with machine assistance to provide affordable quick and accurate subtitles",
         yours:
           "translation process with machine assistance to provide affordable, quick and accurate subtitles.",
-        char: "96",
       },
       {
         id: "3",
@@ -137,7 +300,6 @@ export default {
           "kofi provides subtitling service through two models first a customer can order subtitles",
         yours:
           "Gophi provides subtitling service through two models. First, a customer can order subtitles",
-        char: "90",
       },
       {
         id: "4",
@@ -145,7 +307,6 @@ export default {
           "through gofee which matches the customer’s order with a translator on the platform the matching",
         yours:
           "through Gophi, which matches the customer’s order with a translator on the platform. The matching",
-        char: "97",
       },
       {
         id: "5",
@@ -153,11 +314,15 @@ export default {
           "process considers subtitling language and content context or category a customer can make a",
         yours:
           "process considers subtitling language and content context or category. A customer can make a",
-        char: "92",
       },
     ],
     time: "00.25",
   }),
+  computed: {
+    timeline() {
+      return this.subtitle.slice();
+    },
+  },
 };
 </script>
 
