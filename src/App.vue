@@ -52,16 +52,39 @@
 
       <v-spacer />
 
-      <v-btn
-        text
-        plain
-        class="ml-5"
-        color="#d4f8f4"
-        max-height="48"
-        :to="{ name: 'Login' }"
-      >
-        Profile
-      </v-btn>
+      <v-menu bottom min-width="200px" open-on-hover offset-y right offset-x>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            text
+            plain
+            class="ml-5"
+            color="#d4f8f4"
+            max-height="48"
+            v-on="on"
+            :to="{ name: 'Login' }"
+          >
+            Profile
+          </v-btn>
+        </template>
+        <v-card class="mx-auto" max-width="275" min-width="260" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="text-h5 mb-1">gophi team</div>
+            </v-list-item-content>
+
+            <v-list-item-avatar size="60" color="#d4f8f4">
+              <v-img
+                :src="require('./assets/gophilogodark.png')"
+                contain
+              ></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
+
+          <v-card-actions justify="space-around">
+            <v-btn text color="#1bb7a4" :to="{ name: 'Login' }"> Logout </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
@@ -76,6 +99,9 @@ export default {
   data: () => ({
     //
   }),
+  created() {
+    document.title = "gophi";
+  },
 };
 </script>
 
