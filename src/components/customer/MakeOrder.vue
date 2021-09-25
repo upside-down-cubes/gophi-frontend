@@ -500,6 +500,10 @@ export default {
         let selectedLang = this.subtitlingLangInput[index];
         language.push({ content: this.audioLangInput + " > " + selectedLang });
       }
+      let noteFromCustomer = this.note;
+      if (noteFromCustomer === "") {
+        noteFromCustomer = "No note from customer";
+      }
       let order = {
         date: orderDate,
         by: "gophi team",
@@ -507,6 +511,7 @@ export default {
         audioLang: this.audioLangInput,
         level: this.levelOfLangInput,
         category: this.categoryInput,
+        noteFromCustomer: noteFromCustomer,
         length: "~3 mins",
         amount: "$122",
       };

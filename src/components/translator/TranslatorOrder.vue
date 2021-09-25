@@ -3,16 +3,11 @@
     <v-row class="mt-5">
       <v-col>
         <!--    Button toggle    -->
-        <v-btn-toggle
-          v-model="text"
-          class="mt-10 rounded-lg"
-          color="#13B8A4"
-          mandatory
-        >
-          <v-btn class="mr-1 rounded-lg" @click="changeOrderData('left')">
+        <v-btn-toggle class="mt-10 rounded-lg" color="#13B8A4" mandatory>
+          <v-btn class="mr-1 rounded-lg" @click="changeOrderData(0)">
             <span class="disable-color">Your Orders</span>
           </v-btn>
-          <v-btn class="rounded-lg" @click="changeOrderData('center')">
+          <v-btn class="rounded-lg" @click="changeOrderData(1)">
             <span class="disable-color">Quick Orders</span>
           </v-btn>
         </v-btn-toggle>
@@ -96,18 +91,7 @@
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
                     <p class="font-weight-light" style="font-size: 14px">
-                      It is a long established fact that a reader will be
-                      distracted by the readable content of a page when looking
-                      at its layout. The point of using Lorem Ipsum is that it
-                      has a more-or-less normal distribution of letters, as
-                      opposed to using 'Content here, content here', making it
-                      look like readable English. Many desktop publishing
-                      packages and web page editors now use Lorem Ipsum as their
-                      default model text, and a search for 'lorem ipsum' will
-                      uncover many web sites still in their infancy. Various
-                      versions have evolved over the years, sometimes by
-                      accident, sometimes on purpose (injected humour and the
-                      like).
+                      {{ item.noteFromCustomer }}
                     </p>
                   </v-card-title>
                 </v-card>
@@ -210,7 +194,13 @@
                 </template>
               </v-dialog>
               <!--    Reject button  -->
-              <v-btn class="ma-1" color="#ACACAC" elevation="0" x-small>
+              <v-btn
+                v-if="text === 0"
+                class="ma-1"
+                color="#ACACAC"
+                elevation="0"
+                x-small
+              >
                 <span style="color: white"> Reject </span>
               </v-btn>
               <v-dialog v-model="dialog" width="500">
@@ -271,7 +261,7 @@ import store from "../../store";
 export default {
   name: "Translator_Order",
   data: () => ({
-    text: "left",
+    text: 0,
     time: null,
     noteToCustomer: "",
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -284,7 +274,7 @@ export default {
     order: [],
   }),
   beforeMount() {
-    this.changeOrderData("left");
+    this.changeOrderData(0);
   },
   methods: {
     clearDate(dialog) {
@@ -293,15 +283,11 @@ export default {
       dialog.value = false;
     },
     changeOrderData(input) {
-      if (input === "left") {
+      this.text = input;
+      if (input === 0) {
         let allOrder = store.state.orderData;
-        for (let index = 0; index < allOrder.length; index++) {
-          if (allOrder[index].audioLang === "EN") {
-            this.order.push(allOrder[index]);
-          }
-        }
-      } else if (input === "center") {
-        console.log(store.state.orderData);
+        this.order = allOrder.filter((allOrder) => allOrder.audioLang === "EN");
+      } else if (input === 1) {
         this.order = store.state.orderData;
       }
     },
