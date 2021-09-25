@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from "../components/login/login.vue";
-import Home from "../components/Home.vue";
+import Home from "../components/home/Home.vue";
 
 import TranslatorSignup from "../components/signup/TranslatorSignup";
 import TranslatorOrder from "../components/translator/TranslatorOrder";
