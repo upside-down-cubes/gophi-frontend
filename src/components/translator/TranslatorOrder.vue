@@ -20,6 +20,7 @@
         label="Search"
         single-line
         hide-details
+        color="#13B8A4"
       ></v-text-field>
       <v-select
         class="select-bar"
@@ -27,6 +28,8 @@
         v-model="selectionType"
         :items="['Customer Name', 'Language', 'Level of language']"
         label="Filter by"
+        color="#13B8A4"
+        item-color="teal accent-4"
       ></v-select>
     </v-row>
     <!--   Order table (styled table class is in css/translator/order.css)     -->
@@ -119,9 +122,10 @@
               <v-dialog transition="dialog-top-transition" max-width="600">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="success"
+                    color="#13B8A4"
+                    dark
                     elevation="0"
-                    x-small
+                    small
                     v-bind="attrs"
                     v-on="on"
                     >Accept</v-btn
@@ -216,7 +220,7 @@
                 class="ma-1"
                 color="#ACACAC"
                 elevation="0"
-                x-small
+                small
               >
                 <span style="color: white"> Reject </span>
               </v-btn>

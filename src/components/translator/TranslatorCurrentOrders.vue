@@ -105,9 +105,10 @@
             <td>
               <v-btn
                 class="mr-4"
-                color="success"
+                color="#13B8A4"
+                dark
                 elevation="0"
-                x-small
+                small
                 :to="{ name: 'TranslatorWorkspace' }"
               >
                 edit
