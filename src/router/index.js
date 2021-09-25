@@ -71,6 +71,17 @@ const routes = [
 const router = new VueRouter({ mode: "history", routes: routes });
 
 router.beforeEach(async (to, from, next) => {
+  let isAvailable = false;
+  for (let page = 0; page < routes.length; page++) {
+    if (routes[page].name === to.name) {
+      isAvailable = true;
+      break;
+    }
+  }
+  console.log("pass");
+  if (!isAvailable) {
+    next({ name: "Home" });
+  }
   next();
 });
 

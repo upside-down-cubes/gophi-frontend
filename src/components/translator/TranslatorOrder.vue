@@ -6,7 +6,7 @@
         <v-btn-toggle
           v-model="text"
           class="mt-10 rounded-lg"
-          color="green"
+          color="#13B8A4"
           mandatory
         >
           <v-btn class="mr-1 rounded-lg" @click="changeOrderData('left')">
