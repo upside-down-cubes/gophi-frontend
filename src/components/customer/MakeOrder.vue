@@ -482,7 +482,12 @@
                 <span class="font-weight-bold">Video length</span>
               </v-col>
               <v-col>
-                <span>{{ this.videoDuration[0] }}:{{ this.videoDuration[1] }} minutes</span>
+                <span
+                  >{{ this.videoDuration[0] }}:{{
+                    this.videoDuration[1]
+                  }}
+                  minutes</span
+                >
               </v-col>
             </v-row>
             <v-divider class="divider-header-1 my-2"></v-divider>
@@ -491,12 +496,15 @@
                 <span class="font-weight-bold text-h6">Total:</span>
               </v-col>
               <v-col>
-                <span v-if="categoryInput !== ''" class="text-h6">{{ (subtitlingLangInput.length + 1) * 30 }}</span>
-                <span v-else class="text-h6">${{
-                  subtitlingLangInput.length * 30
-                }}</span>
+                <span v-if="categoryInput !== ''" class="text-h6"
+                  >${{ (subtitlingLangInput.length + 1) * 30 }}</span
+                >
+                <span v-else class="text-h6"
+                  >${{ subtitlingLangInput.length * 30 }}</span
+                >
               </v-col>
             </v-row>
+            <v-divider class="divider-header-2"></v-divider>
           </v-card-subtitle>
         </v-card>
         <v-btn
@@ -533,7 +541,7 @@ export default {
       mobileBankingDialog: false,
       qrcodeDialog: false,
       mobileBanking: false,
-      videoDuration: [0,0],
+      videoDuration: [0, 0],
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
       audioLangInput: "",
@@ -681,6 +689,10 @@ export default {
       if (noteFromCustomer === "") {
         noteFromCustomer = "No note from customer";
       }
+      let total = this.subtitlingLangInput.length * 30;
+      if (this.categoryInput !== "") {
+        total = (this.subtitlingLangInput.length + 1) * 30;
+      }
       let order = {
         date: orderDate,
         by: "gophi team",
@@ -690,7 +702,7 @@ export default {
         category: this.categoryInput,
         noteFromCustomer: noteFromCustomer,
         length: "~3 mins",
-        amount: "$122",
+        amount: "$" + total,
       };
       await store.dispatch("addNewOrder", order);
       await router.push({ name: "TranslatorOrder" });
@@ -698,7 +710,7 @@ export default {
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
 
-      let test = [0,0]
+      let test = [0, 0];
 
       let video = document.createElement("video");
       video.preload = "metadata";

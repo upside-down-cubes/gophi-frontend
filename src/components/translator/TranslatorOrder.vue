@@ -125,7 +125,7 @@
                     color="#13B8A4"
                     dark
                     elevation="0"
-                    small
+                    x-small
                     v-bind="attrs"
                     v-on="on"
                     >Accept</v-btn
@@ -220,7 +220,7 @@
                 class="ma-1"
                 color="#ACACAC"
                 elevation="0"
-                small
+                x-small
               >
                 <span style="color: white"> Reject </span>
               </v-btn>
