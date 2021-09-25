@@ -105,10 +105,36 @@
                     label="Select language"
                     single-line
                     v-model="audioLangInput"
-                    :items="audioLang"
-                    small-chips
+                    :items="LangChoices"
+                    item-value="short"
+                    item-text="fullForm"
                     dense
-                  ></v-autocomplete>
+                  >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        small
+                        v-bind="data.attrs"
+                        :input-value="data.selected"
+                        close
+                        @click="data.select"
+                        @click:close="audioLangInput = ''"
+                      >
+                        {{ data.item.short }}
+                      </v-chip>
+                    </template>
+                    <template v-slot:item="data">
+                      <template>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-html="data.item.fullName"
+                          ></v-list-item-title>
+                          <v-list-item-subtitle
+                            v-html="data.item.short"
+                          ></v-list-item-subtitle>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+                  </v-autocomplete>
                 </v-col>
                 <v-col>
                   <span>Subtitling language</span>
@@ -116,17 +142,41 @@
                     outlined
                     color="#13B8A4"
                     style="background-color: white"
-                    clearable
                     hide-selected
                     label="Select language"
                     v-model="subtitlingLangInput"
                     hide-details
                     single-line
-                    :items="subtitlingLang"
+                    :items="LangChoices"
+                    item-value="short"
+                    item-text="fullForm"
                     multiple
-                    small-chips
                     dense
                   >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        v-bind="data.attrs"
+                        small
+                        :input-value="data.selected"
+                        close
+                        @click="data.select"
+                        @click:close="remove(data.item)"
+                      >
+                        {{ data.item.short }}
+                      </v-chip>
+                    </template>
+                    <template v-slot:item="data">
+                      <template>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-html="data.item.fullName"
+                          ></v-list-item-title>
+                          <v-list-item-subtitle
+                            v-html="data.item.short"
+                          ></v-list-item-subtitle>
+                        </v-list-item-content>
+                      </template>
+                    </template>
                   </v-autocomplete>
                 </v-col>
               </v-row>
@@ -445,8 +495,59 @@ export default {
       isSelecting: false,
       selectedFile: null,
       levelOfLang: ["Basic", "Friendly", "Academic"],
-      subtitlingLang: ["EN", "TH", "JP", "KR"],
-      audioLang: ["EN", "TH", "JP", "KR"],
+      LangChoices: [
+        { short: "AR", fullName: "Arabic" },
+        { short: "BN", fullName: "Bengali" },
+        { short: "BS", fullName: "Bosnian" },
+        { short: "BG", fullName: "Bulgarian" },
+        { short: "MY", fullName: "Burmese" },
+        { short: "ZH (s)", fullName: "Chinese (simplified)" },
+        { short: "ZH (t)", fullName: "Chinese (traditional)" },
+        { short: "DA", fullName: "Danish" },
+        { short: "NL", fullName: "Dutch" },
+        { short: "EN", fullName: "English" },
+        { short: "EN (UK)", fullName: "English (UK)" },
+        { short: "EN (US)", fullName: "English (US)" },
+        { short: "ET", fullName: "Estonian" },
+        { short: "FI", fullName: "Finnish" },
+        { short: "FR", fullName: "French" },
+        { short: "DE", fullName: "German" },
+        { short: "EL", fullName: "Greek" },
+        { short: "HI", fullName: "Hindi" },
+        { short: "HU", fullName: "Hungarian" },
+        { short: "IS", fullName: "Icelandic" },
+        { short: "ID", fullName: "Indonesian" },
+        { short: "GA", fullName: "Irish" },
+        { short: "IT", fullName: "Italian" },
+        { short: "JA", fullName: "Japanese" },
+        { short: "KO", fullName: "Korean" },
+        { short: "LO", fullName: "Lao" },
+        { short: "LA", fullName: "Latin" },
+        { short: "LV", fullName: "Latvian" },
+        { short: "MS", fullName: "Malay" },
+        { short: "MN", fullName: "Mongolian" },
+        { short: "NE", fullName: "Nepali" },
+        { short: "NO", fullName: "Norwegian" },
+        { short: "PS", fullName: "Pashto" },
+        { short: "FA", fullName: "Persian" },
+        { short: "PL", fullName: "Polish" },
+        { short: "PT", fullName: "Portuguese" },
+        { short: "RO", fullName: "Romanian" },
+        { short: "RU", fullName: "Russian" },
+        { short: "SR", fullName: "Serbian" },
+        { short: "SK", fullName: "Slovak" },
+        { short: "SL", fullName: "Slovenian" },
+        { short: "ES", fullName: "Spanish" },
+        { short: "SV", fullName: "Swedish" },
+        { short: "TA", fullName: "Tamil" },
+        { short: "TH", fullName: "Thai" },
+        { short: "TR", fullName: "Turkish" },
+        { short: "UK", fullName: "Ukrainian" },
+        { short: "UR", fullName: "Urdu" },
+        { short: "UZ", fullName: "Uzbek" },
+        { short: "VI", fullName: "Vietnamese" },
+        { short: "CY", fullName: "Welsh" },
+      ],
       category: ["Business", "Sport", "Cosmetic", "Science"],
       e6: 2,
     };
@@ -522,6 +623,10 @@ export default {
       this.selectedFile = e.target.files[0];
 
       // do something
+    },
+    remove(item) {
+      const index = this.subtitlingLangInput.indexOf(item.short);
+      if (index >= 0) this.subtitlingLangInput.splice(index, 1);
     },
   },
 };
