@@ -30,7 +30,7 @@
                   rounded
                   small
                   elevation="0"
-                  color="#CECECE"
+                  color="#A0A0A0"
                   class="white--text mt-3"
                 >
                   Customer review
@@ -61,7 +61,7 @@
                   rounded
                   small
                   elevation="0"
-                  color="#CECECE"
+                  color="#A0A0A0"
                   class="white--text mt-3"
                 >
                  Order sent

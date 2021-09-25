@@ -212,12 +212,14 @@
                   v-model="sub.start"
                   type="time"
                   dense
+                  color="#13B8A4"
                   hide-details
                   style="font-size: 12px; margin: unset"
                 ></v-text-field>
                 <v-text-field
                   v-model="sub.end"
                   type="time"
+                  color="#13B8A4"
                   dense
                   hide-details
                   style="font-size: 12px; margin: unset"
