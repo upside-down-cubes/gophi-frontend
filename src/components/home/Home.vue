@@ -100,7 +100,6 @@
     </v-container>
     <v-container style="background-color: #ffffff">
       <v-row class="my-10">
-        <v-col></v-col>
         <v-col md="5" class="mx-16">
           <h1 style="color: #1bb7a4">Customers</h1>
           <v-divider class="mb-3" style="border-color: #1bb7a4" />
@@ -122,7 +121,6 @@
             process
           </p>
         </v-col>
-        <v-col></v-col>
       </v-row>
     </v-container>
     <v-container style="background-color: #f1f1f1">
