@@ -164,7 +164,7 @@ export default {
   name: "Home",
   data: () => ({
     video:
-      '<iframe width="580" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+      '<iframe width="740" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
   }),
 
   methods: {
