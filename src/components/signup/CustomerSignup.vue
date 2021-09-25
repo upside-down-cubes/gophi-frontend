@@ -15,7 +15,7 @@
         </div>
       </v-col>
       <v-col md="6">
-        <v-card height="580" class="mr-9 rounded-xl" flat color="#F1F1F1">
+        <v-card height="540" class="mr-9 rounded-xl" flat color="#F1F1F1">
           <v-card-title
             class="justify-center default-color"
             style="font-size: xx-large; font-weight: bolder"
@@ -26,18 +26,6 @@
             <v-col align="center" class="completed-signup">
               <span>Personal Information</span>
             </v-col>
-            <v-col
-              align="center"
-              v-if="this.is_translator"
-              :class="this.step > 2 ? 'completed-signup' : 'incomplete-signup'"
-              ><span>Expertise</span></v-col
-            >
-            <v-col
-              align="center"
-              v-if="this.is_translator"
-              :class="this.step > 3 ? 'completed-signup' : 'incomplete-signup'"
-              ><span>Test</span></v-col
-            >
           </v-row>
 
           <!--Different steps for signing up-->
@@ -47,27 +35,7 @@
             </v-window-item>
 
             <v-window-item :value="2">
-              <PersonalTwo></PersonalTwo>
-            </v-window-item>
-
-            <v-window-item :value="3">
-              <Expertise></Expertise>
-            </v-window-item>
-
-            <v-window-item :value="4" class="take-test">
-              <v-container>
-                <v-spacer></v-spacer>
-                <v-row
-                  class="justify-space-around mt-16"
-                  align="center"
-                  justify="center"
-                >
-                  <v-btn color="#13B8A4" dark x-large class="py-7 mt-16">
-                    Take test now
-                  </v-btn>
-                </v-row>
-                <v-spacer></v-spacer>
-              </v-container>
+              <PersonalInformation></PersonalInformation>
             </v-window-item>
           </v-window>
 
@@ -87,7 +55,7 @@
           </v-card-actions>
           <v-card-actions class="next-button"
             ><v-btn
-              v-if="(step < 4 && this.is_translator) || step < 2"
+              v-if="step < 2"
               align="right"
               color="#13B8A4"
               rounded
@@ -118,40 +86,25 @@
 </template>
 <script>
 import PersonalInformation from "./PersonalInformation";
-import PersonalTwo from "./PersonalTwo";
-import Expertise from "./Expertise";
 
 export default {
   name: "CustomerSignup",
-  components: { PersonalInformation, PersonalTwo, Expertise },
+  components: { PersonalInformation },
 
   data: () => ({
-    is_translator: false,
     step: 1,
   }),
 
-  beforeMount() {
-    window.addEventListener("beforeunload", this.preventNav);
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.preventNav);
-  },
   methods: {
-    preventNav(event) {
-      event.preventDefault();
-      event.returnValue = "";
-    },
-
     goBack() {
       if (this.step > 1) {
         this.step--;
       } else {
-        this.$router.push({ name: "Login"});
+        this.$router.push({ name: "Login" });
       }
     },
     submitSignup() {
-      this.$router.push({ name: "CustomerOrder"});
+      this.$router.push({ name: "CustomerOrder" });
     },
   },
 };

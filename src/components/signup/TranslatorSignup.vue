@@ -15,7 +15,7 @@
         </div>
       </v-col>
       <v-col md="6">
-        <v-card height="580" class="mr-9 rounded-xl" flat color="#F1F1F1">
+        <v-card height="540" class="mr-9 rounded-xl" flat color="#F1F1F1">
           <v-card-title
             class="justify-center default-color"
             style="font-size: xx-large; font-weight: bolder"
@@ -28,13 +28,11 @@
             </v-col>
             <v-col
               align="center"
-              v-if="this.is_translator"
               :class="this.step > 2 ? 'completed-signup' : 'incomplete-signup'"
               ><span>Expertise</span></v-col
             >
             <v-col
               align="center"
-              v-if="this.is_translator"
               :class="this.step > 3 ? 'completed-signup' : 'incomplete-signup'"
               ><span>Test</span></v-col
             >
@@ -56,6 +54,7 @@
 
             <v-window-item :value="4" class="take-test">
               <v-container>
+                <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-row
                   class="justify-space-around mt-16"
@@ -87,7 +86,7 @@
           </v-card-actions>
           <v-card-actions class="next-button"
             ><v-btn
-              v-if="(step < 4 && this.is_translator) || step < 2"
+              v-if="step < 4"
               align="right"
               color="#13B8A4"
               rounded
@@ -127,31 +126,10 @@ export default {
   components: { PersonalInformation, PersonalTwo, Expertise },
 
   data: () => ({
-    is_translator: true,
     step: 1,
   }),
 
-  // beforeMount() {
-  //   window.addEventListener("beforeunload", this.preventNav);
-  // },
-  //
-  // beforeDestroy() {
-  //   window.removeEventListener("beforeunload", this.preventNav);
-  // },
-
-  // mounted() {
-  //   if (this.translator === undefined) {
-  //     this.$router.push("/login");
-  //   }
-  //   this.is_translator = this.translator;
-  // },
-
   methods: {
-    preventNav(event) {
-      event.preventDefault();
-      event.returnValue = "";
-    },
-
     goBack() {
       if (this.step > 1) {
         this.step--;
@@ -160,11 +138,7 @@ export default {
       }
     },
     submitSignup() {
-      if (this.is_translator) {
-        this.$router.push({name: "TranslatorOrder"});
-      } else {
-        this.$router.push("/");
-      }
+      this.$router.push({ name: "TranslatorOrder" });
     },
   },
 };
