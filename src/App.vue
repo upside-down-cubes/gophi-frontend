@@ -5,7 +5,7 @@
         fab
         tile
         x-large
-        color="#d4f8f4"
+        plain
         elevation="0"
         max-height="48"
         width="90"
@@ -13,7 +13,7 @@
         :to="{ name: 'Home' }"
       >
         <v-img
-          :src="require('./assets/gophilogodark.png')"
+          :src="require('./assets/gophilogolight.png')"
           contain
           class="mx-0"
           max-height="40"
