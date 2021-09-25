@@ -43,7 +43,7 @@
                   color="#1bb7a4"
                   class="white--text mt-3 ml-10"
                 >
-                  Approve
+                 Accepted
                 </v-btn>
                 <v-btn
                   v-if="item.approve"
@@ -55,6 +55,7 @@
                 >
                   Request revision
                 </v-btn>
+
                 <v-btn
                   v-if="!item.approve"
                   rounded
@@ -68,10 +69,10 @@
                 <a
                   href="workspace"
                   v-if="item.approve"
-                  class="mr-4 float-right mt-3"
+                  class="grey--text mr-4 float-right mt-3"
                   >View submission</a
                 >
-                <a href="workspace" v-else class="mr-3 float-right mt-3"
+                <a href="workspace" v-else class="grey--text mr-3 float-right mt-3"
                   >View more details</a
                 >
               </tr>
