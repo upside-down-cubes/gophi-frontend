@@ -14,8 +14,7 @@
         </v-btn-toggle>
       </v-col>
       <v-select
-        class="select-bar mr-9"
-        style="max-width: 430px"
+        class="select-bar"
         v-model="selectionType"
         :items="['Customer Name', 'Language', 'Level of language']"
         label="Filter by"
@@ -273,11 +272,10 @@
       Order History
       <v-spacer></v-spacer>
       <v-text-field
-        class="search-bar mt-0"
+        class="search-bar"
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
-        style="max-width: 430px"
         single-line
         hide-details
         color="#13B8A4"
