@@ -219,11 +219,20 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
+              <v-checkbox
+                class="mx-5 mb-2"
+                v-model="checkBox"
+                label="I want this order to be done by 12 hours"
+                color="#13B8A4"
+                value="#13B8A4"
+                hide-details
+              ></v-checkbox>
               <v-row class="mx-2">
                 <v-col>
                   <v-switch
                     class="mt-2"
                     v-model="proofread"
+                    :disabled="checkBox"
                     color="#13B8A4"
                     label="Proofread by reviewer"
                     hide-details
@@ -479,7 +488,7 @@
                   <v-col cols="6">
                     <span>{{ categoryInput }}</span>
                   </v-col>
-                  <v-col>~30 Bath/mins</v-col>
+                  <v-col>~30 Bath/min</v-col>
                 </v-row>
               </li>
               <li v-else>No category selected</li>
@@ -548,6 +557,7 @@ export default {
       mobileBankingDialog: false,
       qrcodeDialog: false,
       mobileBanking: false,
+      checkBox: false,
       videoDuration: [0, 0],
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
@@ -640,7 +650,7 @@ export default {
         "Sports & Recreation",
         "Technology & Product description",
       ],
-      e6: 1,
+      e6: 2,
     };
   },
   computed: {
