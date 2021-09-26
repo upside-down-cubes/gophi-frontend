@@ -89,7 +89,7 @@
                       style="font-size: 12px; color: #5b5b5b"
                       class="mb-0 text-end"
                     >
-                      ~3 mins
+                      ~{{ videoLength }} min
                     </p>
                   </v-col>
                 </v-row>
@@ -186,6 +186,9 @@
                   </v-autocomplete>
                 </v-col>
               </v-row>
+              <v-card-subtitle class="mx-2 pt-1">
+                <span>*Auto-detected</span>
+              </v-card-subtitle>
               <v-row class="mx-2">
                 <v-col>
                   <span>Level of language</span>
@@ -220,11 +223,20 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
+              <v-checkbox
+                class="mx-5 mb-2"
+                v-model="checkBox"
+                label="I want this order to be done by 12 hours"
+                color="#13B8A4"
+                value="#13B8A4"
+                hide-details
+              ></v-checkbox>
               <v-row class="mx-2">
                 <v-col>
                   <v-switch
                     class="mt-2"
                     v-model="proofread"
+                    :disabled="checkBox"
                     color="#13B8A4"
                     label="Proofread by reviewer"
                     hide-details
@@ -466,7 +478,7 @@
                   <v-col cols="6">
                     <span>{{ item }}</span>
                   </v-col>
-                  <v-col>~30 Bath/mins</v-col>
+                  <v-col>~30 Baht/min</v-col>
                 </v-row>
               </li>
             </ul>
@@ -480,7 +492,7 @@
                   <v-col cols="6">
                     <span>{{ categoryInput }}</span>
                   </v-col>
-                  <v-col>~30 Bath/mins</v-col>
+                  <v-col>~30 Baht/min</v-col>
                 </v-row>
               </li>
               <li v-else>No category selected</li>
@@ -490,12 +502,7 @@
                 <span class="font-weight-bold">Video length</span>
               </v-col>
               <v-col>
-                <span
-                  >{{ this.videoDuration[0] }}:{{
-                    this.videoDuration[1]
-                  }}
-                  minutes</span
-                >
+                <span>~{{ videoLength }} min</span>
               </v-col>
             </v-row>
             <v-divider class="divider-header-1 my-2"></v-divider>
@@ -505,10 +512,12 @@
               </v-col>
               <v-col>
                 <span v-if="categoryInput !== ''" class="text-h6"
-                  >${{ (subtitlingLangInput.length + 1) * 30 }}</span
+                  >฿{{
+                    (subtitlingLangInput.length + 1) * 30 * videoLength
+                  }}</span
                 >
                 <span v-else class="text-h6"
-                  >${{ subtitlingLangInput.length * 30 }}</span
+                  >฿{{ subtitlingLangInput.length * 30 * videoLength }}</span
                 >
               </v-col>
             </v-row>
@@ -549,10 +558,10 @@ export default {
       mobileBankingDialog: false,
       qrcodeDialog: false,
       mobileBanking: false,
-      videoDuration: [0, 0],
+      checkBox: false,
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-      audioLangInput: "",
+      audioLangInput: "EN",
       subtitlingLangInput: [],
       levelOfLangInput: "",
       categoryInput: "",
@@ -641,12 +650,15 @@ export default {
         "Sports & Recreation",
         "Technology & Product description",
       ],
-      e6: 1,
+      e6: 2,
     };
   },
   computed: {
     fileName() {
       return this.selectedFile ? this.selectedFile.name : "No file chosen";
+    },
+    videoLength() {
+      return this.selectedFile ? Math.floor(Math.random() * 10) + 1 : 0;
     },
   },
   methods: {
@@ -686,8 +698,12 @@ export default {
         currentDate.getFullYear() +
         " " +
         currentDate.getHours() +
-        ":" +
-        currentDate.getMinutes();
+        ":";
+      if (currentDate.getMinutes() < 10) {
+        orderDate += "0" + currentDate.getMinutes();
+      } else {
+        orderDate += "" + currentDate.getMinutes();
+      }
       let language = [];
       for (let index = 0; index < this.subtitlingLangInput.length; index++) {
         let selectedLang = this.subtitlingLangInput[index];
@@ -697,9 +713,9 @@ export default {
       if (noteFromCustomer === "") {
         noteFromCustomer = "No note from customer";
       }
-      let total = this.subtitlingLangInput.length * 30;
+      let total = this.subtitlingLangInput.length * 30 * this.videoLength;
       if (this.categoryInput !== "") {
-        total = (this.subtitlingLangInput.length + 1) * 30;
+        total = (this.subtitlingLangInput.length + 1) * 30 * this.videoLength;
       }
       let order = {
         date: orderDate,
@@ -709,32 +725,14 @@ export default {
         level: this.levelOfLangInput,
         category: this.categoryInput,
         noteFromCustomer: noteFromCustomer,
-        length: "~3 mins",
-        amount: "$" + total,
+        length: "~" + this.videoLength + " min",
+        amount: "฿" + total,
       };
       await store.dispatch("addNewOrder", order);
       await router.push({ name: "TranslatorOrder" });
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
-
-      let test = [0, 0];
-
-      let video = document.createElement("video");
-      video.preload = "metadata";
-      video.onloadedmetadata = function () {
-        console.log("pass");
-        window.URL.revokeObjectURL(video.src);
-        let rawLength = Math.round(video.duration);
-        test = [0, 0];
-        while (rawLength >= 60) {
-          test[0] += 1;
-          rawLength -= 60;
-        }
-        test[1] = rawLength;
-      };
-      video.src = URL.createObjectURL(this.selectedFile);
-
       // do something
     },
     remove(item) {
