@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container style="background-color: #f1f1f1">
-      <v-row class="mt-16 mb-16">
+      <v-row class="my-16 mx-auto">
         <v-col md="6" class="mt-16">
           <v-img
             :src="require('../../assets/gophilogodark.png')"
@@ -162,7 +162,7 @@ export default {
   name: "Home",
   data: () => ({
     video:
-      '<iframe width="740" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+      '<iframe width="600" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
   }),
 
   methods: {
