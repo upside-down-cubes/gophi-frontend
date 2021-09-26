@@ -185,6 +185,9 @@
                   </v-autocomplete>
                 </v-col>
               </v-row>
+              <v-card-subtitle class="mx-2 pt-1">
+                <span>*Auto-detected</span>
+              </v-card-subtitle>
               <v-row class="mx-2">
                 <v-col>
                   <span>Level of language</span>
@@ -513,10 +516,10 @@
               </v-col>
               <v-col>
                 <span v-if="categoryInput !== ''" class="text-h6"
-                  >${{ (subtitlingLangInput.length + 1) * 30 }}</span
+                  >฿{{ (subtitlingLangInput.length + 1) * 30 }}</span
                 >
                 <span v-else class="text-h6"
-                  >${{ subtitlingLangInput.length * 30 }}</span
+                  >฿{{ subtitlingLangInput.length * 30 }}</span
                 >
               </v-col>
             </v-row>
@@ -561,7 +564,7 @@ export default {
       videoDuration: [0, 0],
       video:
         '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-      audioLangInput: "",
+      audioLangInput: "EN",
       subtitlingLangInput: [],
       levelOfLangInput: "",
       categoryInput: "",
