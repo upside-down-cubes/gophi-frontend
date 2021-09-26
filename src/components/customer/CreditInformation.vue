@@ -64,14 +64,13 @@
           :close-on-content-click="false"
           :return-value.sync="date"
           transition="scale-transition"
-          position-y="20px"
           max-width="290px"
           min-width="auto"
+          offset-overflow
           ><template v-slot:activator="{ on, attrs }">
             <v-text-field
               v-model="date"
               color="#13B8A4"
-              label="••••••••"
               prepend-inner-icon="mdi-calendar"
               required
               clearable
@@ -87,8 +86,8 @@
           </template>
           <v-date-picker
             v-model="date"
-            type="month"
             no-title
+            type="month"
             scrollable
             color="#13B8A4"
             light
