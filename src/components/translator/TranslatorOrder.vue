@@ -13,22 +13,16 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-      <v-text-field
-        class="search-bar"
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-        color="#13B8A4"
-      ></v-text-field>
       <v-select
-        class="select-bar"
-        v-resize:20
+        class="select-bar mr-9"
+        style="max-width: 430px"
         v-model="selectionType"
         :items="['Customer Name', 'Language', 'Level of language']"
         label="Filter by"
         color="#13B8A4"
+        hide-details
+        chips
+        clearable
         item-color="teal accent-4"
       ></v-select>
     </v-row>
@@ -274,9 +268,20 @@
       </template>
     </v-simple-table>
     <!-- History table (styled table class in the ccs/translator/order.css) -->
+
     <v-card-title v-if="!text">
       Order History
       <v-spacer></v-spacer>
+      <v-text-field
+        class="search-bar mt-0"
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        style="max-width: 430px"
+        single-line
+        hide-details
+        color="#13B8A4"
+      ></v-text-field>
     </v-card-title>
     <v-simple-table v-if="!text" class="styled-table">
       <template v-slot:default>
@@ -437,6 +442,8 @@ export default {
     dialog: false,
     toggle_multiple: [0, 1, 2],
     order: [],
+    search: "",
+    selectionType: "",
     orderHistory: [
       {
         date: "10-Aug-2021 14:14",
