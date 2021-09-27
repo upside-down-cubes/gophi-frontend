@@ -13,22 +13,15 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-      <v-text-field
-        class="search-bar"
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-        color="#13B8A4"
-      ></v-text-field>
       <v-select
         class="select-bar"
-        v-resize:20
         v-model="selectionType"
-        :items="['Customer Name', 'Language', 'Level of language']"
+        :items="['Language', 'Level of language']"
         label="Filter by"
         color="#13B8A4"
+        hide-details
+        chips
+        clearable
         item-color="teal accent-4"
       ></v-select>
     </v-row>
@@ -83,7 +76,10 @@
             </td>
             <td>{{ item.level }}</td>
             <td>
-              <v-chip color="#CECECE">{{ item.category }}</v-chip>
+              <v-chip v-if="item.category !== ''" color="#CECECE">{{
+                item.category
+              }}</v-chip>
+              <span v-else>{{ item.category }}</span>
             </td>
             <td>{{ item.length }}</td>
             <td>{{ item.amount }}</td>
@@ -110,7 +106,7 @@
                 </template>
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
-                    <p class="font-weight-light" style="font-size: 14px">
+                    <p class="font-weight-light" style="font-size: 14px; word-break: normal">
                       {{ item.noteFromCustomer }}
                     </p>
                   </v-card-title>
@@ -274,9 +270,19 @@
       </template>
     </v-simple-table>
     <!-- History table (styled table class in the ccs/translator/order.css) -->
+
     <v-card-title v-if="!text">
       Order History
       <v-spacer></v-spacer>
+      <v-text-field
+        class="search-bar"
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+        color="#13B8A4"
+      ></v-text-field>
     </v-card-title>
     <v-simple-table v-if="!text" class="styled-table">
       <template v-slot:default>
@@ -336,32 +342,27 @@
               <v-menu
                 top
                 min-width="300px"
-                max-height="500px"
-                open-on-hover
+                max-height="300px"
                 offset-y
                 right
                 offset-x
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
+                  <v-btn
+                    rounded
+                    x-small
+                    elevation="0"
+                    v-on="on"
+                    color="#CECECE"
+                  >
                     <v-icon> mdi-dots-horizontal </v-icon>
                   </v-btn>
                 </template>
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
-                    <p class="font-weight-light">
-                      It is a long established fact that a reader will be
-                      distracted by the readable content of a page when looking
-                      at its layout. The point of using Lorem Ipsum is that it
-                      has a more-or-less normal distribution of letters, as
-                      opposed to using 'Content here, content here', making it
-                      look like readable English. Many desktop publishing
-                      packages and web page editors now use Lorem Ipsum as their
-                      default model text, and a search for 'lorem ipsum' will
-                      uncover many web sites still in their infancy. Various
-                      versions have evolved over the years, sometimes by
-                      accident, sometimes on purpose (injected humour and the
-                      like).
+                    <p class="font-weight-light" style="font-size: 14px; word-break: normal">
+                      Hi! I would like this video to be translated from English
+                      to Thai, preferably within the next 2 weeks.
                     </p>
                   </v-card-title>
                 </v-card>
@@ -437,6 +438,8 @@ export default {
     dialog: false,
     toggle_multiple: [0, 1, 2],
     order: [],
+    search: "",
+    selectionType: "",
     orderHistory: [
       {
         date: "10-Aug-2021 14:14",
@@ -452,7 +455,7 @@ export default {
         level: "Friendly",
         category: "Business",
         length: "~3 mins",
-        amount: "$122",
+        amount: "฿122",
       },
     ],
   }),
