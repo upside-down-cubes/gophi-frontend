@@ -709,14 +709,12 @@ export default {
         let selectedLang = this.subtitlingLangInput[index];
         language.push({ content: this.audioLangInput + " > " + selectedLang });
       }
-      let noteFromCustomer = this.note;
-      if (noteFromCustomer === "") {
-        noteFromCustomer = "No note from customer";
-      }
-      let total = this.subtitlingLangInput.length * 30 * this.videoLength;
-      if (this.categoryInput !== "") {
-        total = (this.subtitlingLangInput.length + 1) * 30 * this.videoLength;
-      }
+      let noteFromCustomer =
+        this.note !== "" ? this.note : "No note from customer";
+      let total =
+        this.categoryInput !== ""
+          ? (this.subtitlingLangInput.length + 1) * 30 * this.videoLength
+          : this.subtitlingLangInput.length * 30 * this.videoLength;
       let order = {
         date: orderDate,
         by: "gophi team",
