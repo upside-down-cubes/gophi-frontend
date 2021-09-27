@@ -650,7 +650,7 @@ export default {
         "Sports & Recreation",
         "Technology & Product description",
       ],
-      e6: 2,
+      e6: 1,
     };
   },
   computed: {

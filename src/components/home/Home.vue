@@ -302,7 +302,7 @@
             <h2 style="color: #ffffff"><b>Contact us:</b></h2>
           </v-col>
           <v-col md="4">
-            <h2 style="color: #ffffff">sopanat+gophi@gmail.com</h2>
+            <h2 style="color: #ffffff">sopanant+gophi@gmail.com</h2>
           </v-col>
           <v-col></v-col>
         </v-row>
