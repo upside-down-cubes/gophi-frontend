@@ -223,14 +223,31 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
-              <v-checkbox
-                class="mx-5 mb-2"
-                v-model="checkBox"
-                label="I want this order to be done by 12 hours"
-                color="#13B8A4"
-                value="#13B8A4"
-                hide-details
-              ></v-checkbox>
+              <v-row class="mx-1">
+                <v-checkbox
+                  class="mx-5 mb-2"
+                  v-model="checkBox"
+                  label="I would like to receive my order within 12 hours"
+                  color="#13B8A4"
+                  value="#13B8A4"
+                  hide-details
+                  @click="proofread = false"
+                  ><v-tooltip slot="append" max-width="250" bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-icon small v-on="on" color="#13B8A4" class="mt-1">
+                        mdi-help
+                      </v-icon>
+                    </template>
+                    <span style="font-size: 12px"
+                      >If you would like to receive your order within 12 hours,
+                      your order will be sent to a larger group of translators
+                      of your match for the quickest acceptance. Otherwise, your
+                      order wil be sent to the top ~3 translators of your match
+                      whereby the acceptance time may be longer.</span
+                    >
+                  </v-tooltip>
+                </v-checkbox>
+              </v-row>
               <v-row class="mx-2">
                 <v-col>
                   <v-switch
