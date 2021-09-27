@@ -106,7 +106,14 @@
                 </template>
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
-                    <p class="font-weight-light" style="font-size: 14px; word-break: normal">
+                    <p
+                      class="font-weight-light"
+                      style="
+                        font-size: 14px;
+                        white-space: pre-wrap;
+                        word-break: normal;
+                      "
+                    >
                       {{ item.noteFromCustomer }}
                     </p>
                   </v-card-title>
@@ -360,7 +367,14 @@
                 </template>
                 <v-card class="mx-auto" max-width="300" outlined>
                   <v-card-title class="ma-1">
-                    <p class="font-weight-light" style="font-size: 14px; word-break: normal">
+                    <p
+                      class="font-weight-light"
+                      style="
+                        font-size: 14px;
+                        white-space: pre-wrap;
+                        word-break: normal;
+                      "
+                    >
                       Hi! I would like this video to be translated from English
                       to Thai, preferably within the next 2 weeks.
                     </p>
@@ -454,7 +468,7 @@ export default {
         ],
         level: "Friendly",
         category: "Business",
-        length: "~3 mins",
+        length: "~3 min",
         amount: "฿122",
       },
     ],
