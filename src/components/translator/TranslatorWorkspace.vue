@@ -89,17 +89,20 @@
               dark
               v-bind="attrs"
               v-on="on"
-              >English <v-icon right> mdi-chevron-down </v-icon>
+              >{{ transLang }} <v-icon right> mdi-chevron-down </v-icon>
             </v-chip>
           </template>
           <v-list dense>
             <v-list-item-group color="#13B8A4">
               <v-list-item
-                v-for="item in transcripts"
-                :key="item.language"
-                @click="transcript = item.text"
+                v-for="item in languages"
+                :key="item"
+                @click="
+                  transLang = item;
+                  changeTranscript();
+                "
               >
-                <v-list-item-content>{{ item.language }}</v-list-item-content>
+                <v-list-item-content>{{ item }}</v-list-item-content>
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -299,20 +302,6 @@ export default {
 
   data: () => ({
     text: "center",
-    video:
-      '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-    transcripts: [
-      {
-        language: "English",
-        text: "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
-      },
-      {
-        language: "Thai",
-        text: "โกฟิเป็นแพลตฟอร์มสร้างคำบรรยายในวิดีโอเพื่อช่วยเผยแพร่ความรู้สู่สากล เรามุ่งหวังที่จะทำให้กระบวนการสร้างคำบรรยาย รวมถึงขั้นตอนการแปลคล่องตัวมากยิ่งขึ้น โดยใช้ประโยชน์จากปัญญาประดิษฐ์ เพื่อให้ได้คำบรรยายอย่างรวดเร็วและแม่นยำในราคาที่เหมาะสม โกฟิให้บริการสร้างคำบรรยายในวิดีโอในสองรูปแบบ ในรูปแบบแรก ลูกค้าสามารถสั่งทำคำบรรยายในวิดีโอผ่านโกฟิ ซึ่งจับคู่คำสั่งงานของลูกค้ากับนักแปลในระบบ การจับคู่นี้คำนึงถึงภาษาของคำบรรยายรวมถึงบริบทหรือประเภทของเนื้อหา ลูกค้าสามารถสั่งซื้อคำบรรยายในวิดีโอโดยอัปโหลดวิดีโอ เลือกภาษาของคำบรรยาย อารมณ์และน้ำเสียง และหมวดหมู่ จากนั้น กดยืนยันคำสั่งซื้อและชำระค่าบริการ เมื่อนักแปลที่ถูกเลือกโดยอัตโนมัติตอบรับงาน นักแปลจะใช้เครื่องมือปัญญาประดิษฐ์ช่วยเป็นแนวทางในการแปล นักแปลส่งคำบรรยายภายในระยะเวลาที่กำหนดให้ลูกค้ากดยอมรับ ลูกค้าสามารถดาวน์โหลดคำบรรยาย และนักแปลได้รับค่าตอบแทน ในรูปแบบที่สอง ลูกค้าที่สนใจสร้างและแปลคำบรรยายในวิดีโอด้วยตนเองสามารถใช้เครื่องมือของเราที่มีปัญญา ประดิษฐ์ช่วยเหลือเช่นเดียวกับที่นักแปลใช้",
-      },
-    ],
-    transcript:
-      "Gophi is a subtitling platform for globalizing knowledge. We aim to streamline the subtitling and translation process with machine assistance to provide affordable, quick and accurate subtitles. Gophi provides subtitling service through two models. First, a customer can order subtitles through Gophi, which matches the customer’s order with a translator on the platform. The matching process considers subtitling language and content context or category. A customer can make a subtitle order by uploading their video, selecting subtitling languages, mood and tone, and category, then confirming the order and making payment. Once an automatically-selected translator accepts the order, the translator works on that order with our machine assistance service, using machine subtitles as a guideline. Within the agreed time frame, subtitles are submitted for customer approval. The customer can download their subtitles, and the translator is rewarded. For the second model, a customer interested in creating and translating subtitles themselves can use our machine-assisted subtitling service, in the same way translators do.\n",
     order: [
       {
         id: "#000001",
@@ -332,6 +321,12 @@ export default {
         amount: "$122",
       },
     ],
+    video:
+      '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+    languages: ["English", "Thai"],
+    transLang: "English",
+    transcripts: [],
+    transcript: "",
     subtitle: null,
     subtitleEN: [
       {
@@ -428,10 +423,19 @@ export default {
       },
     ],
     time: "00.25",
+    totalSeconds: 0,
   }),
 
   created() {
     this.subtitle = this.subtitleEN;
+    this.changeTranscript();
+    this.subtitleTH.forEach((t) => {
+      this.$watch(() => t, this.updateTranscript, { deep: true });
+    });
+    this.subtitleEN.forEach((t) => {
+      this.$watch(() => t, this.updateTranscript, { deep: true });
+    });
+    setInterval(this.countTimer, 1000);
   },
 
   computed: {
@@ -447,6 +451,33 @@ export default {
       } else {
         this.subtitle = this.subtitleEN;
       }
+    },
+
+    changeTranscript() {
+      if (this.transLang === "English") {
+        this.transcripts = this.subtitleEN;
+      } else {
+        this.transcripts = this.subtitleTH;
+      }
+      this.updateTranscript();
+    },
+
+    updateTranscript() {
+      this.transcript = "";
+      for (let i = 0; i < this.transcripts.length; i++) {
+        this.transcript += this.transcripts[i].yours;
+      }
+    },
+
+    countTimer() {
+      this.totalSeconds++;
+      let hour = Math.floor(this.totalSeconds / 3600);
+      let minute = Math.floor((this.totalSeconds - hour * 3600) / 60);
+      let seconds = this.totalSeconds - (hour * 3600 + minute * 60);
+      if (hour < 10) hour = "0" + hour;
+      if (minute < 10) minute = "0" + minute;
+      if (seconds < 10) seconds = "0" + seconds;
+      this.time = hour + ":" + minute + ":" + seconds;
     },
   },
 };
