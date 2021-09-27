@@ -42,12 +42,13 @@
                     <span>Only video files are allowed to be uploaded.</span>
                   </v-card-subtitle>
                 </v-list-item-content>
-
+                <!--
                 <v-list-item-action>
                   <v-window>
                     <v-window-item v-html="video"></v-window-item>
                   </v-window>
                 </v-list-item-action>
+                -->
               </v-list-item>
               <v-card-actions class="justify-end mx-2">
                 <v-btn
