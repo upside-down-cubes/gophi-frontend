@@ -774,7 +774,6 @@ export default {
         this.categoryPriceInput !== 0
       ) {
         let pricePerMin = parseFloat(this.categoryPriceInput);
-        console.log(pricePerMin);
         for (let i = 0; i < this.subtitlingLangInput.length; i++) {
           let lang = this.subtitlingLangInput[i];
           let search = this.langPrices.filter(
@@ -789,8 +788,12 @@ export default {
             console.log(typeof search[j].general);
           }
         }
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.total = (pricePerMin * this.videoLength).toFixed(1);
         return (pricePerMin * this.videoLength).toFixed(1);
       } else {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.total = 0;
         return 0;
       }
     },
@@ -845,10 +848,6 @@ export default {
       }
       let noteFromCustomer =
         this.note !== "" ? this.note : "No note from customer";
-      let total =
-        this.categoryInput !== ""
-          ? (this.subtitlingLangInput.length + 1) * 30 * this.videoLength
-          : this.subtitlingLangInput.length * 30 * this.videoLength;
       let order = {
         date: orderDate,
         by: "gophi team",
@@ -858,11 +857,11 @@ export default {
         category: this.categoryInput,
         noteFromCustomer: noteFromCustomer,
         length: "~" + this.videoLength + " min",
-        amount: "฿" + total,
+        amount: "฿" + this.total,
         quickOrder: this.checkBox,
       };
       await store.dispatch("addNewOrder", order);
-      await router.push({ name: "TranslatorOrder" });
+      await router.push({ name: "CustomerOrder" });
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
