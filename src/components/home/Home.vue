@@ -173,20 +173,24 @@
               <h3>Order subtitles</h3>
               <p>Pay as you go</p>
             </v-col>
-            <v-divider
-              vertical
-              style="border-width: 1px; border-color: #5b5b5b"
-            />
+            <span class="vertical-divider"></span>
+            <!--            <v-divider-->
+            <!--              vertical-->
+            <!--              style="border-width: 1px; border-color: #5b5b5b"-->
+            <!--            />-->
             <v-col>
               <v-row class="mx-5 my-3">
                 <v-col md="4">
-                  <p style="color: #1bb7a4; font-size: large" class="my-0">
+                  <p
+                    style="color: #1bb7a4; font-size: large"
+                    class="my-0 pb-2 incomplete-signup"
+                  >
                     Captioning
                   </p>
-                  <v-divider
-                    style="border-width: medium; border-color: #acacac"
-                    class="mb-0"
-                  />
+                  <!--                  <v-divider-->
+                  <!--                    style="border-width: medium; border-color: #acacac"-->
+                  <!--                    class="mb-0"-->
+                  <!--                  />-->
                   <v-card color="#fafafa" flat height="200" class="mt-2">
                     <v-container fill-height>
                       <v-row>
@@ -221,13 +225,16 @@
                   </v-card>
                 </v-col>
                 <v-col class="mx-10">
-                  <p style="color: #1bb7a4; font-size: large" class="my-0">
+                  <p
+                    style="color: #1bb7a4; font-size: large"
+                    class="my-0 pb-2 incomplete-signup"
+                  >
                     Subtitle Translation
                   </p>
-                  <v-divider
-                    style="border-width: medium; border-color: #acacac"
-                    class="mb-0"
-                  />
+                  <!--                  <v-divider-->
+                  <!--                    style="border-width: medium; border-color: #acacac"-->
+                  <!--                    class="mb-0"-->
+                  <!--                  />-->
                   <v-container>
                     <v-row>
                       <v-col>
@@ -325,10 +332,11 @@
               <h3>Create subtitles</h3>
               <p>Subscribe</p>
             </v-col>
-            <v-divider
-              vertical
-              style="border-width: 1px; border-color: #5b5b5b"
-            />
+            <span class="my-2 py-2 vertical-divider"></span>
+            <!--            <v-divider-->
+            <!--              vertical-->
+            <!--              style="border-width: 1px; border-color: #5b5b5b"-->
+            <!--            />-->
             <v-col>
               <v-row class="mx-10">
                 <v-col>

@@ -28,7 +28,7 @@
                 <!-- Status buttons -->
                 <!-- status 0: waiting for Translator to accept -->
                 <v-btn
-                  v-if="item.status == 0"
+                  v-if="item.status === 0"
                   rounded
                   small
                   elevation="0"
@@ -37,15 +37,15 @@
                 >
                   Order sent
                 </v-btn>
-                <a
-                  v-if="item.status == 0"
-                  href="workspace"
+                <span
+                  v-if="item.status === 0"
+                  style="cursor: pointer"
                   class="grey--text mr-3 float-right mt-3"
-                  >View more details</a
+                  ><u>View more details</u></span
                 >
                 <!-- status 1: Work is done from Translator-->
                 <v-btn
-                  v-if="item.status == 1"
+                  v-if="item.status === 1"
                   rounded
                   small
                   elevation="0"
@@ -55,7 +55,7 @@
                   Customer review
                 </v-btn>
                 <v-btn
-                  v-if="item.status == 1"
+                  v-if="item.status === 1"
                   @click="changeStatus(item, 3)"
                   rounded
                   small
@@ -66,7 +66,7 @@
                   Accept
                 </v-btn>
                 <v-btn
-                  v-if="item.status == 1"
+                  v-if="item.status === 1"
                   @click="changeStatus(item, 2)"
                   rounded
                   small
@@ -76,15 +76,16 @@
                 >
                   Request revision
                 </v-btn>
-                <a
-                  href="view_workspace"
-                  v-if="item.status == 1"
-                  class="grey--text mr-4 float-right mt-3"
-                  >View submission</a
+                <span
+                  v-if="item.status === 1"
+                  @click="viewWorkspace"
+                  style="cursor: pointer"
+                  class="grey--text mr-4 float-right mt-3 underlined"
+                  ><u>View submission</u></span
                 >
                 <!-- status 2: Request revision-->
                 <v-btn
-                  v-if="item.status == 2"
+                  v-if="item.status === 2"
                   rounded
                   small
                   elevation="0"
@@ -94,7 +95,7 @@
                   Customer review
                 </v-btn>
                 <v-btn
-                  v-if="item.status == 2"
+                  v-if="item.status === 2"
                   outlined
                   rounded
                   small
@@ -104,15 +105,16 @@
                 >
                   Waiting for revision
                 </v-btn>
-                <a
-                  href="view_workspace"
-                  v-if="item.status == 2"
+                <span
+                  @click="viewWorkspace"
+                  style="cursor: pointer"
+                  v-if="item.status === 2"
                   class="grey--text mr-4 float-right mt-3"
-                  >View submission</a
+                  ><u>View submission</u></span
                 >
                 <!-- status 3: ACCEPTED-->
                 <v-btn
-                  v-if="item.status == 3"
+                  v-if="item.status === 3"
                   rounded
                   small
                   elevation="0"
@@ -122,7 +124,7 @@
                   Customer review
                 </v-btn>
                 <v-btn
-                  v-if="item.status == 3"
+                  v-if="item.status === 3"
                   outlined
                   rounded
                   small
@@ -132,11 +134,12 @@
                 >
                   Accepted
                 </v-btn>
-                <a
-                  href="view_workspace"
-                  v-if="item.status == 3"
+                <span
+                  @click="viewWorkspace"
+                  style="cursor: pointer"
+                  v-if="item.status === 3"
                   class="grey--text mr-4 float-right mt-3"
-                  >View submission</a
+                  ><u>View submission</u></span
                 >
               </tr>
             </tbody>
@@ -208,6 +211,9 @@ export default {
     preventNav(event) {
       event.preventDefault();
       event.returnValue = "";
+    },
+    viewWorkspace() {
+      this.$router.push({ name: "CustomerViewWorkspace" });
     },
   },
 };

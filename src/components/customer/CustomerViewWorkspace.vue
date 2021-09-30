@@ -284,10 +284,10 @@
       <v-btn
         dark
         class="ma-7"
-        color="white"
+        color="#13B8A4"
         elevation="0"
-        :to="{ name: 'TranslatorCurrentOrders' }"
-      >
+        :to="{ name: 'CustomerOrder' }"
+        >Submit
       </v-btn>
     </v-row>
   </v-container>
@@ -295,7 +295,7 @@
 
 <script>
 export default {
-  name: "TranslatorProject",
+  name: "CustomerViewWorkspace",
 
   data: () => ({
     text: "center",
@@ -441,7 +441,25 @@ export default {
     },
   },
 
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
     changeSubtitle() {
       if (this.subtitle === this.subtitleEN) {
         this.subtitle = this.subtitleTH;
