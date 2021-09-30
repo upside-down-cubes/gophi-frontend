@@ -116,11 +116,7 @@
       <div class="text-center" style="font-size: larger">
         <v-row class="my-10 mx-16">
           <v-col class="mx=5">
-            <img
-              width="100"
-              src="../../assets/home-img/accurate.png"
-              alt="Cart"
-            />
+            <img height="100" src="../../assets/home-img/cart.png" alt="Cart" />
             <p>
               <span style="color: #1bb7a4; font-weight: bolder">Order</span>
               translations with
@@ -132,8 +128,8 @@
           </v-col>
           <v-col>
             <img
-              width="100"
-              src="../../assets/home-img/accurate.png"
+              height="100"
+              src="../../assets/home-img/pencil.png"
               alt="Pencil"
             />
             <p>
@@ -152,18 +148,312 @@
           flat
           rounded
         >
-          <v-row>
-            <v-col class="mx-16">
-              <p>What do you get?</p>
+          <v-container fill-height>
+            <v-row justify="center" align="center">
+              <v-col class="mx-16">
+                <p>What do you get?</p>
+              </v-col>
+              <v-col>
+                <ul class="checklist">
+                  <li>Subtitle files in your preferred format</li>
+                  <li>Video files with burned-in subtitles</li>
+                </ul>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+        <v-container fill-height>
+          <v-row class="mx-5 my-3" justify="center" align="center">
+            <v-col md="4">
+              <img
+                height="100"
+                src="../../assets/home-img/cart.png"
+                alt="Cart"
+              />
+              <h3>Order subtitles</h3>
+              <p>Pay as you go</p>
             </v-col>
+            <v-divider
+              vertical
+              style="border-width: 1px; border-color: #5b5b5b"
+            />
             <v-col>
-              <ul class="checklist">
-                <li>Subtitle files in your preferred format</li>
-                <li>Video files with burned-in subtitles</li>
-              </ul>
+              <v-row class="mx-5 my-3">
+                <v-col md="4">
+                  <p style="color: #1bb7a4; font-size: large" class="my-0">
+                    Captioning
+                  </p>
+                  <v-divider
+                    style="border-width: medium; border-color: #acacac"
+                    class="mb-0"
+                  />
+                  <v-card color="#fafafa" flat height="200" class="mt-2">
+                    <v-container fill-height>
+                      <v-row>
+                        <v-col>
+                          <p
+                            class="mb-0"
+                            style="font-size: small; color: #acacac"
+                          >
+                            Starting from
+                          </p>
+                          <v-card-text
+                            style="
+                              color: #5b5b5b;
+                              font-size: xx-large;
+                              font-weight: bold;
+                            "
+                          >
+                            ฿15
+                            <span style="font-size: x-large; color: #acacac"
+                              >/min</span
+                            >
+                          </v-card-text>
+                          <p
+                            class="mt-10 mb-0"
+                            style="font-size: small; color: #acacac"
+                          >
+                            Same Language Subtitling
+                          </p>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </v-col>
+                <v-col class="mx-10">
+                  <p style="color: #1bb7a4; font-size: large" class="my-0">
+                    Subtitle Translation
+                  </p>
+                  <v-divider
+                    style="border-width: medium; border-color: #acacac"
+                    class="mb-0"
+                  />
+                  <v-container>
+                    <v-row>
+                      <v-col>
+                        <v-card flat color="#D4F8F4">
+                          <span style="font-size: medium">General Content</span>
+                        </v-card>
+                        <v-card color="#fafafa" flat height="150" class="mt-2">
+                          <v-container fill-height>
+                            <v-row>
+                              <v-col>
+                                <p
+                                  class="mb-0"
+                                  style="font-size: small; color: #acacac"
+                                >
+                                  Starting from
+                                </p>
+                                <v-card-text
+                                  style="
+                                    color: #5b5b5b;
+                                    font-size: xx-large;
+                                    font-weight: bold;
+                                  "
+                                >
+                                  ฿22
+                                  <span
+                                    style="font-size: x-large; color: #acacac"
+                                    >/min</span
+                                  >
+                                </v-card-text>
+                                <p
+                                  class="mt-10 mb-0"
+                                  style="font-size: small; color: #acacac"
+                                >
+                                  By generalist Translator
+                                </p>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                        </v-card>
+                      </v-col>
+                      <v-col>
+                        <v-card flat color="#D4F8F4">
+                          <span style="font-size: medium"
+                            >Specialized Content</span
+                          >
+                        </v-card>
+                        <v-card color="#fafafa" flat height="150" class="mt-2">
+                          <v-container fill-height>
+                            <v-row>
+                              <v-col>
+                                <p
+                                  class="mb-0"
+                                  style="font-size: small; color: #acacac"
+                                >
+                                  Starting from
+                                </p>
+                                <v-card-text
+                                  style="
+                                    color: #5b5b5b;
+                                    font-size: xx-large;
+                                    font-weight: bold;
+                                  "
+                                >
+                                  ฿29
+                                  <span
+                                    style="font-size: x-large; color: #acacac"
+                                    >/min</span
+                                  >
+                                </v-card-text>
+                                <p
+                                  class="mt-10 mb-0"
+                                  style="font-size: small; color: #acacac"
+                                >
+                                  By subject-matter experts
+                                </p>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
-        </v-card>
+          <v-divider style="border-width: 1px" class="mx-10" />
+          <v-row class="mx-5 my-3" justify="center" align="center">
+            <v-col md="4">
+              <img
+                height="100"
+                src="../../assets/home-img/pencil.png"
+                alt="Pencil"
+              />
+              <h3>Create subtitles</h3>
+              <p>Subscribe</p>
+            </v-col>
+            <v-divider
+              vertical
+              style="border-width: 1px; border-color: #5b5b5b"
+            />
+            <v-col>
+              <v-row class="mx-10">
+                <v-col>
+                  <v-card flat color="#d4f8f4" height="250">
+                    <v-card-text
+                      style="
+                        color: #acacac;
+                        font-size: medium;
+                        font-weight: bold;
+                      "
+                    >
+                      Free
+                    </v-card-text>
+                    <v-divider class="mx-4" style="border-color: #acacac" />
+                    <v-card-text
+                      style="
+                        color: #5b5b5b;
+                        font-size: xx-large;
+                        font-weight: bold;
+                      "
+                      class="my-3"
+                    >
+                      ฿0
+                    </v-card-text>
+                    <ul
+                      style="
+                        font-size: small;
+                        color: #acacac;
+                        list-style-position: inside;
+                        text-align: left;
+                      "
+                    >
+                      <li>1 individual project</li>
+                      <li>Work on up to 3 min of video</li>
+                      <li>Download subtitles in any format</li>
+                    </ul>
+                  </v-card>
+                </v-col>
+                <v-col>
+                  <v-card flat color="#d4f8f4" height="250">
+                    <v-card-text
+                      style="
+                        color: #acacac;
+                        font-size: medium;
+                        font-weight: bold;
+                      "
+                    >
+                      Basic
+                    </v-card-text>
+                    <v-divider class="mx-4" style="border-color: #acacac" />
+                    <v-card-text
+                      style="
+                        color: #5b5b5b;
+                        font-size: xx-large;
+                        font-weight: bold;
+                      "
+                      class="my-3"
+                    >
+                      ฿99
+                      <span style="font-size: x-large; color: #acacac"
+                        >/mo</span
+                      >
+                    </v-card-text>
+                    <ul
+                      style="
+                        font-size: small;
+                        color: #acacac;
+                        list-style-position: inside;
+                        text-align: left;
+                      "
+                    >
+                      <li>Multiple individual projects</li>
+                      <li>Work on up to 6 hr of video</li>
+                      <li>Download subtitles in any format</li>
+                      <li>Download videos with burned-in subtitles</li>
+                    </ul>
+                  </v-card>
+                </v-col>
+                <v-col>
+                  <v-card flat color="#d4f8f4" height="250">
+                    <v-card-text
+                      style="
+                        color: #acacac;
+                        font-size: medium;
+                        font-weight: bold;
+                      "
+                    >
+                      Premium
+                    </v-card-text>
+                    <v-divider class="mx-4" style="border-color: #acacac" />
+                    <v-card-text
+                      style="
+                        color: #5b5b5b;
+                        font-size: xx-large;
+                        font-weight: bold;
+                      "
+                      class="my-3"
+                    >
+                      ฿189
+                      <span style="font-size: x-large; color: #acacac"
+                        >/mo</span
+                      >
+                    </v-card-text>
+                    <ul
+                      style="
+                        font-size: small;
+                        color: #acacac;
+                        list-style-position: inside;
+                        text-align: left;
+                      "
+                    >
+                      <li>Multiple team projects</li>
+                      <li>Work on up to hr of video</li>
+                      <li>Download subtitles in any format</li>
+                      <li>
+                        Download videos with burned-in subtitles with styling
+                        options
+                      </li>
+                    </ul>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
       </div>
     </v-container>
     <v-container style="background-color: #f1f1f1">
@@ -319,7 +609,33 @@ export default {
       '<iframe width="600" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
   }),
 
+  created() {
+    this.$store.state.refresh = true;
+  },
+
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    if (this.$store.state.isLoggedIn) {
+      window.addEventListener("beforeunload", this.preventNav);
+    }
+  },
+
+  beforeDestroy() {
+    if (this.$store.state.isLoggedIn) {
+      window.removeEventListener("beforeunload", this.preventNav);
+    }
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
     async createCustomer() {
       await this.$router.push({ name: "CustomerSignup" });
     },

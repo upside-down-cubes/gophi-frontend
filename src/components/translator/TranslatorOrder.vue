@@ -484,7 +484,14 @@ export default {
     ],
     acceptedOrder: false,
   }),
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
   beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
     this.changeOrderData(0);
   },
   created() {
@@ -593,7 +600,16 @@ export default {
       }
     });
   },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
     clearDate(dialog, remove) {
       this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()

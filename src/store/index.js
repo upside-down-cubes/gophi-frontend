@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isLoggedIn: false,
     isTranslator: false,
     orderData: [],
+    refresh: false,
   },
   actions: {
     setOrderData({ commit }, newOrderLst) {
