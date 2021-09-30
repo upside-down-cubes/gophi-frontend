@@ -74,6 +74,17 @@
 
       <v-spacer />
 
+      <v-btn
+        v-if="this.$route.name === 'Home'"
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
+        @click="$vuetify.goTo(pageHeight)"
+      >
+        Contact Us
+      </v-btn>
       <v-menu bottom min-width="200px" open-on-hover offset-y right offset-x>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -168,34 +179,34 @@
         Contact Us
       </v-btn>
     </v-app-bar>
-    <v-app-bar
-      v-else-if="this.$route.name === 'Login'"
-      app
-      color="#1bb7a4"
-      dark
-      dense
-      flat
-      class="test"
-    >
-      <v-btn
-        fab
-        tile
-        x-large
-        plain
-        elevation="0"
-        max-height="48"
-        width="90"
-        contain
-        :to="{ name: 'Home' }"
-      >
-        <v-img
-          :src="require('./assets/gophilogolight.png')"
-          contain
-          class="mx-0"
-          max-height="40"
-        />
-      </v-btn>
-    </v-app-bar>
+    <!--    <v-app-bar-->
+    <!--      v-else-->
+    <!--      app-->
+    <!--      color="#1bb7a4"-->
+    <!--      dark-->
+    <!--      dense-->
+    <!--      flat-->
+    <!--      class="test"-->
+    <!--    >-->
+    <!--      <v-btn-->
+    <!--        fab-->
+    <!--        tile-->
+    <!--        x-large-->
+    <!--        plain-->
+    <!--        elevation="0"-->
+    <!--        max-height="48"-->
+    <!--        width="90"-->
+    <!--        contain-->
+    <!--        :to="{ name: 'Home' }"-->
+    <!--      >-->
+    <!--        <v-img-->
+    <!--          :src="require('./assets/gophilogolight.png')"-->
+    <!--          contain-->
+    <!--          class="mx-0"-->
+    <!--          max-height="40"-->
+    <!--        />-->
+    <!--      </v-btn>-->
+    <!--    </v-app-bar>-->
 
     <v-main>
       <router-view />
