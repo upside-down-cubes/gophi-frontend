@@ -1,5 +1,97 @@
 <template>
   <v-container>
+    <v-dialog
+      v-model="acceptedOrder"
+      transition="dialog-top-transition"
+      max-width="600"
+    >
+      <!--  Pop up dialog to select estimate time to finish -->
+      <template v-slot:default="dialog">
+        <v-card>
+          <v-card-title style="background-color: #13b8a4">
+            <span style="color: white">Estimate time to finish</span>
+          </v-card-title>
+          <v-row class="mx-5 mt-4">
+            <v-col>
+              <v-menu
+                v-model="menu"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    label="Estimate Date"
+                    outlined
+                    color="#13b8a4"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="date"
+                  color="#13b8a4"
+                  @input="menu = false"
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col>
+              <v-menu
+                ref="menu"
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="time"
+                transition="scale-transition"
+                offset-y
+                max-width="290px"
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="time"
+                    color="#13b8a4"
+                    label="Estimate time"
+                    prepend-icon="mdi-clock-time-four-outline"
+                    readonly
+                    outlined
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-time-picker
+                  v-if="menu2"
+                  v-model="time"
+                  color="#13b8a4"
+                  format="24hr"
+                  full-width
+                  @click:minute="$refs.menu.save(time)"
+                ></v-time-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+          <v-card-actions class="justify-end">
+            <v-btn text @click="clearDate(dialog, false)">Close</v-btn>
+            <v-btn
+              color="#13b8a4"
+              elevation="0"
+              dark
+              @click="
+                dialog.value = false;
+                clearDate(dialog, true);
+              "
+              >Confirm</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-dialog>
+
     <!-- Test button -->
     <v-row class="mt-5">
       <v-col>
@@ -122,106 +214,23 @@
             </td>
             <td>
               <!-- Accept button with dialog -->
-              <v-dialog transition="dialog-top-transition" max-width="600">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    color="#13B8A4"
-                    dark
-                    elevation="0"
-                    x-small
-                    v-bind="attrs"
-                    v-on="on"
-                    >Accept</v-btn
-                  >
-                </template>
-                <!--  Pop up dialog to select estimate time to finish -->
-                <template v-slot:default="dialog">
-                  <v-card>
-                    <v-card-title style="background-color: #13b8a4">
-                      <span style="color: white">Estimate time to finish</span>
-                    </v-card-title>
-                    <v-row class="mx-5 mt-4">
-                      <v-col>
-                        <v-menu
-                          v-model="menu"
-                          :close-on-content-click="false"
-                          :nudge-right="40"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="auto"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="date"
-                              label="Estimate Date"
-                              outlined
-                              color="#13b8a4"
-                              prepend-icon="mdi-calendar"
-                              readonly
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                          <v-date-picker
-                            v-model="date"
-                            color="#13b8a4"
-                            @input="menu = false"
-                          ></v-date-picker>
-                        </v-menu>
-                      </v-col>
-                      <v-col>
-                        <v-menu
-                          ref="menu"
-                          v-model="menu2"
-                          :close-on-content-click="false"
-                          :nudge-right="40"
-                          :return-value.sync="time"
-                          transition="scale-transition"
-                          offset-y
-                          max-width="290px"
-                          min-width="290px"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="time"
-                              color="#13b8a4"
-                              label="Estimate time"
-                              prepend-icon="mdi-clock-time-four-outline"
-                              readonly
-                              outlined
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                          <v-time-picker
-                            v-if="menu2"
-                            v-model="time"
-                            color="#13b8a4"
-                            format="24hr"
-                            full-width
-                            @click:minute="$refs.menu[0].save(time)"
-                          ></v-time-picker>
-                        </v-menu>
-                      </v-col>
-                    </v-row>
-                    <v-card-actions class="justify-end">
-                      <v-btn text @click="clearDate(dialog)">Close</v-btn>
-                      <v-btn
-                        color="#13b8a4"
-                        elevation="0"
-                        dark
-                        @click="dialog.value = false"
-                        >Confirm</v-btn
-                      >
-                    </v-card-actions>
-                  </v-card>
-                </template>
-              </v-dialog>
+              <v-btn
+                color="#13B8A4"
+                dark
+                elevation="0"
+                x-small
+                @click="
+                  acceptedOrder = true;
+                  toDelete = item;
+                "
+                >Accept</v-btn
+              >
               <!--    Reject button  -->
               <v-btn
                 v-if="text === 0"
                 class="ma-1"
                 color="#ACACAC"
+                @click="removeOrder(item)"
                 elevation="0"
                 x-small
               >
@@ -442,7 +451,7 @@ export default {
   name: "Translator_Order",
   data: () => ({
     text: 0,
-    time: null,
+    time: "00:00",
     noteToCustomer: "",
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       .toISOString()
@@ -450,6 +459,7 @@ export default {
     menu: false,
     menu2: false,
     dialog: false,
+    toDelete: {},
     toggle_multiple: [0, 1, 2],
     order: [],
     search: "",
@@ -472,15 +482,21 @@ export default {
         amount: "฿122",
       },
     ],
+    acceptedOrder: false,
   }),
   beforeMount() {
     this.changeOrderData(0);
   },
   methods: {
-    clearDate(dialog) {
-      this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+    clearDate(dialog, remove) {
+      this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10);
       this.time = null;
       dialog.value = false;
+      if (remove && this.toDelete !== {}) {
+        this.removeOrder(this.toDelete);
+      }
     },
     changeOrderData(input) {
       this.text = input;
@@ -488,8 +504,14 @@ export default {
         let allOrder = store.state.orderData;
         this.order = allOrder.filter((allOrder) => allOrder.audioLang === "EN");
       } else if (input === 1) {
-        this.order = store.state.orderData;
+        this.order = store.state.orderData.filter(
+          (allOrder) => allOrder.quickOrder
+        );
       }
+    },
+    async removeOrder(OrderToRemove) {
+      this.order = this.order.filter((order) => order !== OrderToRemove);
+      await store.dispatch("setOrderData", this.order);
     },
   },
 };

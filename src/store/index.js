@@ -10,15 +10,21 @@ export default new Vuex.Store({
     orderData: [],
   },
   actions: {
-    setUserLogin({ commit }, logInStatus, translatorStatus) {
-      commit("setLogIn", logInStatus);
-      commit("setUserStatus", translatorStatus);
+    setOrderData({ commit }, newOrderLst) {
+      commit("setOrderData", newOrderLst);
+    },
+    setUserLogin({ commit }, userStatus) {
+      commit("setLogIn", userStatus.isLoggedIn);
+      commit("setUserStatus", userStatus.isTranslator);
     },
     addNewOrder({ commit }, newOrder) {
       commit("addOrder", newOrder);
     },
   },
   mutations: {
+    setOrderData(state, newLst) {
+      this.state.orderData = newLst;
+    },
     setLogIn(state, loading_status) {
       this.state.isLoggedIn = loading_status;
     },

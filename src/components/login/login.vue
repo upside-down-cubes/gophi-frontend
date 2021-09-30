@@ -2,12 +2,14 @@
   <v-container fill-height fluid>
     <v-row>
       <v-col md="6" class="mt-16">
-        <v-img
-          :src="require('../../assets/gophilogodark.png')"
-          contain
-          height="150"
-          class="mt-16"
-        />
+        <router-link :to="{ name: 'Home' }">
+          <v-img
+            :src="require('../../assets/gophilogodark.png')"
+            contain
+            height="150"
+            class="mt-16"
+          />
+        </router-link>
         <div class="text-center mt-2">
           <span style="font-size: x-large"
             >A subtitling platform for globalizing knowledge</span
@@ -111,7 +113,11 @@
               <v-btn block color="#13B8A4" dark @click="logIn">Log In</v-btn>
             </v-col>
           </v-row>
-          <v-card-text align="center" style="color: #1bb7a4" @click="createAcc">
+          <v-card-text
+            class="text-center"
+            style="color: #1bb7a4"
+            @click="createAcc"
+          >
             Create an Account
           </v-card-text>
         </v-card>
@@ -137,15 +143,23 @@ export default {
     },
 
     async logIn() {
-      await this.$router.push({ name: "Home" });
+      let status = {
+        isLoggedIn: true,
+        isTranslator: this.translator,
+      };
+      await this.$store.dispatch("setUserLogin", status);
+      console.warn(this.$store.state.isLoggedIn);
+      if (this.translator) {
+        await this.$router.push({ name: "TranslatorOrder" });
+      } else {
+        await this.$router.push({ name: "CustomerOrder" });
+      }
     },
 
     async createAcc() {
       if (this.translator) {
-        //console.log("trans");
         await this.$router.push({ name: "TranslatorSignup" });
       } else {
-        //console.log("cust");
         await this.$router.push({ name: "CustomerSignup" });
       }
     },

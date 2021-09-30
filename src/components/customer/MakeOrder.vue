@@ -489,13 +489,16 @@
           <v-divider class="mx-10"></v-divider>
           <v-card-subtitle>
             <p class="font-weight-bold">Languages</p>
-            <ul class="my-3" v-for="(item, i) in subtitlingLangInput" :key="i">
+            <ul class="my-3" v-for="(item, i) in langPriceInput" :key="i">
               <li>
                 <v-row>
                   <v-col cols="6">
-                    <span>{{ item }}</span>
+                    <span>{{ item.language }}</span>
                   </v-col>
-                  <v-col>~30 Baht/min</v-col>
+                  <v-col v-if="categoryInput === 'General'"
+                    >~{{ item.general }} Baht/min</v-col
+                  >
+                  <v-col v-else>~{{ item.special }} Baht/min</v-col>
                 </v-row>
               </li>
             </ul>
@@ -509,7 +512,9 @@
                   <v-col cols="6">
                     <span>{{ categoryInput }}</span>
                   </v-col>
-                  <v-col>~30 Baht/min</v-col>
+                  <v-col v-if="categoryInput !== ''"
+                    >~{{ categoryPrice }} Baht/min</v-col
+                  >
                 </v-row>
               </li>
               <li v-else>No category selected</li>
@@ -528,14 +533,7 @@
                 <span class="font-weight-bold text-h6">Total:</span>
               </v-col>
               <v-col>
-                <span v-if="categoryInput !== ''" class="text-h6"
-                  >฿{{
-                    (subtitlingLangInput.length + 1) * 30 * videoLength
-                  }}</span
-                >
-                <span v-else class="text-h6"
-                  >฿{{ subtitlingLangInput.length * 30 * videoLength }}</span
-                >
+                <span class="text-h6">฿{{ totalPrice }}</span>
               </v-col>
             </v-row>
             <v-divider class="divider-header-2"></v-divider>
@@ -576,12 +574,11 @@ export default {
       qrcodeDialog: false,
       mobileBanking: false,
       checkBox: false,
-      video:
-        '<iframe width="213" height="150" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
       audioLangInput: "EN",
       subtitlingLangInput: [],
       levelOfLangInput: "",
       categoryInput: "",
+      categoryPriceInput: 0,
       proofread: false,
       isSelecting: false,
       selectedFile: null,
@@ -667,6 +664,61 @@ export default {
         "Sports & Recreation",
         "Technology & Product description",
       ],
+      total: 0,
+      langPrices: [
+        { language: "AF", general: 32, special: 41.6 },
+        { language: "AR", general: 22, special: 28.6 },
+        { language: "BN", general: 32, special: 41.6 },
+        { language: "BS", general: 32, special: 41.6 },
+        { language: "BG", general: 32, special: 41.6 },
+        { language: "MY", general: 32, special: 41.6 },
+        { language: "ZH (s)", general: 32, special: 41.6 },
+        { language: "ZH (t)", general: 32, special: 41.6 },
+        { language: "DA", general: 32, special: 41.6 },
+        { language: "NL", general: 32, special: 41.6 },
+        { language: "EN", general: 15, special: 19.5 },
+        { language: "EN (UK)", general: 15, special: 19.5 },
+        { language: "EN (US)", general: 15, special: 19.5 },
+        { language: "ET", general: 32, special: 41.6 },
+        { language: "FI", general: 32, special: 41.6 },
+        { language: "FR", general: 32, special: 41.6 },
+        { language: "DE", general: 32, special: 41.6 },
+        { language: "EL", general: 32, special: 41.6 },
+        { language: "HI", general: 22, special: 28.6 },
+        { language: "HU", general: 32, special: 41.6 },
+        { language: "IS", general: 32, special: 41.6 },
+        { language: "ID", general: 32, special: 41.6 },
+        { language: "GA", general: 22, special: 28.6 },
+        { language: "IT", general: 32, special: 41.6 },
+        { language: "JA", general: 45, special: 58.5 },
+        { language: "KO", general: 32, special: 41.6 },
+        { language: "LO", general: 32, special: 41.6 },
+        { language: "LA", general: 45, special: 58.5 },
+        { language: "LV", general: 32, special: 41.6 },
+        { language: "MS", general: 32, special: 41.6 },
+        { language: "MN", general: 32, special: 41.6 },
+        { language: "NE", general: 32, special: 41.6 },
+        { language: "NO", general: 32, special: 41.6 },
+        { language: "PS", general: 32, special: 41.6 },
+        { language: "FA", general: 32, special: 41.6 },
+        { language: "PL", general: 22, special: 28.6 },
+        { language: "PT", general: 22, special: 28.6 },
+        { language: "RO", general: 32, special: 41.6 },
+        { language: "RU", general: 32, special: 41.6 },
+        { language: "SR", general: 32, special: 41.6 },
+        { language: "SK", general: 32, special: 41.6 },
+        { language: "SL", general: 32, special: 41.6 },
+        { language: "ES", general: 22, special: 28.6 },
+        { language: "SV", general: 32, special: 41.6 },
+        { language: "TA", general: 32, special: 41.6 },
+        { language: "TH", general: 32, special: 41.6 },
+        { language: "TR", general: 22, special: 28.6 },
+        { language: "UK", general: 32, special: 41.6 },
+        { language: "UR", general: 32, special: 41.6 },
+        { language: "UZ", general: 32, special: 41.6 },
+        { language: "VI", general: 32, special: 41.6 },
+        { language: "CY", general: 32, special: 41.6 },
+      ],
       e6: 1,
     };
   },
@@ -676,6 +728,74 @@ export default {
     },
     videoLength() {
       return this.selectedFile ? Math.floor(Math.random() * 10) + 1 : 0;
+    },
+    langPriceInput() {
+      if (this.subtitlingLangInput) {
+        let lst = [];
+        for (let i = 0; i < this.subtitlingLangInput.length; i++) {
+          let lang = this.subtitlingLangInput[i];
+          let search = this.langPrices.filter(
+            (langRate) => langRate.language === lang
+          );
+          lst = lst.concat(search);
+        }
+        return lst;
+      } else {
+        return [];
+      }
+    },
+    categoryPrice() {
+      if (this.categoryInput !== "") {
+        let prices = 0;
+        for (let i = 0; i < this.subtitlingLangInput.length; i++) {
+          let searchResult = this.langPrices.filter(
+            (lang) => lang.language === this.subtitlingLangInput[i]
+          );
+          for (let j = 0; j < searchResult.length; j++) {
+            if (this.categoryInput === "General") {
+              prices += searchResult[j].general;
+            } else {
+              prices += searchResult[j].special;
+            }
+          }
+        }
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.categoryPriceInput = prices.toFixed(1);
+        return prices.toFixed(1);
+      } else {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.categoryPriceInput = 0;
+        return 0;
+      }
+    },
+    totalPrice() {
+      if (
+        this.subtitlingLangInput.length !== 0 &&
+        this.categoryPriceInput !== 0
+      ) {
+        let pricePerMin = parseFloat(this.categoryPriceInput);
+        for (let i = 0; i < this.subtitlingLangInput.length; i++) {
+          let lang = this.subtitlingLangInput[i];
+          let search = this.langPrices.filter(
+            (langRate) => langRate.language === lang
+          );
+          for (let j = 0; j < search.length; j++) {
+            if (this.categoryInput === "General") {
+              pricePerMin += search[j].general;
+            } else {
+              pricePerMin += search[j].special;
+            }
+            console.log(typeof search[j].general);
+          }
+        }
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.total = (pricePerMin * this.videoLength).toFixed(1);
+        return (pricePerMin * this.videoLength).toFixed(1);
+      } else {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.total = 0;
+        return 0;
+      }
     },
   },
   methods: {
@@ -728,10 +848,6 @@ export default {
       }
       let noteFromCustomer =
         this.note !== "" ? this.note : "No note from customer";
-      let total =
-        this.categoryInput !== ""
-          ? (this.subtitlingLangInput.length + 1) * 30 * this.videoLength
-          : this.subtitlingLangInput.length * 30 * this.videoLength;
       let order = {
         date: orderDate,
         by: "gophi team",
@@ -741,10 +857,11 @@ export default {
         category: this.categoryInput,
         noteFromCustomer: noteFromCustomer,
         length: "~" + this.videoLength + " min",
-        amount: "฿" + total,
+        amount: "฿" + this.total,
+        quickOrder: this.checkBox,
       };
       await store.dispatch("addNewOrder", order);
-      await router.push({ name: "TranslatorOrder" });
+      await router.push({ name: "CustomerOrder" });
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
