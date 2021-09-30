@@ -76,14 +76,14 @@
             </v-col>
           </v-row>
           <v-card-actions class="justify-end">
-            <v-btn text @click="clearDate(dialog)">Close</v-btn>
+            <v-btn text @click="clearDate(dialog, false)">Close</v-btn>
             <v-btn
               color="#13b8a4"
               elevation="0"
               dark
               @click="
                 dialog.value = false;
-                clearDate(dialog);
+                clearDate(dialog, true);
               "
               >Confirm</v-btn
             >
@@ -219,7 +219,10 @@
                 dark
                 elevation="0"
                 x-small
-                @click="acceptedOrder = true"
+                @click="
+                  acceptedOrder = true;
+                  toDelete = item;
+                "
                 >Accept</v-btn
               >
               <!--    Reject button  -->
@@ -227,6 +230,7 @@
                 v-if="text === 0"
                 class="ma-1"
                 color="#ACACAC"
+                @click="removeOrder(item)"
                 elevation="0"
                 x-small
               >
@@ -455,6 +459,7 @@ export default {
     menu: false,
     menu2: false,
     dialog: false,
+    toDelete: {},
     toggle_multiple: [0, 1, 2],
     order: [],
     search: "",
@@ -483,10 +488,15 @@ export default {
     this.changeOrderData(0);
   },
   methods: {
-    clearDate(dialog) {
-      this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+    clearDate(dialog, remove) {
+      this.date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10);
       this.time = null;
       dialog.value = false;
+      if (remove && this.toDelete !== {}) {
+        this.removeOrder(this.toDelete);
+      }
     },
     changeOrderData(input) {
       this.text = input;
@@ -496,6 +506,10 @@ export default {
       } else if (input === 1) {
         this.order = store.state.orderData;
       }
+    },
+    async removeOrder(OrderToRemove) {
+      this.order = this.order.filter((order) => order !== OrderToRemove);
+      await store.dispatch("setOrderData", this.order);
     },
   },
 };

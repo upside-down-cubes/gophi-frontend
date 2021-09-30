@@ -10,6 +10,9 @@ export default new Vuex.Store({
     orderData: [],
   },
   actions: {
+    setOrderData({ commit }, newOrderLst) {
+      commit("setOrderData", newOrderLst);
+    },
     setUserLogin({ commit }, logInStatus, translatorStatus) {
       commit("setLogIn", logInStatus);
       commit("setUserStatus", translatorStatus);
@@ -19,6 +22,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setOrderData(state, newLst) {
+      this.state.orderData = newLst;
+    },
     setLogIn(state, loading_status) {
       this.state.isLoggedIn = loading_status;
     },
