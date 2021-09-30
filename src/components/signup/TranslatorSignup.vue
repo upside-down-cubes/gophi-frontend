@@ -2,12 +2,14 @@
   <v-container fill-height fluid>
     <v-row>
       <v-col md="6" class="mt-16">
-        <v-img
-          :src="require('../../assets/gophilogodark.png')"
-          contain
-          height="150"
-          class="mt-16"
-        />
+        <router-link :to="{ name: 'Home' }">
+          <v-img
+            :src="require('../../assets/gophilogodark.png')"
+            contain
+            height="150"
+            class="mt-16"
+          />
+        </router-link>
         <div class="text-center mt-2">
           <span style="font-size: x-large"
             >A subtitling platform for globalizing knowledge</span
@@ -23,17 +25,17 @@
             <span class="mt-5">Welcome to gophi</span>
           </v-card-title>
           <v-row align="center" justify="center" class="mx-7">
-            <v-col align="center" class="completed-signup">
+            <v-col class="completed-signup text-center">
               <span>Personal Information</span>
             </v-col>
             <v-col
-              align="center"
               :class="this.step > 2 ? 'completed-signup' : 'incomplete-signup'"
+              class="text-center"
               ><span>Expertise</span></v-col
             >
             <v-col
-              align="center"
               :class="this.step > 3 ? 'completed-signup' : 'incomplete-signup'"
+              class="text-center"
               ><span>Test</span></v-col
             >
           </v-row>
@@ -87,13 +89,12 @@
           <v-card-actions class="next-button"
             ><v-btn
               v-if="step < 4"
-              align="right"
               color="#13B8A4"
               rounded
               small
               dark
               @click="step++"
-              class="px-6"
+              class="px-6 align-content-end"
             >
               Next
             </v-btn>
@@ -103,9 +104,8 @@
               rounded
               small
               dark
-              align="right"
               @click="submitSignup"
-              class="px-4"
+              class="px-4 align-content-end"
             >
               Submit
             </v-btn>
@@ -138,7 +138,7 @@ export default {
       }
     },
     submitSignup() {
-      this.$router.push({ name: "TranslatorOrder" });
+      this.$router.push({ name: "Login" });
     },
   },
 };
