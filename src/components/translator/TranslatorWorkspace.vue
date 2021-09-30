@@ -442,7 +442,25 @@ export default {
     },
   },
 
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
     changeSubtitle() {
       if (this.subtitle === this.subtitleEN) {
         this.subtitle = this.subtitleTH;

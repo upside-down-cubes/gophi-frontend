@@ -95,7 +95,26 @@ export default {
     step: 1,
   }),
 
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
+
     goBack() {
       if (this.step > 1) {
         this.step--;

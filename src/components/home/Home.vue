@@ -319,7 +319,33 @@ export default {
       '<iframe width="600" height="365" src="https://www.youtube.com/embed/wLN1vVYqOXM" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
   }),
 
+  created() {
+    this.$store.state.refresh = true;
+  },
+
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    if (this.$store.state.isLoggedIn) {
+      window.addEventListener("beforeunload", this.preventNav);
+    }
+  },
+
+  beforeDestroy() {
+    if (this.$store.state.isLoggedIn) {
+      window.removeEventListener("beforeunload", this.preventNav);
+    }
+  },
+
   methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
     async createCustomer() {
       await this.$router.push({ name: "CustomerSignup" });
     },

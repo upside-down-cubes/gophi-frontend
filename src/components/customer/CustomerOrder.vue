@@ -43,7 +43,7 @@
                   color="#1bb7a4"
                   class="white--text mt-3 ml-10"
                 >
-                 Accepted
+                  Accepted
                 </v-btn>
                 <v-btn
                   v-if="item.approve"
@@ -64,7 +64,7 @@
                   color="#A0A0A0"
                   class="white--text mt-3"
                 >
-                 Order sent
+                  Order sent
                 </v-btn>
                 <a
                   href="workspace"
@@ -72,7 +72,10 @@
                   class="grey--text mr-4 float-right mt-3"
                   >View submission</a
                 >
-                <a href="workspace" v-else class="grey--text mr-3 float-right mt-3"
+                <a
+                  href="workspace"
+                  v-else
+                  class="grey--text mr-3 float-right mt-3"
                   >View more details</a
                 >
               </tr>
@@ -102,7 +105,26 @@ export default {
       },
     ],
   }),
-  methods: {},
+  mounted() {
+    if (!this.$store.state.refresh) {
+      this.$router.push({ name: "Home" });
+    }
+  },
+
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.preventNav);
+  },
+
+  methods: {
+    preventNav(event) {
+      event.preventDefault();
+      event.returnValue = "";
+    },
+  },
 };
 </script>
 
