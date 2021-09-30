@@ -13,9 +13,9 @@ export default new Vuex.Store({
     setOrderData({ commit }, newOrderLst) {
       commit("setOrderData", newOrderLst);
     },
-    setUserLogin({ commit }, logInStatus, translatorStatus) {
-      commit("setLogIn", logInStatus);
-      commit("setUserStatus", translatorStatus);
+    setUserLogin({ commit }, userStatus) {
+      commit("setLogIn", userStatus.isLoggedIn);
+      commit("setUserStatus", userStatus.isTranslator);
     },
     addNewOrder({ commit }, newOrder) {
       commit("addOrder", newOrder);

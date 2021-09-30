@@ -137,15 +137,23 @@ export default {
     },
 
     async logIn() {
-      await this.$router.push({ name: "Home" });
+      let status = {
+        isLoggedIn: true,
+        isTranslator: this.translator,
+      };
+      await this.$store.dispatch("setUserLogin", status);
+      console.warn(this.$store.state.isLoggedIn);
+      if (this.translator) {
+        await this.$router.push({ name: "TranslatorOrder" });
+      } else {
+        await this.$router.push({ name: "CustomerOrder" });
+      }
     },
 
     async createAcc() {
       if (this.translator) {
-        //console.log("trans");
         await this.$router.push({ name: "TranslatorSignup" });
       } else {
-        //console.log("cust");
         await this.$router.push({ name: "CustomerSignup" });
       }
     },

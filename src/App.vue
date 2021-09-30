@@ -28,6 +28,7 @@
         />
       </v-btn>
       <v-btn
+        v-if="this.$store.state.isTranslator"
         text
         plain
         class="ml-5"
@@ -38,6 +39,18 @@
         Orders
       </v-btn>
       <v-btn
+        v-else
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
+        :to="{ name: 'CustomerOrder' }"
+      >
+        Orders
+      </v-btn>
+      <v-btn
+        v-if="!this.$store.state.isTranslator"
         text
         plain
         class="ml-5"
@@ -48,6 +61,7 @@
         Make Order
       </v-btn>
       <v-btn
+        v-else
         text
         plain
         class="ml-5"
@@ -69,7 +83,6 @@
             color="#d4f8f4"
             max-height="48"
             v-on="on"
-            :to="{ name: 'Login' }"
           >
             Profile
           </v-btn>
@@ -89,13 +102,13 @@
           </v-list-item>
 
           <v-card-actions justify="space-around">
-            <v-btn text color="#1bb7a4" :to="{ name: 'Login' }"> Logout </v-btn>
+            <v-btn text color="#1bb7a4" @click="logout"> Logout </v-btn>
           </v-card-actions>
         </v-card>
       </v-menu>
     </v-app-bar>
     <v-app-bar
-      v-if="this.$route.name === 'Home'"
+      v-else-if="this.$route.name === 'Home'"
       app
       color="#1bb7a4"
       dark
@@ -155,7 +168,15 @@
         Contact Us
       </v-btn>
     </v-app-bar>
-    <v-app-bar v-else app color="#1bb7a4" dark dense flat class="test">
+    <v-app-bar
+      v-else-if="this.$route.name === 'Login'"
+      app
+      color="#1bb7a4"
+      dark
+      dense
+      flat
+      class="test"
+    >
       <v-btn
         fab
         tile
@@ -205,6 +226,7 @@ export default {
   data: () => ({
     scrolled: false,
   }),
+
   created() {
     document.title = "gophi";
   },
@@ -220,6 +242,14 @@ export default {
       if (typeof window === "undefined") return;
       const top = window.pageYOffset || e.target.scrollTop || 0;
       this.scrolled = top > 20;
+    },
+    async logout() {
+      let status = {
+        isLoggedIn: false,
+        isTranslator: false,
+      };
+      await this.$store.dispatch("setUserLogin", status);
+      await this.$router.push({ name: "Login" });
     },
   },
 };
