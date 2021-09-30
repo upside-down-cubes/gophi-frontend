@@ -37,11 +37,11 @@
         <v-text-field
           color="#13B8A4"
           v-model="email"
+          :rules="emailRules"
           label="customer@example.com"
           persistent-hint
           required
           clearable
-          hide-details
           outlined
           dense
           single-line
@@ -60,6 +60,7 @@
       </v-col>
       <v-col class="mr-5 pb-0">
         <v-text-field
+          v-model="password"
           color="#13B8A4"
           label="••••••••"
           required
@@ -84,12 +85,13 @@
       </v-col>
       <v-col class="mr-5 pb-0">
         <v-text-field
+          v-model="confirmPassword"
+          :rules="[confirmPasswordRules, passwordConfirmationRule]"
           color="#13B8A4"
           label="••••••••"
           required
           clearable
           outlined
-          hide-details
           dense
           single-line
           solo
@@ -107,7 +109,24 @@ export default {
   data: () => ({
     email: "",
     fullName: "",
+    password: "",
+    confirmPassword: "",
+
+    emailRules: [
+      (v) =>
+        !v ||
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+        "E-mail must be valid",
+    ],
+
+    confirmPasswordRules: [],
   }),
+
+  computed: {
+    passwordConfirmationRule() {
+      return () => (this.password === this.confirmPassword) || 'Password must match'
+    },
+  }
 };
 </script>
 
