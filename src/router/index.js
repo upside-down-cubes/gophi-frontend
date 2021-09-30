@@ -11,6 +11,7 @@ import TranslatorWorkspace from "../components/translator/TranslatorWorkspace";
 import CustomerSignup from "../components/signup/CustomerSignup";
 import CustomerOrder from "../components/customer/CustomerOrder";
 import CustomerMakeOrder from "../components/customer/MakeOrder";
+import CustomerViewWorkspace from "../components/customer/CustomerViewWorkspace";
 
 Vue.use(VueRouter);
 
@@ -65,6 +66,11 @@ const routes = [
     name: "CustomerMakeOrder",
     path: "/makeorder",
     component: CustomerMakeOrder,
+  },
+  {
+    name: "CustomerViewWorkspace",
+    path: "/view_workspace",
+    component: CustomerViewWorkspace,
   },
 ];
 

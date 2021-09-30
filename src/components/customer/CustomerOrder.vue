@@ -25,39 +25,10 @@
               <tr v-for="item in order" :key="item.name">
                 <td>{{ item.id }}</td>
                 <td>{{ item.title }}</td>
+                <!-- Status buttons -->
+                <!-- status 0: waiting for Translator to accept -->
                 <v-btn
-                  v-if="item.approve"
-                  rounded
-                  small
-                  elevation="0"
-                  color="#A0A0A0"
-                  class="white--text mt-3"
-                >
-                  Customer review
-                </v-btn>
-                <v-btn
-                  v-if="item.approve"
-                  rounded
-                  small
-                  elevation="0"
-                  color="#1bb7a4"
-                  class="white--text mt-3 ml-10"
-                >
-                  Accepted
-                </v-btn>
-                <v-btn
-                  v-if="item.approve"
-                  rounded
-                  small
-                  elevation="0"
-                  color="#CECECE"
-                  class="mt-3 ml-2"
-                >
-                  Request revision
-                </v-btn>
-
-                <v-btn
-                  v-if="!item.approve"
+                  v-if="item.status == 0"
                   rounded
                   small
                   elevation="0"
@@ -67,16 +38,105 @@
                   Order sent
                 </v-btn>
                 <a
+                  v-if="item.status == 0"
                   href="workspace"
-                  v-if="item.approve"
+                  class="grey--text mr-3 float-right mt-3"
+                  >View more details</a
+                >
+                <!-- status 1: Work is done from Translator-->
+                <v-btn
+                  v-if="item.status == 1"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#A0A0A0"
+                  class="white--text mt-3"
+                >
+                  Customer review
+                </v-btn>
+                <v-btn
+                  v-if="item.status == 1"
+                  @click="changeStatus(item, 3)"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#1bb7a4"
+                  class="white--text mt-3 ml-10"
+                >
+                  Accept
+                </v-btn>
+                <v-btn
+                  v-if="item.status == 1"
+                  @click="changeStatus(item, 2)"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#CECECE"
+                  class="mt-3 ml-2"
+                >
+                  Request revision
+                </v-btn>
+                <a
+                  href="view_workspace"
+                  v-if="item.status == 1"
                   class="grey--text mr-4 float-right mt-3"
                   >View submission</a
                 >
+                <!-- status 2: Request revision-->
+                <v-btn
+                  v-if="item.status == 2"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#A0A0A0"
+                  class="white--text mt-3"
+                >
+                  Customer review
+                </v-btn>
+                <v-btn
+                  v-if="item.status == 2"
+                  outlined
+                  rounded
+                  small
+                  elevation="0"
+                  color="#1bb7a4"
+                  class="mt-3 ml-10"
+                >
+                  Waiting for revision
+                </v-btn>
                 <a
-                  href="workspace"
-                  v-else
-                  class="grey--text mr-3 float-right mt-3"
-                  >View more details</a
+                  href="view_workspace"
+                  v-if="item.status == 2"
+                  class="grey--text mr-4 float-right mt-3"
+                  >View submission</a
+                >
+                <!-- status 3: ACCEPTED-->
+                <v-btn
+                  v-if="item.status == 3"
+                  rounded
+                  small
+                  elevation="0"
+                  color="#A0A0A0"
+                  class="white--text mt-3"
+                >
+                  Customer review
+                </v-btn>
+                <v-btn
+                  v-if="item.status == 3"
+                  outlined
+                  rounded
+                  small
+                  elevation="0"
+                  color="#1bb7a4"
+                  class="mt-3 ml-10"
+                >
+                  Accepted
+                </v-btn>
+                <a
+                  href="view_workspace"
+                  v-if="item.status == 3"
+                  class="grey--text mr-4 float-right mt-3"
+                  >View submission</a
                 >
               </tr>
             </tbody>
@@ -91,20 +151,41 @@
 export default {
   name: "Translator_OrderHistory",
   data: () => ({
+    // status
+    /*
+    0: waiting for Translator to accept
+    1: Work is done from Translator
+    2: Request revision
+    3: ACCEPTED
+    */
     order: [
       {
         id: "#000001",
         title: "Go gophi!",
-        approve: true,
+        status: 0,
         //some Random data
       },
       {
         id: "#000002",
-        title: "Go udc!",
+        title: "A new youtube video on space",
+        status: 1,
+        //some Random data
+      },
+      {
+        id: "#000003",
+        title: "Sports commentary",
+        status: 1,
+        //some Random data
+      },
+      {
+        id: "#000004",
+        title: "Documentary on dinosaurs",
+        status: 1,
         //some Random data
       },
     ],
   }),
+
   mounted() {
     if (!this.$store.state.refresh) {
       this.$router.push({ name: "Home" });
@@ -120,6 +201,10 @@ export default {
   },
 
   methods: {
+    changeStatus(item, num) {
+      console.log("hit");
+      item.status = num;
+    },
     preventNav(event) {
       event.preventDefault();
       event.returnValue = "";
