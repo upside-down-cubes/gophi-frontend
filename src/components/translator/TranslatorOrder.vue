@@ -504,7 +504,9 @@ export default {
         let allOrder = store.state.orderData;
         this.order = allOrder.filter((allOrder) => allOrder.audioLang === "EN");
       } else if (input === 1) {
-        this.order = store.state.orderData;
+        this.order = store.state.orderData.filter(
+          (allOrder) => allOrder.quickOrder
+        );
       }
     },
     async removeOrder(OrderToRemove) {
