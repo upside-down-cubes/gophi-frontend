@@ -86,7 +86,7 @@
       <v-col class="mr-5 pb-0">
         <v-text-field
           v-model="confirmPassword"
-          :rules="[confirmPasswordRules, passwordConfirmationRule]"
+          :rules="[passwordConfirmationRule]"
           color="#13B8A4"
           label="••••••••"
           required
@@ -118,8 +118,6 @@ export default {
         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
         "E-mail must be valid",
     ],
-
-    confirmPasswordRules: [],
   }),
 
   computed: {
