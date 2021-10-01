@@ -12,7 +12,7 @@
 docker pull alpine
 docker run --name gophi -p 8080:8080 -it alpine
 ```
-6. Type `exit` into the Terminal
+5. Now, you will see `/ #`. Type `exit` into the Terminal
 7. Download `setup.sh` and `run.sh` files (from LINE)
 8. Go to the same directory (folder) that `setup.sh` and `run.sh` are in (type `cd [path to file]` into the Terminal)
 9. Paste the following commands in the Terminal
@@ -21,6 +21,7 @@ docker cp setup.sh gophi:/setup.sh
 docker cp run.sh gophi:/run.sh
 docker start -i gophi
 ```
+10. Type `./setup.sh` into the Terminal
 
 ### Running for every other time
 
