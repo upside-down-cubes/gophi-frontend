@@ -1,74 +1,13 @@
 <template>
   <v-container>
     <!--Order Info-->
-    <v-simple-table class="styled-table" dense>
-      <thead>
-        <tr v-for="item in order" :key="item.name">
-          <td>Order {{ item.id }}</td>
-          <td>{{ item.date }}</td>
-          <td>By {{ item.by }}</td>
-          <td>
-            <v-chip
-              class="ma-1"
-              color="#CECECE"
-              v-for="(lan_item, j) in item.language"
-              :key="j"
-              small
-            >
-              {{ lan_item.content }}
-            </v-chip>
-          </td>
-          <td>{{ item.level }}</td>
-          <td>
-            <v-chip color="#CECECE" small>{{ item.category }}</v-chip>
-          </td>
-          <td>{{ item.length }}</td>
-          <td>{{ item.amount }}</td>
-          <td>
-            <v-menu
-              top
-              min-width="300px"
-              max-height="300px"
-              offset-y
-              right
-              offset-x
-            >
-              <template v-slot:activator="{ on }">
-                <v-btn rounded x-small elevation="0" v-on="on" color="#CECECE">
-                  <v-icon> mdi-dots-horizontal </v-icon>
-                </v-btn>
-              </template>
-              <v-card class="mx-auto" max-width="300" outlined>
-                <v-card-title class="ma-1">
-                  <p
-                    class="font-weight-light"
-                    style="
-                      font-size: 14px;
-                      white-space: pre-wrap;
-                      word-break: normal;
-                    "
-                  >
-                    Hi! I would like this video to be translated from English to
-                    to Thai, preferably within the next 2 weeks.
-                  </p>
-                </v-card-title>
-              </v-card>
-            </v-menu>
-          </td>
-          <td>
-            <v-btn icon small elevation="0">
-              <v-icon> mdi-chat </v-icon>
-            </v-btn>
-          </td>
-        </tr>
-      </thead>
-    </v-simple-table>
-    <div>
-      <span class="mr-1">Time spent:</span>
-      <v-chip v-text="time" x-small></v-chip>
-    </div>
+    <v-row class="mt-4 mx-10">
+      <span class="font-weight-bold">Project name: Go gophi!</span>
+      <v-spacer></v-spacer>
+      <span class="grey--text"><u>Subscribed</u></span>
+    </v-row>
     <!--Video + Transcript-->
-    <v-row class="mt-2 mx-10">
+    <v-row class="mt-4 mx-10">
       <!--Video Player-->
       <v-col>
         <v-window>
@@ -307,25 +246,6 @@ export default {
 
   data: () => ({
     text: "center",
-    order: [
-      {
-        id: "#000001",
-        date: "25-Aug-2021 14:14",
-        by: "gophi team",
-        language: [
-          {
-            content: "EN > EN",
-          },
-          {
-            content: "EN > TH",
-          },
-        ],
-        level: "Friendly",
-        category: "Business",
-        length: "~3 min",
-        amount: "฿122",
-      },
-    ],
     video:
       '<iframe width="413" height="280" src="https://www.youtube.com/embed/H3vFeHYfquw" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
     languages: ["English", "Thai"],
