@@ -105,17 +105,21 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-      <v-select
-        class="select-bar"
-        v-model="selectionType"
-        :items="['Language', 'Level of language']"
-        label="Filter by"
-        color="#13B8A4"
-        hide-details
-        chips
-        clearable
-        item-color="teal accent-4"
-      ></v-select>
+      <v-col>
+        <v-list-item class="justify-end">
+          <v-btn @click="generateRandomOrder" text> Test </v-btn>
+        </v-list-item>
+        <v-select
+          v-model="selectionType"
+          :items="['Language', 'Level of language']"
+          label="Filter by"
+          color="#13B8A4"
+          hide-details
+          chips
+          clearable
+          item-color="teal accent-4"
+        ></v-select>
+      </v-col>
     </v-row>
     <!--   Order table (styled table class is in css/translator/order.css)     -->
 
@@ -494,120 +498,6 @@ export default {
     window.addEventListener("beforeunload", this.preventNav);
     this.changeOrderData(0);
   },
-  created() {
-    window.addEventListener("keydown", async (e) => {
-      if (e.key === "\\") {
-        let min = Math.ceil(1);
-        let allMonths = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        let currentDate = new Date();
-        let orderDate =
-          currentDate.getDate() +
-          "-" +
-          allMonths[currentDate.getMonth()] +
-          "-" +
-          currentDate.getFullYear() +
-          " " +
-          currentDate.getHours() +
-          ":";
-        if (currentDate.getMinutes() < 10) {
-          orderDate += "0" + currentDate.getMinutes();
-        } else {
-          orderDate += "" + currentDate.getMinutes();
-        }
-        let languageToRand = [
-          "EN > AR",
-          "EN > TH",
-          "BN > BG",
-          "KR > TH",
-          "AR > ET",
-          "HI > DE",
-          "DE > TH",
-          "LA > PL",
-          "PT > EN",
-        ];
-        let categoryToRand = [
-          "General",
-          "Arts & Entertainment",
-          "Biology",
-          "Business",
-          "Chemistry",
-          "Economics & Finance",
-          "Games & Fiction",
-          "General science",
-          "History",
-          "Law",
-          "Lifestyle & Health",
-          "Medical science",
-        ];
-        let levelOfLang = [
-          "Academic",
-          "Business Casual",
-          "Business Formal",
-          "Casual",
-          "Conversational",
-          "Formal/technical",
-          "Marketing",
-          "Other",
-        ];
-        let language = [
-          {
-            content:
-              languageToRand[
-                Math.floor(
-                  Math.random() *
-                    (Math.floor(languageToRand.length - 1) - min + 1)
-                ) + min
-              ],
-          },
-        ];
-        let audioLang = language[0].content.split(" > ")[0].trim();
-        let noteFromCustomer = "No note from customer";
-        let order = {
-          date: orderDate,
-          by: "gophi team",
-          language: language,
-          audioLang: audioLang,
-          level:
-            levelOfLang[
-              Math.floor(
-                Math.random() * (Math.floor(levelOfLang.length - 1) - min + 1)
-              ) + min
-            ],
-          category:
-            categoryToRand[
-              Math.floor(
-                Math.random() *
-                  (Math.floor(categoryToRand.length - 1) - min + 1)
-              ) + min
-            ],
-          noteFromCustomer: noteFromCustomer,
-          length:
-            "~" +
-            (Math.floor(Math.random() * (Math.floor(10) - min + 1)) + min) +
-            " min",
-          amount:
-            "฿" +
-            (Math.floor(Math.random() * (Math.floor(2500) - 100 + 1)) + 80),
-          quickOrder: audioLang !== "EN",
-        };
-        await store.dispatch("addNewOrder", order);
-        this.changeOrderData(0);
-      }
-    });
-  },
 
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.preventNav);
@@ -645,6 +535,114 @@ export default {
       );
       await store.dispatch("setOrderData", this.order);
       this.changeOrderData(this.text);
+    },
+    async generateRandomOrder() {
+      let min = Math.ceil(1);
+      let allMonths = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      let currentDate = new Date();
+      let orderDate =
+        currentDate.getDate() +
+        "-" +
+        allMonths[currentDate.getMonth()] +
+        "-" +
+        currentDate.getFullYear() +
+        " " +
+        currentDate.getHours() +
+        ":";
+      if (currentDate.getMinutes() < 10) {
+        orderDate += "0" + currentDate.getMinutes();
+      } else {
+        orderDate += "" + currentDate.getMinutes();
+      }
+      let languageToRand = [
+        "EN > AR",
+        "EN > TH",
+        "BN > BG",
+        "KR > TH",
+        "AR > ET",
+        "HI > DE",
+        "DE > TH",
+        "LA > PL",
+        "PT > EN",
+      ];
+      let categoryToRand = [
+        "General",
+        "Arts & Entertainment",
+        "Biology",
+        "Business",
+        "Chemistry",
+        "Economics & Finance",
+        "Games & Fiction",
+        "General science",
+        "History",
+        "Law",
+        "Lifestyle & Health",
+        "Medical science",
+      ];
+      let levelOfLang = [
+        "Academic",
+        "Business Casual",
+        "Business Formal",
+        "Casual",
+        "Conversational",
+        "Formal/technical",
+        "Marketing",
+        "Other",
+      ];
+      let language = [
+        {
+          content:
+            languageToRand[
+              Math.floor(
+                Math.random() *
+                  (Math.floor(languageToRand.length - 1) - min + 1)
+              ) + min
+            ],
+        },
+      ];
+      let audioLang = language[0].content.split(" > ")[0].trim();
+      let noteFromCustomer = "No note from customer";
+      let order = {
+        date: orderDate,
+        by: "gophi team",
+        language: language,
+        audioLang: audioLang,
+        level:
+          levelOfLang[
+            Math.floor(
+              Math.random() * (Math.floor(levelOfLang.length - 1) - min + 1)
+            ) + min
+          ],
+        category:
+          categoryToRand[
+            Math.floor(
+              Math.random() * (Math.floor(categoryToRand.length - 1) - min + 1)
+            ) + min
+          ],
+        noteFromCustomer: noteFromCustomer,
+        length:
+          "~" +
+          (Math.floor(Math.random() * (Math.floor(10) - min + 1)) + min) +
+          " min",
+        amount:
+          "฿" + (Math.floor(Math.random() * (Math.floor(1000) - 80 + 1)) + 80),
+        quickOrder: audioLang !== "EN",
+      };
+      await store.dispatch("addNewOrder", order);
+      this.changeOrderData(0);
     },
   },
 };

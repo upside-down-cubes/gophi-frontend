@@ -742,7 +742,7 @@ export default {
       }
     },
     categoryPrice() {
-      if (this.categoryInput !== "") {
+      if (this.categoryInput !== "" && this.categoryInput !== "General") {
         let prices = 0;
         let n = 0;
         for (let i = 0; i < this.subtitlingLangInput.length; i++) {
