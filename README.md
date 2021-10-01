@@ -24,7 +24,8 @@ docker start -i gophi
 
 ### Running for every other time
 
-1. Paste the following command in the Terminal
+1. Open the Terminal 
+2. Paste the following command in the Terminal
 ```bash
 docker start -i gophi
 ```
