@@ -2,7 +2,7 @@
 
 ## Note to Gophi Team when running this
 
-### Running for the first time
+### Set up the environment (before running for the first time)
 
 1. Install Docker
 2. Open Docker
@@ -23,8 +23,10 @@ docker start -i gophi
 ```
 10. Type `chmod -R 777 ./`
 11. Type `./setup.sh` into the Terminal
+12. You can type `exit` to exit or type `./run.sh` to start the frontend
+13. If you choose to do the latter, type in `localhost:8080` into your browser
 
-### Running for every other time
+### Running the the frontend
 
 1. Open the Terminal 
 2. Paste the following command in the Terminal
@@ -32,6 +34,7 @@ docker start -i gophi
 docker start -i gophi
 ```
 2. Type `./run.sh` into the Terminal
+3. Type in `localhost:8080` into your browser
 
 <hr/>
 
