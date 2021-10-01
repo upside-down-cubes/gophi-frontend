@@ -92,18 +92,7 @@
                   color="#A0A0A0"
                   class="white--text mt-3"
                 >
-                  Customer review
-                </v-btn>
-                <v-btn
-                  v-if="item.status === 2"
-                  outlined
-                  rounded
-                  small
-                  elevation="0"
-                  color="#1bb7a4"
-                  class="mt-3 ml-10"
-                >
-                  Waiting for revision
+                  Revision Requested
                 </v-btn>
                 <span
                   @click="viewWorkspace"
@@ -121,18 +110,7 @@
                   color="#A0A0A0"
                   class="white--text mt-3"
                 >
-                  Customer review
-                </v-btn>
-                <v-btn
-                  v-if="item.status === 3"
-                  outlined
-                  rounded
-                  small
-                  elevation="0"
-                  color="#1bb7a4"
-                  class="mt-3 ml-10"
-                >
-                  Accepted
+                  Order Completed
                 </v-btn>
                 <span
                   @click="viewWorkspace"
