@@ -583,18 +583,40 @@
           </v-col>
         </v-row>
         <v-divider style="border-color: grey" class="my-8" />
-        <p style="font-size: x-large; font-weight: bold">About us</p>
-        <p>
-          Gophi was founded by a group of undergraduate students with the
-          objective of making information accessible. We aim to streamline the
-          video subtitling process to help overcome the language barrier to
-          information.
-        </p>
-        <p>Acknowledgements:</p>
+        <v-row>
+          <v-col md="7">
+            <p style="font-size: x-large; font-weight: bold">About us</p>
+            <p>
+              Gophi was founded by a group of undergraduate students with the
+              objective of making information accessible. We aim to streamline
+              the video subtitling process to help overcome the language barrier
+              to information.
+            </p>
+            <ul>
+              <li>Sopanant Datta</li>
+              <li>Siriyakorn Chudhakor</li>
+              <li>Saruda Bhumapanich</li>
+            </ul>
+            <p></p>
+            <p>
+              Acknowledgements: This site is brought to you by Upside-Down
+              Cubes, an organization (on GitHub) consisting of 5 university
+              students, majoring in Computer Science at Mahidol University
+              International College:
+            </p>
+            <ul>
+              <li>Archer N. Phillips</li>
+              <li>Krittin Nisunarat</li>
+              <li>Pornkamol Luthra</li>
+              <li>Thanawin Boonpojanasoontorn</li>
+              <li>Vanessa Rujipatanakul</li>
+            </ul>
+          </v-col>
+        </v-row>
       </div>
     </v-container>
     <v-container style="background-color: #1bb7a4">
-      <div class="my-7 mx-10">
+      <div class="my-3 mx-10">
         <v-row>
           <v-col md="2">
             <h2 style="color: #ffffff"><b>Contact us:</b></h2>

@@ -71,6 +71,17 @@
       >
         My Workspace
       </v-btn>
+      <v-btn
+        v-if="!this.$store.state.isTranslator"
+        text
+        plain
+        class="ml-5"
+        color="#d4f8f4"
+        max-height="48"
+        :to="{ name: 'CustomerViewWorkspace' }"
+      >
+        My Project
+      </v-btn>
 
       <v-spacer />
 
