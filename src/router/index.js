@@ -12,6 +12,7 @@ import CustomerSignup from "../components/signup/CustomerSignup";
 import CustomerOrder from "../components/customer/CustomerOrder";
 import CustomerMakeOrder from "../components/customer/MakeOrder";
 import CustomerViewWorkspace from "../components/customer/CustomerViewWorkspace";
+import CustomerReview from "../components/customer/CustomerReview";
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
     name: "CustomerViewWorkspace",
     path: "/view_workspace",
     component: CustomerViewWorkspace,
+  },
+  {
+    name: "CustomerReview",
+    path: "/customer_review/:step",
+    component: CustomerReview,
   },
 ];
 

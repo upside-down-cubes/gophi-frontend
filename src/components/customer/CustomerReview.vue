@@ -111,200 +111,24 @@
         </v-card>
       </v-col>
     </v-row>
-    <!--Dummy Subtitle Layout-->
-    <v-card
-      width="1440"
-      height="100"
-      elevation="0"
-      tile
-      dark
-      class="mt-3 overflow-hidden"
-      color="#5B5B5B"
-    >
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-col v-for="s in subtitle" :key="s.id" width="400">
-          <div v-if="s.id === '2'">
-            <v-icon small color="red">mdi-triangle mdi-flip-v</v-icon>
-            <span style="font-size: 10px">00:05 / 1:40</span>
-          </div>
-          <div v-else>
-            <span style="font-size: 10px; color: #5b5b5b">00:05 / 1:40</span>
-          </div>
-          <v-row class="mt-1">
-            <v-card
-              height="70"
-              width="395"
-              outlined
-              class="rounded-lg"
-              color="#41A1FB"
-              style="border-color: white"
-            >
-              <v-card-text style="font-size: 12px">{{ s.yours }}</v-card-text>
-            </v-card>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-card>
     <!--Text Suggestion-->
-    <v-card width="1200" elevation="0" class="mx-auto mt-10">
-      <v-row class="ml-0">
-        <div v-if="this.subtitle === this.subtitleEN">
-          <v-btn
-            class="rounded-lg mr-1"
-            small
-            color="#13B8A4"
-            elevation="0"
-            dense
-          >
-            <span style="color: white">EN > EN</span>
-          </v-btn>
-          <v-btn
-            class="rounded-lg"
-            small
-            color="#B2DFDB"
-            elevation="0"
-            dense
-            @click="changeSubtitle"
-          >
-            <span style="color: white">EN > TH</span>
-          </v-btn>
-        </div>
-        <div v-else>
-          <v-btn
-            class="rounded-lg mr-1"
-            small
-            color="#B2DFDB"
-            elevation="0"
-            dense
-            @click="changeSubtitle"
-          >
-            <span style="color: white">EN > EN</span>
-          </v-btn>
-          <v-btn class="rounded-lg" small color="#13B8A4" elevation="0" dense>
-            <span style="color: white">EN > TH</span>
-          </v-btn>
-        </div>
-      </v-row>
-      <v-simple-table
-        fixed-header
-        dark
-        class="styled-table"
-        dense
-        style="margin-bottom: unset"
-      >
-        <thead>
-          <tr>
-            <th class="text-left" style="color: #f1f1f1">#</th>
-            <th class="text-left" style="color: #f1f1f1">Text suggestion</th>
-            <th />
-            <th class="text-left" style="color: #f1f1f1">Text by You</th>
-            <th class="text-right" style="color: #f1f1f1">Char.</th>
-          </tr>
-        </thead>
-      </v-simple-table>
-      <!--Timeline-->
-      <v-card height="200" class="overflow-y-auto" elevation="0">
-        <v-slide-y-transition group>
-          <v-list-item v-for="sub in timeline" :key="sub.id" small>
-            <v-col>
-              <v-row class="justify-space-between" style="width: 190px">
-                <v-text-field
-                  v-model="sub.start"
-                  type="time"
-                  dense
-                  color="#13B8A4"
-                  hide-details
-                  style="font-size: 12px; margin: unset"
-                ></v-text-field>
-                <v-text-field
-                  v-model="sub.end"
-                  type="time"
-                  color="#13B8A4"
-                  dense
-                  hide-details
-                  style="font-size: 12px; margin: unset"
-                >
-                  <template v-slot:prepend>
-                    <v-icon x-small class="mt-1"> mdi-minus </v-icon>
-                  </template>
-                </v-text-field>
-                <v-spacer></v-spacer>
-              </v-row>
-              <v-row>
-                <v-card
-                  color="#f1f1f1"
-                  width="1440"
-                  class="pa-1"
-                  elevation="0"
-                  tile
-                >
-                  <v-row
-                    justify="space-around"
-                    align="center"
-                    style="font-size: 14px"
-                  >
-                    <v-col cols="1" v-text="sub.id"></v-col>
-                    <v-col cols="4" v-text="sub.suggest"></v-col>
-                    <v-btn
-                      rounded
-                      x-small
-                      color="#c4c4c4"
-                      elevation="0"
-                      @click="sub.yours = sub.suggest"
-                    >
-                      <v-icon color="#000000"> mdi-arrow-right </v-icon>
-                    </v-btn>
-                    <v-col cols="4"
-                      ><v-textarea
-                        v-model="sub.yours"
-                        outlined
-                        dense
-                        hide-details
-                        no-resize
-                        rows="2"
-                        style="font-size: 12px"
-                      ></v-textarea
-                    ></v-col>
-                    <v-col
-                      cols="1"
-                      class="text-right"
-                      v-text="sub.yours.length"
-                    ></v-col>
-                  </v-row>
-                </v-card>
-              </v-row>
-            </v-col>
-          </v-list-item>
-        </v-slide-y-transition>
-      </v-card>
-    </v-card>
-    <v-row>
-      <v-spacer></v-spacer>
-      <v-btn
-        dark
-        class="ma-7"
-        color="#13B8A4"
-        elevation="0"
-        :to="{ name: 'CustomerOrder' }"
-        >Save Draft
-      </v-btn>
-      <v-btn
-        dark
-        class="ma-7"
-        color="#13B8A4"
-        elevation="0"
-        :to="{ name: 'CustomerReview', params: { step: 'download' } }"
-        >Download
-      </v-btn>
-    </v-row>
+    <v-window>
+      <CustomerReviewSubmission
+        v-if="this.step === 'submission'"
+      ></CustomerReviewSubmission>
+      <CustomerReviewDownload
+        v-if="this.step === 'download'"
+      ></CustomerReviewDownload>
+    </v-window>
   </v-container>
 </template>
 
 <script>
+import CustomerReviewSubmission from "./CustomerReviewSubmission";
+import CustomerReviewDownload from "./CustomerReviewDownload";
 export default {
-  name: "CustomerViewWorkspace",
-
+  name: "CustomerReview",
+  components: { CustomerReviewDownload, CustomerReviewSubmission },
   data: () => ({
     text: "center",
     order: [
@@ -429,6 +253,7 @@ export default {
     ],
     time: "00.25",
     totalSeconds: 0,
+    step: "",
   }),
 
   created() {
@@ -441,12 +266,7 @@ export default {
       this.$watch(() => t, this.updateTranscript, { deep: true });
     });
     setInterval(this.countTimer, 1000);
-  },
-
-  computed: {
-    timeline() {
-      return this.subtitle.slice();
-    },
+    this.step = this.$route.params.step;
   },
 
   mounted() {
@@ -467,13 +287,6 @@ export default {
     preventNav(event) {
       event.preventDefault();
       event.returnValue = "";
-    },
-    changeSubtitle() {
-      if (this.subtitle === this.subtitleEN) {
-        this.subtitle = this.subtitleTH;
-      } else {
-        this.subtitle = this.subtitleEN;
-      }
     },
 
     changeTranscript() {
