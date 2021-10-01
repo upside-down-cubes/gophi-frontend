@@ -187,7 +187,6 @@ export default {
 
   methods: {
     changeStatus(item, num) {
-      console.log("hit");
       item.status = num;
     },
     preventNav(event) {

@@ -166,7 +166,6 @@ export default {
         isTranslator: this.translator,
       };
       await this.$store.dispatch("setUserLogin", status);
-      console.warn(this.$store.state.isLoggedIn);
       if (this.translator) {
         await this.$router.push({ name: "TranslatorOrder" });
       } else {
