@@ -130,7 +130,7 @@ export default {
   }),
 
   mounted() {
-    if (!this.$store.state.refresh) {
+    if (!this.$store.state.refresh || this.$store.state.isLoggedIn) {
       this.$router.push({ name: "Home" });
     }
   },

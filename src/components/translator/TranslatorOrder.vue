@@ -230,7 +230,7 @@
                 v-if="text === 0"
                 class="ma-1"
                 color="#ACACAC"
-                @click="removeOrder(item)"
+                @click="removeOrder(item, 1)"
                 elevation="0"
                 x-small
               >
@@ -527,7 +527,17 @@ export default {
         } else {
           orderDate += "" + currentDate.getMinutes();
         }
-        let languageToRand = ["EN > AR", "EN > TH", "BN > BG"];
+        let languageToRand = [
+          "EN > AR",
+          "EN > TH",
+          "BN > BG",
+          "KR > TH",
+          "AR > ET",
+          "HI > DE",
+          "DE > TH",
+          "LA > PL",
+          "PT > EN",
+        ];
         let categoryToRand = [
           "General",
           "Arts & Entertainment",
@@ -586,13 +596,11 @@ export default {
           noteFromCustomer: noteFromCustomer,
           length:
             "~" +
-            Math.floor(Math.random() * (Math.floor(10) - min + 1)) +
-            min +
+            (Math.floor(Math.random() * (Math.floor(10) - min + 1)) + min) +
             " min",
           amount:
             "฿" +
-            Math.floor(Math.random() * (Math.floor(2500) - 100 + 1)) +
-            100,
+            (Math.floor(Math.random() * (Math.floor(2500) - 100 + 1)) + 80),
           quickOrder: audioLang !== "EN",
         };
         await store.dispatch("addNewOrder", order);
@@ -632,8 +640,11 @@ export default {
       }
     },
     async removeOrder(OrderToRemove) {
-      this.order = this.order.filter((order) => order !== OrderToRemove);
+      this.order = store.state.orderData.filter(
+        (order) => order !== OrderToRemove
+      );
       await store.dispatch("setOrderData", this.order);
+      this.changeOrderData(this.text);
     },
   },
 };
