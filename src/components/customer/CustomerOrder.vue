@@ -10,10 +10,10 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left" width="20%">
+                <th class="text-left" style="width: 20%">
                   <span style="font-size: 18px">Order ID </span>
                 </th>
-                <th class="text-left" width="30%">
+                <th class="text-left" style="width: 30%">
                   <span style="font-size: 18px">Title </span>
                 </th>
                 <th class="text-left">
@@ -37,12 +37,13 @@
                 >
                   Order sent
                 </v-btn>
-                <span
+                <td
                   v-if="item.status === 0"
                   style="cursor: pointer"
                   class="grey--text mr-3 float-right mt-3"
-                  ><u>View more details</u></span
                 >
+                  <u>View more details</u>
+                </td>
                 <!-- status 1: Work is done from Translator-->
                 <v-btn
                   v-if="item.status === 1"
@@ -76,13 +77,14 @@
                 >
                   Request revision
                 </v-btn>
-                <span
+                <td
                   v-if="item.status === 1"
-                  @click="viewWorkspace"
+                  @click="viewSubmission"
                   style="cursor: pointer"
                   class="grey--text mr-4 float-right mt-3 underlined"
-                  ><u>View submission</u></span
                 >
+                  <u>View submission</u>
+                </td>
                 <!-- status 2: Request revision-->
                 <v-btn
                   v-if="item.status === 2"
@@ -94,13 +96,14 @@
                 >
                   Revision Requested
                 </v-btn>
-                <span
-                  @click="viewWorkspace"
+                <td
+                  @click="viewSubmission"
                   style="cursor: pointer"
                   v-if="item.status === 2"
                   class="grey--text mr-4 float-right mt-3"
-                  ><u>View submission</u></span
                 >
+                  <u>View submission</u>
+                </td>
                 <!-- status 3: ACCEPTED-->
                 <v-btn
                   v-if="item.status === 3"
@@ -112,13 +115,14 @@
                 >
                   Order Completed
                 </v-btn>
-                <span
-                  @click="viewWorkspace"
+                <td
+                  @click="viewDownload"
                   style="cursor: pointer"
                   v-if="item.status === 3"
                   class="grey--text mr-4 float-right mt-3"
-                  ><u>View submission</u></span
                 >
+                  <u>View & Download</u>
+                </td>
               </tr>
             </tbody>
           </template>
@@ -190,8 +194,17 @@ export default {
       event.preventDefault();
       event.returnValue = "";
     },
-    viewWorkspace() {
-      this.$router.push({ name: "CustomerViewWorkspace" });
+    viewSubmission() {
+      this.$router.push({
+        name: "CustomerReview",
+        params: { step: "submission" },
+      });
+    },
+    viewDownload() {
+      this.$router.push({
+        name: "CustomerReview",
+        params: { step: "download" },
+      });
     },
   },
 };
