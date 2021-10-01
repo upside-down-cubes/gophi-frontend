@@ -570,9 +570,9 @@ export default {
       let languageToRand = [
         "EN > AR",
         "EN > TH",
-        "BN > BG",
-        "KR > TH",
-        "AR > ET",
+        "EN > BG",
+        "EN > TH",
+        "TH > ET",
         "HI > DE",
         "DE > TH",
         "LA > PL",

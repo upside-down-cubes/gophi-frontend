@@ -213,7 +213,6 @@
                     color="#13B8A4"
                     item-color="teal accent-4"
                     style="background-color: white"
-                    clearable
                     v-model="categoryInput"
                     hide-details
                     label="Select category"
@@ -574,7 +573,7 @@ export default {
       audioLangInput: "EN",
       subtitlingLangInput: [],
       levelOfLangInput: "",
-      categoryInput: "",
+      categoryInput: "General",
       categoryPriceInput: 0,
       proofread: false,
       isSelecting: false,
