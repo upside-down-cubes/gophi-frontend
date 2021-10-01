@@ -495,10 +495,7 @@
                   <v-col cols="6">
                     <span>{{ item.language }}</span>
                   </v-col>
-                  <v-col v-if="categoryInput === 'General'"
-                    >~{{ item.general }} Baht/min</v-col
-                  >
-                  <v-col v-else>~{{ item.special }} Baht/min</v-col>
+                  <v-col>~{{ item.general }} Baht/min</v-col>
                 </v-row>
               </li>
             </ul>
@@ -513,7 +510,7 @@
                     <span>{{ categoryInput }}</span>
                   </v-col>
                   <v-col v-if="categoryInput !== ''"
-                    >~{{ categoryPrice }} Baht/min</v-col
+                    >+{{ categoryPrice }} Baht/min</v-col
                   >
                 </v-row>
               </li>
@@ -719,7 +716,7 @@ export default {
         { language: "VI", general: 32, special: 41.6 },
         { language: "CY", general: 32, special: 41.6 },
       ],
-      e6: 1,
+      e6: 2,
     };
   },
   computed: {
@@ -747,32 +744,24 @@ export default {
     categoryPrice() {
       if (this.categoryInput !== "") {
         let prices = 0;
+        let n = 0;
         for (let i = 0; i < this.subtitlingLangInput.length; i++) {
           let searchResult = this.langPrices.filter(
             (lang) => lang.language === this.subtitlingLangInput[i]
           );
           for (let j = 0; j < searchResult.length; j++) {
-            if (this.categoryInput === "General") {
-              prices += searchResult[j].general;
-            } else {
-              prices += searchResult[j].special;
-            }
+            prices += searchResult[j].special - searchResult[j].general;
+            n++;
           }
         }
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.categoryPriceInput = prices.toFixed(1);
+        prices /= n;
         return prices.toFixed(1);
       } else {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.categoryPriceInput = 0;
         return 0;
       }
     },
     totalPrice() {
-      if (
-        this.subtitlingLangInput.length !== 0 &&
-        this.categoryPriceInput !== 0
-      ) {
+      if (this.subtitlingLangInput.length !== 0) {
         let pricePerMin = parseFloat(this.categoryPriceInput);
         for (let i = 0; i < this.subtitlingLangInput.length; i++) {
           let lang = this.subtitlingLangInput[i];
@@ -785,7 +774,6 @@ export default {
             } else {
               pricePerMin += search[j].special;
             }
-            console.log(typeof search[j].general);
           }
         }
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties

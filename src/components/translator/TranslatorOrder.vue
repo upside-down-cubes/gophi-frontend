@@ -496,7 +496,7 @@ export default {
   },
   created() {
     window.addEventListener("keydown", async (e) => {
-      if (e.key === "Escape") {
+      if (e.key === "\\") {
         let min = Math.ceil(1);
         let allMonths = [
           "Jan",
