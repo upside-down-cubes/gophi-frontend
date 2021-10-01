@@ -32,6 +32,8 @@ docker start -i gophi
 ```
 2. Type `./run.sh` into the Terminal
 
+<hr/>
+
 ## Project setup
 ```
 yarn install
