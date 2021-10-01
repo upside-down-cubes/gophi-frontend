@@ -21,7 +21,8 @@ docker cp setup.sh gophi:/setup.sh
 docker cp run.sh gophi:/run.sh
 docker start -i gophi
 ```
-10. Type `./setup.sh` into the Terminal
+10. Type `chmod -R 777 ./`
+11. Type `./setup.sh` into the Terminal
 
 ### Running for every other time
 
