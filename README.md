@@ -13,18 +13,22 @@ docker pull alpine
 docker run --name gophi -p 8080:8080 -it alpine
 ```
 5. Now, you will see `/ #`. Type `exit` into the Terminal
-7. Download `setup.sh` and `run.sh` files (from LINE)
-8. Go to the same directory (folder) that `setup.sh` and `run.sh` are in (type `cd [path to file]` into the Terminal)
-9. Paste the following commands in the Terminal
+6. Download `setup.sh` and `run.sh` files (from LINE)
+7. Move `run.sh` and `setup.sh` into the Downloads folder
+8. Paste the following commands in the Terminal:
 ```bash
+cd Downloads
 docker cp setup.sh gophi:/setup.sh
 docker cp run.sh gophi:/run.sh
 docker start -i gophi
 ```
-10. Type `chmod -R 777 ./`
-11. Type `./setup.sh` into the Terminal
-12. You can type `exit` to exit or type `./run.sh` to start the frontend
-13. If you choose to do the latter, type in `localhost:8080` into your browser
+9. You will see `/ #` again. Now paste the following command into your terminal:
+```bash
+chmod -R 777 ./
+```
+10. Type `./setup.sh` into the Terminal
+11. You can type `exit` to exit   **OR**   type `./run.sh` to start the frontend
+12. If you choose to do the latter, type in `localhost:8080` into your browser (**Note:** do not close the Terminal while the app is running)
 
 ### Running the the frontend
 
@@ -33,8 +37,14 @@ docker start -i gophi
 ```bash
 docker start -i gophi
 ```
-2. Type `./run.sh` into the Terminal
-3. Type in `localhost:8080` into your browser
+3. Type `./run.sh` into the Terminal
+4. Type in `localhost:8080` into your web browser (Note: do not close the Terminal while the app is running)
+
+### Stopping the frontend
+
+1. To stop the running webapp, press `Ctrl + C` in the Terminal (**Note:** Not `Command + C`)
+2. You will see the `/ #` prompt again. You can then type exit
+
 
 <hr/>
 

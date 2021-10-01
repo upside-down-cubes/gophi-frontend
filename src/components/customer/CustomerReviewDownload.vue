@@ -19,6 +19,7 @@
               :items="formatList"
               item-value="short"
               item-text="fullName"
+              multiple
               dense
             >
               <template v-slot:selection="data">
@@ -54,45 +55,16 @@
             <v-autocomplete
               outlined
               color="#13B8A4"
-              style="background-color: white"
               item-color="teal accent-4"
-              label="Select your preferred subtitles style"
+              style="background-color: white"
+              clearable
               v-model="subtitleStyle"
+              label="Select your preferred subtitles style"
               hide-details
               single-line
               :items="styleList"
-              item-value="short"
-              item-text="fullName"
-              multiple
               dense
-            >
-              <template v-slot:selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  small
-                  color="rgba(19, 184, 165, 0.7)"
-                  dark
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item.short }}
-                </v-chip>
-              </template>
-              <template v-slot:item="data">
-                <template>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      v-html="data.item.fullName"
-                    ></v-list-item-title>
-                    <v-list-item-subtitle
-                      v-html="data.item.short"
-                    ></v-list-item-subtitle>
-                  </v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
+            ></v-autocomplete>
           </v-col>
         </v-row>
       </v-card>
@@ -118,15 +90,17 @@ export default {
   data: () => ({
     fileFormat: "",
     formatList: [
-      { short: ".txt", fullName: "Text File" },
-      { short: ".dummy", fullName: "dummy" },
-      { short: ".csv", fullName: "CSV" },
+      { short: "SRT", fullName: "SubRip" },
+      { short: "SSA", fullName: "SubStation Alpha" },
+      { short: "TTML", fullName: "Times Text Markup Language" },
+      { short: "SBV", fullName: "YouTube Format" },
+      { short: "DFXP", fullName: "Distribution Format Exchange Profile" },
+      { short: "VTT", fullName: "Web Video Text Track" },
+      { short: "TXT", fullName: "Untimed Text Transcript" },
+      { short: "ITT", fullName: "iTunes Timed Text" },
     ],
     subtitleStyle: "",
-    styleList: [
-      { short: "bt", fullName: "Burnt In" },
-      { short: "lol", fullName: "LOL" },
-    ],
+    styleList: ["Default"],
   }),
 };
 </script>
