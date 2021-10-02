@@ -32,13 +32,14 @@ chmod -R 777 ./
 
 ### Running the the frontend
 
-1. Open the Terminal 
-2. Paste the following command in the Terminal
+1. Open Docker
+2. Open the Terminal 
+3. Paste the following command in the Terminal
 ```bash
 docker start -i gophi
 ```
-3. Type `./run.sh` into the Terminal
-4. Type in `localhost:8080` into your web browser (Note: do not close the Terminal while the app is running)
+4. Type `./run.sh` into the Terminal
+5. Type in `localhost:8080` into your web browser (Note: do not close the Terminal while the app is running)
 
 ### Stopping the frontend
 
