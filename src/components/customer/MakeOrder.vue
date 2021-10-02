@@ -715,7 +715,7 @@ export default {
         { language: "VI", general: 32, special: 41.6 },
         { language: "CY", general: 32, special: 41.6 },
       ],
-      e6: 2,
+      e6: 1,
     };
   },
   computed: {
