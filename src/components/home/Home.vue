@@ -592,11 +592,11 @@
               the video subtitling process to help overcome the language barrier
               to information.
             </p>
-            <ul>
-              <li>Sopanant Datta</li>
-              <li>Siriyakorn Chudhakor</li>
-              <li>Saruda Bhumapanich</li>
-            </ul>
+            <!--         <ul>-->
+            <!--              <li>Sopanant Datta</li>-->
+            <!--              <li>Siriyakorn Chudhakor</li>-->
+            <!--              <li>Saruda Bhumapanich</li>-->
+            <!--            </ul>-->
             <p></p>
             <p>
               Acknowledgements: This site is brought to you by Upside-Down
